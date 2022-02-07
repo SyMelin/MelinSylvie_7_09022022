@@ -1,0 +1,15 @@
+.logo__text {
+    font-size: $fontSize-logo;
+    font-weight: $fontWeight-logo;
+}
+
+.search-form {
+    &__input {
+        font-size: $fontSize-d;
+    }
+    &__icon {
+        & .fa-search {
+            font-size: $fontSize-fa;
+        }
+    }
+}

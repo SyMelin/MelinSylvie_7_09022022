@@ -1,0 +1,22 @@
+.search-form {
+    width: 100%;
+    position: relative;
+    &__label{
+        display: flex;
+        flex-direction: row;
+    }
+    &__input {
+        width: 100%;
+        border-radius: $radius-d;
+        padding: 1.5em;
+    }
+    &__icon {
+        z-index: 1;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        right: 1em;
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,0 +1,14 @@
+.logo {
+    @include flex-col-gap($size: $gapSize-d);
+    justify-content: center;
+    align-items: center;
+   /* @include border;*/
+    &__img {
+      width: 3.16em;
+      /* @include border;*/
+      }
+    &__text {
+      /*  @include border;*/
+    margin: 0 auto;
+    }
+}

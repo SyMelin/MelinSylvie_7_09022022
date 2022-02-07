@@ -1,0 +1,20 @@
+body {
+    color: $color-default;
+}
+
+.logo__text {
+    color: $color-primary;
+}
+
+#searchField {
+    background: $color-background;
+    border: none;
+    outline: none;
+    border-style: none;
+    &:focus {
+        border: 2px solid $color-primary;
+    }
+    &::placeholder {
+        opacity: 25%;
+    }
+}

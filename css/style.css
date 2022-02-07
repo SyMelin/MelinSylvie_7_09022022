@@ -1,6 +1,101 @@
+@import url("https://fonts.googleapis.com/css?family=DM+Sans&display=swap");
+@import url("https://use.fontawesome.com/releases/v5.8.1/css/all.css");
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+body {
+  color: #000000;
+}
+
+.logo__text {
+  color: #D04F4F;
+}
+
+#searchField {
+  background: #E7E7E7;
+  border: none;
+  outline: none;
+  border-style: none;
+}
+#searchField:focus {
+  border: 2px solid #D04F4F;
+}
+#searchField::placeholder {
+  opacity: 25%;
+}
+
+.logo__text {
+  font-size: 2.25em;
+  font-weight: 700;
+}
+
+.search-form__input {
+  font-size: 1.125em;
+}
+.search-form__icon .fa-search {
+  font-size: 2em;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+}
+
 header {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+main {
+  width: 90%;
+  /*  @include border;*/
+}
+
+.recipeCard__Wrapper {
+  border: 1px solid black;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  gap: 0em;
+  justify-content: center;
+  align-items: center;
+  /* @include border;*/
+}
+.logo__img {
+  width: 3.16em;
+  /* @include border;*/
+}
+.logo__text {
+  /*  @include border;*/
+  margin: 0 auto;
+}
+
+.search-form {
+  width: 100%;
+  position: relative;
+}
+.search-form__label {
+  display: flex;
+  flex-direction: row;
+}
+.search-form__input {
+  width: 100%;
+  border-radius: 5px;
+  padding: 1.5em;
+}
+.search-form__icon {
+  z-index: 1;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 1em;
+  display: flex;
   align-items: center;
 }
 

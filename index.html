@@ -6,16 +6,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Découvrez nos recettes de cuisine d'eexception." />
         <link rel="icon" type="image/png" href="assets/favicon.png">
-        <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+
         <title>Les petits plats</title>
     </head>
 
     <body>
         <header>
-            <img src="assets/images/logo.svg">
-            <p>Les petits plats</p>
+            <div class="logo">
+                <img class="logo__img" src="assets/images/logo.svg">
+                <p class="logo__text">Les petits plats</p>
+            </div>
         </header>
-        <main></main>
+        <main>
+            <form class="search-form">
+                <label class="search-form__label" for="searchField">
+                    <input type="text" placeholder="Rechercher une recette" name="searchField" class="search-form__input" id="searchField">
+                    <div class="search-form__icon">
+                        <i class="fa fa-search" ></i>
+                    </div>
+                </label>
+            </form>
+            <div class="sorting">Les tags et les filtres/combobox/form</div>
+            <div class="recipeCard__Wrapper">LES RECETTES</div>
+        </main>
 
         <script src="scripts/pages/index.js"></script>
 

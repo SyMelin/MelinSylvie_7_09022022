@@ -1,0 +1,10 @@
+// mixin pour mettre les éléments en display flex, direction colonne et choisir une taille d'espacement
+@mixin flex-col-gap($size: $gs-d){
+    display: flex;
+    flex-direction: column;
+    gap: $size;
+}
+
+@mixin border {
+    border: 1px solid black;
+}
