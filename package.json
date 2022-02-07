@@ -1,0 +1,23 @@
+{
+    "name": "projet_7",
+    "version": "1.0.0",
+    "description": "Sylvie Melin's Project 7",
+    "main": "index.js",
+    "scripts": {
+      "sass": "sass --watch ./sass/main.scss:./css/style.css"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/SyMelin/MelinSylvie_7_07022022.git"
+    },
+    "keywords": [
+      "\"\""
+    ],
+    "author": "sylvie melin",
+    "license": "ISC",
+    "browserslist": "last 4 versions",
+    "bugs": {
+      "url": "https://github.com/SyMelin/MelinSylvie_7_07022022/issues"
+    },
+    "homepage": "https://github.com/SyMelin/MelinSylvie_3_07022022#readme"
+  }
