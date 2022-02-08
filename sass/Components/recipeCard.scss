@@ -1,0 +1,41 @@
+.recipe-card {
+    width: 23.75em;
+    height: 22.75em;
+    border-radius: $radius-d;
+    overflow: hidden;
+    @include flex-col-gap(0);
+    text-decoration: none;
+    &__img {
+        height: 11.125em;
+    }
+    &__details {
+        height: 11.625em;
+        padding: 1.25em;
+        & .details__top {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        & .details__bottom {
+            display: flex;
+        }
+    }
+    & .recipe-duration {
+        display: flex;
+        align-items: center;
+        & p {
+            display: flex;
+            margin-left: 0.5em;
+        }
+    }
+    & .recipe-ingredientList {
+        list-style: none;
+        margin-left: -3.25em;
+    }
+    & .recipe-description {
+        width: 50%;
+        white-space: wrap;
+     /*   overflow: hidden;*/
+        text-overflow: ellipsis;
+    }
+}

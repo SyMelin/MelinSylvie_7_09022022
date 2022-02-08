@@ -2,7 +2,7 @@
 function displayData(data) {
     const recipeWrapper = document.querySelector('.recipe-wrapper');
     data.forEach((recipe) => {
-        const recipeCard = new RecipeCard(recipe).getRecipeCardDOM();
+        const recipeCard = new Recipe(recipe).getRecipeCardDOM();
         recipeWrapper.appendChild(recipeCard);
     });
 };

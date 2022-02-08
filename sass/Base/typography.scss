@@ -1,6 +1,6 @@
 .logo__text {
     font-size: $fontSize-logo;
-    font-weight: $fontWeight-logo;
+    font-weight: $fontWeight-xs;
 }
 
 .search-form {
@@ -11,5 +11,18 @@
         & .fa-search {
             font-size: $fontSize-fa;
         }
+    }
+}
+
+.recipe-card {
+    & .recipe-title {
+        font-size: $fontSize-d;
+        font-weight: $fontWeight-m;
+    }
+    & .recipe-duration {
+        font-weight: $fontWeight-xs;
+    }
+    & .details__bottom {
+        font-size: $fontSize-details;
     }
 }

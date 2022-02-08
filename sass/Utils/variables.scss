@@ -1,16 +1,21 @@
 $color-primary: #D04F4F;
 $color-background: #E7E7E7;
+$color-backgroundImg: #C7BEBE;
 $color-default: #000000;
 
 $gapSize-d: 0em;
 $gapSize-body: 1em;
 
-$font-d: 'DM Sans';
+$font-body: 'DM Sans';
+$font-recipeTitle: 'Roboto';
+$font-default: sans-serif;
 
+$fontSize-details: 0.75em;
 $fontSize-d: 1.125em;
 $fontSize-fa: 2em;
 $fontSize-logo: 2.25em;
 
-$fontWeight-logo: 700;
+$fontWeight-m: 400;
+$fontWeight-xs: 700;
 
 $radius-d: 5px;

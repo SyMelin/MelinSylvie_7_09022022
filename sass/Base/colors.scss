@@ -18,3 +18,13 @@ body {
         opacity: 25%;
     }
 }
+
+.recipe-card {
+    color: $color-default;
+    &__img {
+    background-color: $color-backgroundImg;
+    }
+    &__details {
+        background-color: $color-background;
+    }
+}
