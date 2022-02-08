@@ -15,9 +15,13 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            align-items: center;
+            height: 20%;
         }
         & .details__bottom {
             display: flex;
+            height: 80%;
+            column-gap: 1.5em;
         }
     }
     & .recipe-duration {
@@ -30,12 +34,24 @@
     }
     & .recipe-ingredientList {
         list-style: none;
+        width: 50%;
         margin-left: -3.25em;
+        & li {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: " "; 
+        }
     }
     & .recipe-description {
+        box-sizing: border-box;
+       // margin-left: 0.5em;
         width: 50%;
-        white-space: wrap;
-     /*   overflow: hidden;*/
+        height: 87%;
+       // ellipsis multiligne
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
         text-overflow: ellipsis;
     }
 }

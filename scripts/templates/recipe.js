@@ -67,11 +67,17 @@ class Recipe {
                         span.classList.add('recipe-ingredient');
                     break;
                     case 'quantity' :
-                        span.textContent = `: ${value}`;
+                        span.innerHTML = `<span class="fontWeight">: </span>${value}`;
                         span.classList.add('ingredient-quantity');
                     break;
                     case 'unit' :
-                        span.textContent = value;
+                        if (value == "grammes"){
+                            span.textContent = "g";
+                        } else if (value.length > 2) {
+                            span.textContent = " "+ value;
+                        } else {
+                            span.textContent = value;
+                        }
                         span.classList.add('ingredient-unit');
                     break;
 
