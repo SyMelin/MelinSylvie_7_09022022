@@ -87,6 +87,11 @@ main {
   /*  @include border;*/
 }
 
+.filters {
+  display: flex;
+  flex-direction: row;
+}
+
 .recipe-wrapper {
   width: 100%;
   height: 5500px;
@@ -200,6 +205,24 @@ main {
   right: 1em;
   display: flex;
   align-items: center;
+}
+
+.listbox-container {
+  width: 33%;
+  border: 1px solid black;
+}
+
+.listbox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border: 2px solid red;
+}
+
+.option {
+  width: 33%;
+  list-style: none;
+  margin-left: -2em;
 }
 
 /*# sourceMappingURL=style.css.map */
