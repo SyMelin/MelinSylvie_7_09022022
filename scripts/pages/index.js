@@ -1,33 +1,32 @@
 let allIngredients = [];
 let allAppliances = [];
 let allUstensils = [];
+let matchingRecipes = [];
+let notmatchingRecipes = [];
 
-function capitalizeString(item) {
+
+function capitaliseString(item) {
     item = item.charAt(0).toUpperCase() + item.slice(1).toLowerCase();
     return item;
 }
 
-
-
 let getAllIngredients = function (data) {
     data.forEach(((recipe) => {
         (recipe.ingredients).forEach((ingredient) => {
-            let item = capitalizeString(ingredient.ingredient);
+            let item = capitaliseString(ingredient.ingredient);
             if (!(allIngredients.includes(item))) {
                 allIngredients.push(item);
             }
         });
     }));
     allIngredients.sort();
-    return allIngredients;
-
     //console.log("allIngredients", allIngredients);
+    return allIngredients;
 }
 
 let getAllAppliances = function (data) {
-   
     data.forEach(((recipe) => {
-        let item = capitalizeString(recipe.appliance);
+        let item = capitaliseString(recipe.appliance);
         if (!(allAppliances.includes(item))) {
             allAppliances.push(item);
         } 
@@ -39,16 +38,16 @@ let getAllAppliances = function (data) {
 let getAllUstensils = function (data) {
     data.forEach(((recipe) => {
         (recipe.ustensils).forEach((ustensil) => {
-            let item = capitalizeString(ustensil);
+            let item = capitaliseString(ustensil);
             if (!(allUstensils.includes(item))) {
                 allUstensils.push(item);
             }
         });
     }));
     allUstensils.sort();
+    //console.log("allUstensils", allUstensils);
     return allUstensils;
    
-    //onsole.log("allUstensils", allUstensils);
 }
 
 function InitialiseFilters (data) {
@@ -79,6 +78,7 @@ function displayData(data) {
 //Initialise la page index.html
 function init() {
 
+    //On initialise les filtres: par défaut, ils contiennent toutes les options
     InitialiseFilters(recipes);
 
     //On affiche les recettes
