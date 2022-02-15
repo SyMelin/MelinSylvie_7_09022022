@@ -29,7 +29,7 @@ class Listbox {
 
     create () {
         const listboxContainer = document.createElement('div');
-        listboxContainer.classList.add('listbox-container', `'listbox-container--${this._number}'`);
+        listboxContainer.classList.add('listbox-container', `'listbox-container--${this._number}'`, 'col-4');
         listboxContainer.appendChild(this._label);
         listboxContainer.appendChild(this._listbox);
         const filters = document.querySelector('.filters');
@@ -54,7 +54,7 @@ class Listbox {
         listbox.setAttribute('role', 'listbox');
         listbox.setAttribute('aria-expanded', false);
         listbox.setAttribute('aria-labelledby', `'lisbox-label--${this._number}'`);
-        ['listbox', 'listbox--close'].map(element => listbox.classList.add(element));
+        listbox.classList.add('listbox', 'listbox--close');
 
         let integer = 1;
         this._options.forEach((option) => {
@@ -71,7 +71,7 @@ class Listbox {
         option.setAttribute('role', 'option');
         option.setAttribute('aria-selected', false);
         option.setAttribute('id', `'option--${integer}'`);
-        ['option', 'option--notSelected'].map(element => option.classList.add(element));
+        option.classList.add('option', 'option--notSelected');
         option.textContent = text;
         return option;
     }
