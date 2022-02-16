@@ -71,7 +71,7 @@ class Combobox {
         option.setAttribute('role', 'option');
         option.setAttribute('aria-selected', false);
         option.setAttribute('id', `'option--${integer}'`);
-        ['option', 'option--notSelected'].map(element => option.classList.add(element));
+        option.classList.add('option', 'option--notSelected');
         option.textContent = text;
         return option;
     }
