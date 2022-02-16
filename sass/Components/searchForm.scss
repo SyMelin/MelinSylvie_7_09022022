@@ -1,12 +1,12 @@
 .search-form {
-    //width: 100%;
+    width: 100%;
     position: relative;
     &__label{
         display: flex;
         flex-direction: row;
     }
     &__input {
-      //  width: 100%;
+        width: 100%;
         border-radius: $radius-d;
         padding: 1.5em;
     }

@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <!--link href="css/style.css" rel="stylesheet" type="text/css" /-->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="Découvrez nos recettes de cuisine d'exception." />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
         <link rel="icon" type="image/png" href="assets/favicon.png">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>Les petits plats</title>
     </head>
 
     <body>
         <div class="container">
-            <header class ="row">
-                <div class="logo col">
+            <header>
+                <div class="logo">
                     <img class="logo__img" src="assets/images/logo.svg">
                     <h1 class="logo__text">Les petits plats</h1>
                 </div>
             </header>
             <main class="container">
-                <div class="row">
-                    <form class="search-form col">
-                        <label class="search-form__label row" for="searchField">
-                            <input type="text" placeholder="Rechercher une recette (minimum 3 caractères)" name="searchField" class="search-form__input col id="searchField">
-                            <div class="search-form__icon">
-                                <i class="fa fa-search" ></i>
-                            </div>
-                        </label>
-                    </form>
+                <form class="search-form">
+                    <label class="search-form__label" for="searchField">
+                        <input type="text" placeholder="Rechercher une recette (minimum 3 caractères)" name="searchField" class="search-form__input" id="searchField">
+                        <div class="search-form__icon">
+                            <i class="fa fa-search" ></i>
+                        </div>
+                    </label>
+                </form>
+                <div class="sorting">Les tags et les filtres/combobox/form
+                    <div class="tags-container">LES TAGS</div>
+                    <div class="filters"></div>
                 </div>
-                <div class="sorting container">Les tags et les filtres/combobox/form
-                    <div class="tags-container row">LES TAGS</div>
-                    <div class="filters row"></div>
-                </div>
-                <div class="recipe-wrapper row"></div>
+                <div class="recipe-wrapper"></div>
             </main>
         </div>
         

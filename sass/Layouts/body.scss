@@ -1,4 +1,6 @@
-/*body {
+body {
+    width: 90vw;
+    margin : auto;
     @include flex-col-gap($gapSize-body);
     align-items: center;
-}*/
+}

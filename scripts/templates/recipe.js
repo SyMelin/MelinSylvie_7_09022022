@@ -21,8 +21,7 @@ class Recipe {
         const recipeCard = document.createElement('a');
         recipeCard.setAttribute('role', 'link');
         recipeCard.setAttribute('href', '');
-        recipeCard.classList.add('recipe-card', 'card');
-        recipeCard.classList.add('col', 'col-12', 'col-md-6', 'col-lg-4');
+        recipeCard.classList.add('recipe-card');
 
         //On crée la division image
         const recipeCardImg = document.createElement('div');
@@ -37,24 +36,24 @@ class Recipe {
 
         //On crée la partie supérieure du texte: titre + durée
         const detailTop = document.createElement('div');
-        detailTop.classList.add('details__top', 'row');
+        detailTop.classList.add('details__top');
 
         const title = document.createElement('h2');
-        title.classList.add('recipe-title', 'card-title', 'col', 'col-7');
+        title.classList.add('recipe-title');
         title.textContent = this._name;
 
         const duration = document.createElement('div');
-        duration.classList.add('recipe-duration', 'col', 'col-5');
-        duration.innerHTML = `<i class="far fa-clock"></i><p>${this._time} min<p>`;
+        duration.classList.add('recipe-duration');
+        duration.innerHTML = `<i class="far fa-clock"></i><p>${this._time} min</p>`;
 
         [title, duration].map(element => detailTop.appendChild(element));
 
         //On crée la partie inférieure du texte: liste des ingédients + description
         const detailBottom = document.createElement('div');
-        detailBottom.classList.add('details__bottom', 'row');
+        detailBottom.classList.add('details__bottom');
 
         this._ingredientList = document.createElement('ul');
-        this._ingredientList.classList.add('recipe-ingredientList', 'col', 'col-6');
+        this._ingredientList.classList.add('recipe-ingredientList');
 
         this._ingredients.forEach((ingredient) => {
             let li = document.createElement('li');
@@ -89,7 +88,7 @@ class Recipe {
         });
 
         const recipeDescription = document.createElement('p');
-        recipeDescription.classList.add('recipe-description', 'card-text', 'col', 'col-6');
+        recipeDescription.classList.add('recipe-description');
         recipeDescription.textContent = this._description;
 
         [this._ingredientList, recipeDescription].map(element => detailBottom.appendChild(element));

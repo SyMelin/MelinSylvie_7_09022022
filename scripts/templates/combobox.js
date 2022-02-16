@@ -54,7 +54,7 @@ class Combobox {
         datalist.setAttribute('role', 'datalist');
         datalist.setAttribute('aria-expanded', false);
         datalist.setAttribute('aria-labelledby', `combobox__label--${this._number}`);
-        ['datalist', 'datalist--close'].map(element => datalist.classList.add(element));
+        ['combobox__datalist', 'combobox__datalist--close'].map(element => datalist.classList.add(element));
 
         let integer = 1;
         this._options.forEach((option) => {
