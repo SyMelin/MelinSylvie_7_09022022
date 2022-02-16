@@ -30,6 +30,19 @@ body {
   opacity: 25%;
 }
 
+.combobox-container {
+  color: #FFFFFF;
+}
+.combobox-container--1 {
+  background-color: #3282F7;
+}
+.combobox-container--2 {
+  background-color: #68D9A4;
+}
+.combobox-container--3 {
+  background-color: #ED6454;
+}
+
 .recipe-card {
   color: #000000;
 }
@@ -90,19 +103,29 @@ main {
 .filters {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  column-gap: 1.5em;
 }
 
 .recipe-wrapper {
   width: 100%;
-  height: 5500px;
-  display: flex;
-  flex-flow: row wrap;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
   justify-content: space-between;
-  gap: 2.5em;
+  grid-gap: 2.5em;
+}
+@media screen and (min-width: 768px) and (max-width: 991.98px) {
+  .recipe-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (min-width: 992px) {
+  .recipe-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .recipe-card {
-  width: 23.75em;
   height: 22.75em;
   border-radius: 5px;
   overflow: hidden;
@@ -159,7 +182,7 @@ main {
 .recipe-card .recipe-description {
   box-sizing: border-box;
   width: 50%;
-  height: 82%;
+  height: 81%;
   display: -webkit-box;
   -webkit-line-clamp: 7;
   -webkit-box-orient: vertical;
@@ -207,22 +230,35 @@ main {
   align-items: center;
 }
 
-.listbox-container {
-  width: 33%;
+.combobox-container {
   border: 1px solid black;
 }
 
-.listbox {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.combobox {
+  display: grid;
   border: 2px solid red;
+  grid-template-columns: repeat(1, 1fr);
+  grid-column-gap: 3em;
+}
+@media screen and (min-width: 768px) and (max-width: 991.98px) {
+  .combobox {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (min-width: 992px) {
+  .combobox {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .option {
-  width: 33%;
+  display: block;
   list-style: none;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-right: 2em;
   margin-left: -2em;
+  padding: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

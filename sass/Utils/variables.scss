@@ -1,21 +1,43 @@
+// Variables couleurs
 $color-primary: #D04F4F;
 $color-background: #E7E7E7;
 $color-backgroundImg: #C7BEBE;
 $color-default: #000000;
+$color-white: #FFFFFF;
+$color-comboboxContainer--1: #3282F7;
+$color-comboboxContainer--2: #68D9A4;
+$color-comboboxContainer--3: #ED6454;
 
+// Variables gaps
 $gapSize-d: 0em;
 $gapSize-body: 1em;
 
+// Variables fonts
 $font-body: 'DM Sans';
 $font-recipeTitle: 'Roboto';
 $font-default: sans-serif;
 
+// Variables taille de font
 $fontSize-details: 0.75em;
 $fontSize-d: 1.125em;
 $fontSize-fa: 2em;
 $fontSize-logo: 2.25em;
 
+// Variables weight font
 $fontWeight-m: 400;
 $fontWeight-xs: 700;
 
+
+// Variables arrondis
 $radius-d: 5px;
+
+// Map des breakpoints
+$breakpoints: (
+    extraSmallMax: 575.98px,
+    smallMin: 576px,
+    smallMax: 767.98px,
+    mediumMin: 768px,
+    mediumMax: 991.98px,
+    largeMin: 992px,
+    extraLargeMin: 1200px
+);

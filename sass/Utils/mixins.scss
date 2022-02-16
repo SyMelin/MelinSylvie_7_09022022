@@ -8,3 +8,51 @@
 @mixin border {
     border: 1px solid black;
 }
+
+// mixin qui reprend les media queries pour les écrans de petites tailles
+@mixin SmallScreen-only{
+    @media screen and (max-width: map-get($map: $breakpoints, $key: smallMax)) {
+        @content;
+    }
+}
+
+// mixin qui reprend les media queries pour les écrans de petites et moyennes tailles
+@mixin SmallAndMediumScreen{
+    @media screen and (max-width: map-get($map: $breakpoints, $key: mediumMax)) {
+        @content;
+    }
+}
+
+// mixin qui reprend les media queries pour les écrans de tailles moyennes
+@mixin MediumScreen-only{
+    @media screen and (min-width: map-get($map: $breakpoints, $key: mediumMin )) and (max-width: map-get($map: $breakpoints, $key: mediumMax)) {
+        @content;
+    }
+}
+
+// mixin qui reprend les media queries pour les écrans de tailles moyennes et larges
+@mixin MediumAndLargeScreen{
+    @media screen and (min-width: map-get($map: $breakpoints, $key: mediumMin)) {
+        @content;
+    }
+}
+
+// mixin qui reprend le media queries pour les écrans de grandes tailles
+@mixin LargeScreen-only{
+    @media screen and (min-width: map-get($map: $breakpoints, $key: largeMin)) {
+        @content;
+    }
+}
+
+
+// mixins non utilisées :
+//@mixin MediumAndLargeScreen{
+//    @media screen and (min-width: map-get($map: $breakpoints, $key: mediumMin)) {
+//        @content;
+//    }
+//}
+//@mixin LargeScreen-only{
+//    @media screen and (min-width: map-get($map: $breakpoints, $key: largeMin)) {
+//        @content;
+//    }
+//}

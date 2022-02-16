@@ -19,6 +19,19 @@ body {
     }
 }
 
+.combobox-container {
+    color: $color-white;
+    &--1 {
+        background-color: $color-comboboxContainer--1 ;
+    }
+    &--2 {
+        background-color: $color-comboboxContainer--2 ;
+    }
+    &--3 {
+        background-color: $color-comboboxContainer--3 ;
+    }
+}
+
 .recipe-card {
     color: $color-default;
     &__img {

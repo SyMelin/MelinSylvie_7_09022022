@@ -54,9 +54,9 @@ function InitialiseFilters (data) {
     getAllIngredients(data);
     getAllAppliances(data);
     getAllUstensils(data);
-    new Listbox (allIngredients, '1', 'Ingrédients').create();
-    new Listbox (allAppliances, '2', 'Appareils').create();
-    new Listbox (allUstensils, '3', 'Ustensiles').create();
+    new Combobox (allIngredients, '1', 'Ingrédients').create();
+    new Combobox (allAppliances, '2', 'Appareils').create();
+    new Combobox (allUstensils, '3', 'Ustensiles').create();
    // console.log(getAllIngredients(data).sort());
     //console.log(getAllAppliances(data).sort());
     //console.log(getAllUstensils(data).sort());

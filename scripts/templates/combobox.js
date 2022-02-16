@@ -1,4 +1,4 @@
-class Listbox {
+class Combobox {
 
     /**
      *  @param {Array} options tableau regroupant les options
@@ -10,8 +10,8 @@ class Listbox {
         this._options = options;
         this._number = number;
         this._name = name;
-        this._label = this.createListboxLabel();
-        this._listbox = this.createListbox();
+        this._comboboxLabel = this.createComboboxLabel();
+        this._comboboxDatalist = this.createComboboxDatalist();
     }
 /*
     <div tabindex="0" id="listbox-label" class="tabindex0 inMain">Trier par </div>
@@ -28,42 +28,42 @@ class Listbox {
 
 
     create () {
-        const listboxContainer = document.createElement('div');
-        listboxContainer.classList.add('listbox-container', `'listbox-container--${this._number}'`);
-        listboxContainer.appendChild(this._label);
-        listboxContainer.appendChild(this._listbox);
+        const comboboxContainer = document.createElement('div');
+        comboboxContainer.classList.add('combobox-container', `combobox-container--${this._number}`);
+        comboboxContainer.appendChild(this._comboboxLabel);
+        comboboxContainer.appendChild(this._comboboxDatalist);
         const filters = document.querySelector('.filters');
         console.log(filters);
-        filters.appendChild(listboxContainer);
+        filters.appendChild(comboboxContainer);
     }
 
-    createListboxLabel () {
+    createComboboxLabel () {
         //console.log(this._options);
        //// console.log(this._name);
-        const listboxLabel = document.createElement('div');
+        const label = document.createElement('div');
         console.log(this._number);
-        listboxLabel.setAttribute('id', `'listbox-label--${this._number}'`); //
-        listboxLabel.classList.add('listox-label');
-        listboxLabel.textContent = this._name;
-        console.log(listboxLabel);
-        return listboxLabel;
+        label.setAttribute('id', `combobox__label--${this._number}`); //
+        label.classList.add('combobox__label');
+        label.textContent = this._name;
+        console.log(label);
+        return label;
     }
 
-    createListbox () {
-        const listbox = document.createElement('ul');
-        listbox.setAttribute('role', 'listbox');
-        listbox.setAttribute('aria-expanded', false);
-        listbox.setAttribute('aria-labelledby', `'lisbox-label--${this._number}'`);
-        ['listbox', 'listbox--close'].map(element => listbox.classList.add(element));
+    createComboboxDatalist () {
+        const datalist = document.createElement('ul');
+        datalist.setAttribute('role', 'datalist');
+        datalist.setAttribute('aria-expanded', false);
+        datalist.setAttribute('aria-labelledby', `combobox__label--${this._number}`);
+        ['datalist', 'datalist--close'].map(element => datalist.classList.add(element));
 
         let integer = 1;
         this._options.forEach((option) => {
             const optionDOM = this.createOption(integer, option);
-            listbox.appendChild(optionDOM);
+            datalist.appendChild(optionDOM);
             integer++ ;
         })
 
-        return listbox;
+        return datalist;
     }
 
     createOption (integer, text) {
@@ -75,8 +75,4 @@ class Listbox {
         option.textContent = text;
         return option;
     }
-
-
-
-
 }

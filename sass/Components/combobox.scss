@@ -1,0 +1,32 @@
+.combobox-container {
+    //width: 33%;
+   // max-width: 50%;
+   // height: 50em;
+    @include border;
+}
+
+.combobox {
+    display: grid;
+    //flex-wrap: wrap;
+    //justify-content: space-between;
+    border: 2px solid red;
+    grid-template-columns: repeat(1, 1fr);
+    grid-column-gap: 3em;
+    @include MediumScreen-only {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    @include LargeScreen-only {
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}
+
+.option {
+    display: block;
+    //width: 33%;
+    list-style: none;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-right: 2em;
+    margin-left: -2em;
+    padding: 0;
+}

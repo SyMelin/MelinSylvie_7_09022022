@@ -1,4 +1,6 @@
 .filters {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    column-gap: 1.5em;
 }
