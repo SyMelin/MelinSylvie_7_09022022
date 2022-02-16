@@ -3,6 +3,7 @@ let allAppliances = [];
 let allUstensils = [];
 let matchingRecipes = [];
 let notmatchingRecipes = [];
+let clickIndex = 0; //sert à savoir quel filtre a été cliqué le dernier afin d'ouvrir celui-ci et fermer les autres
 
 
 function capitaliseString(item) {

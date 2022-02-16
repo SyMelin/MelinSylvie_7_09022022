@@ -57,6 +57,30 @@ body {
             opacity: 50%;
         }
     }
+    & .combobox__datalist {
+        &--1 .option:hover {
+            background-color: darken($color: $color-comboboxContainer--1, $amount: 20%);
+        }
+        &--2 .option:hover {
+            background-color: darken($color: $color-comboboxContainer--2, $amount: 20%);
+        }
+        &--3 .option:hover {
+            background-color: darken($color: $color-comboboxContainer--3, $amount: 20%);
+        }
+    }
+}
+
+.tagsList .option {
+    color: white;
+    &--1 {
+        background-color: $color-comboboxContainer--1;
+    }
+    &--2 {
+        background-color: $color-comboboxContainer--2;
+    }
+    &--3 {
+        background-color: $color-comboboxContainer--3;
+    }
 }
 
 .recipe-card {

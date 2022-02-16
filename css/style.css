@@ -59,6 +59,28 @@ body {
   color: #FFFFFF;
   opacity: 50%;
 }
+.combobox-container .combobox__datalist--1 .option:hover {
+  background-color: #0751bc;
+}
+.combobox-container .combobox__datalist--2 .option:hover {
+  background-color: #2caf72;
+}
+.combobox-container .combobox__datalist--3 .option:hover {
+  background-color: #c62715;
+}
+
+.tagsList .option {
+  color: white;
+}
+.tagsList .option--1 {
+  background-color: #3282F7;
+}
+.tagsList .option--2 {
+  background-color: #68D9A4;
+}
+.tagsList .option--3 {
+  background-color: #ED6454;
+}
 
 .recipe-card {
   color: #000000;
@@ -259,6 +281,40 @@ body {
   align-items: center;
 }
 
+.option {
+  display: block;
+  list-style: none;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-right: 2em;
+  margin-left: -2em;
+  padding: 0;
+  cursor: pointer;
+}
+
+.tagsList .option {
+  display: flex;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  cursor: auto;
+}
+.tagsList .option .closeBtn {
+  background-image: url("../assets/icons/close_xmark_circle.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 1.25em;
+  height: 1.25em;
+  margin-left: 1em;
+  cursor: pointer;
+}
+
+.tagsList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 1em;
+}
+
 .combobox-container {
   padding-left: 1.25em;
   padding-right: 1.25em;
@@ -301,16 +357,6 @@ body {
 
 .combobox__header .combobox__label--hidden, .combobox__header .combobox__input--hidden {
   display: none;
-}
-
-.option {
-  display: block;
-  list-style: none;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  margin-right: 2em;
-  margin-left: -2em;
-  padding: 0;
 }
 
 .expandBtn {
