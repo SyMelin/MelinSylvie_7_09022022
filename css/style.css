@@ -2,14 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;900&display=swap");
 @import url("https://use.fontawesome.com/releases/v5.8.1/css/all.css");
 body {
-  font-family: "DM Sans", sans-serif;
-}
-
-.recipe-card .recipe-title {
-  font-family: "Roboto", sans-serif;
-}
-
-body {
   color: #000000;
 }
 
@@ -33,14 +25,39 @@ body {
 .combobox-container {
   color: #FFFFFF;
 }
-.combobox-container--1 {
+.combobox-container .combobox__header--1, .combobox-container .combobox__datalist--1 {
   background-color: #3282F7;
 }
-.combobox-container--2 {
+.combobox-container .combobox__header--2, .combobox-container .combobox__datalist--2 {
   background-color: #68D9A4;
 }
-.combobox-container--3 {
+.combobox-container .combobox__header--3, .combobox-container .combobox__datalist--3 {
   background-color: #ED6454;
+}
+.combobox-container .combobox__input {
+  background-color: transparent;
+  color: #FFFFFF;
+  border-radius: 5px;
+  border: none;
+  height: 90%;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+.combobox-container .combobox__input:focus {
+  outline: none;
+}
+.combobox-container .combobox__input--1:focus {
+  background-color: #085bd4;
+}
+.combobox-container .combobox__input--2:focus {
+  background-color: #31c37f;
+}
+.combobox-container .combobox__input--3:focus {
+  background-color: #dd2c17;
+}
+.combobox-container .combobox__input::placeholder {
+  color: #FFFFFF;
+  opacity: 50%;
 }
 
 .recipe-card {
@@ -51,6 +68,14 @@ body {
 }
 .recipe-card__details {
   background-color: #E7E7E7;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+.recipe-card .recipe-title {
+  font-family: "Roboto", sans-serif;
 }
 
 .logo__text {
@@ -100,13 +125,17 @@ body {
     width: 90%;
   /*  @include border;*/
 .filters {
+  z-index: 1;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  column-gap: 1.5em;
+  justify-content: flex-start;
+  column-gap: 0.25em;
+  flex-wrap: wrap;
+  height: 7em;
 }
 
 .recipe-wrapper {
+  z-index: 0;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -124,7 +153,25 @@ body {
   }
 }
 
+.logo {
+  display: flex;
+  flex-direction: column;
+  gap: 0em;
+  justify-content: center;
+  align-items: center;
+  /* @include border;*/
+}
+.logo__img {
+  width: 3.16em;
+  /* @include border;*/
+}
+.logo__text {
+  /*  @include border;*/
+  margin: 0 auto;
+}
+
 .recipe-card {
+  z-index: 0;
   height: 22.75em;
   border-radius: 5px;
   overflow: hidden;
@@ -189,23 +236,6 @@ body {
   text-overflow: ellipsis;
 }
 
-.logo {
-  display: flex;
-  flex-direction: column;
-  gap: 0em;
-  justify-content: center;
-  align-items: center;
-  /* @include border;*/
-}
-.logo__img {
-  width: 3.16em;
-  /* @include border;*/
-}
-.logo__text {
-  /*  @include border;*/
-  margin: 0 auto;
-}
-
 .search-form {
   width: 100%;
   position: relative;
@@ -230,24 +260,47 @@ body {
 }
 
 .combobox-container {
-  border: 1px solid black;
+  padding-left: 1.25em;
+  padding-right: 1.25em;
+  z-index: 2;
+  margin: 0;
 }
 
+.combobox__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.125em;
+  border-radius: 5px;
+}
 .combobox__datalist {
+  z-index: 2;
+  border-radius: 0 0 5px 5px;
+}
+.combobox__datalist--closed {
+  display: none;
+}
+.combobox__datalist--open {
+  margin-top: 0;
   display: grid;
   border: 2px solid red;
   grid-template-columns: repeat(1, 1fr);
   grid-column-gap: 3em;
 }
 @media screen and (min-width: 768px) and (max-width: 991.98px) {
-  .combobox__datalist {
+  .combobox__datalist--open {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media screen and (min-width: 992px) {
-  .combobox__datalist {
+  .combobox__datalist--open {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+.combobox__header .combobox__label--hidden, .combobox__header .combobox__input--hidden {
+  display: none;
 }
 
 .option {
@@ -258,6 +311,23 @@ body {
   margin-right: 2em;
   margin-left: -2em;
   padding: 0;
+}
+
+.expandBtn {
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 2.25em;
+  height: 2.25em;
+  z-index: 2;
+}
+
+.expandBtn--more {
+  background-image: url("../assets/icons/arrow_down.svg");
+}
+
+.expandBtn--less {
+  transform: rotate(180deg);
 }
 
 /*# sourceMappingURL=style.css.map */

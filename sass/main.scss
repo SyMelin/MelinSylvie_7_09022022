@@ -2,8 +2,8 @@
 @import "Utils/functions";
 @import "Utils/mixins";
 
-@import "Base/fonts";
 @import "Base/colors";
+@import "Base/fonts";
 @import "Base/typography";
 
 @import "Layouts/body";
@@ -12,7 +12,8 @@
 @import "Layouts/filters.scss";
 @import "Layouts/recipeWrapper.scss";
 
-@import "Components/recipeCard";
 @import "Components/logo";
+@import "Components/recipeCard";
 @import "Components/searchForm.scss";
 @import "Components/combobox.scss";
+@import "Components/expandBtn.scss";

@@ -1,0 +1,18 @@
+.expandBtn {
+    cursor: pointer;
+   // position: absolute;
+   // right: 0.625em;
+   // top: 1.3125em;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 2.25em;
+    height: 2.25em;
+    z-index: 2;
+}
+
+.expandBtn--more {
+    background-image: url("../assets/icons/arrow_down.svg");
+}
+.expandBtn--less {
+    transform: rotate(180deg);
+}

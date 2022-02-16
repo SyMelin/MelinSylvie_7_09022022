@@ -21,14 +21,41 @@ body {
 
 .combobox-container {
     color: $color-white;
-    &--1 {
-        background-color: $color-comboboxContainer--1 ;
+    & .combobox__header, & .combobox__datalist {
+        &--1 {
+            background-color: $color-comboboxContainer--1 ;
+        }
+        &--2 {
+            background-color: $color-comboboxContainer--2 ;
+        }
+        &--3 {
+            background-color: $color-comboboxContainer--3 ;
+        }
     }
-    &--2 {
-        background-color: $color-comboboxContainer--2 ;
-    }
-    &--3 {
-        background-color: $color-comboboxContainer--3 ;
+    & .combobox__input {
+        background-color: transparent;
+        color: $color-white;
+        border-radius: $radius-d;
+        border: none;
+        height: 90%;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        &:focus {
+            outline: none;
+        }
+        &--1:focus {
+            background-color: darken($color: $color-comboboxContainer--1, $amount: 15%);
+        }
+        &--2:focus {
+            background-color: darken($color: $color-comboboxContainer--2, $amount: 15%);
+        }
+        &--3:focus {
+            background-color: darken($color: $color-comboboxContainer--3, $amount: 15%);
+        }
+        &::placeholder {
+            color: $color-white;
+            opacity: 50%;
+        }
     }
 }
 
