@@ -16,19 +16,7 @@ class Combobox {
         this._comboboxButton = this.createComboboxButton();
         this._comboboxHeader = this.createComboboxHeader();
     }
-/*
-    <div tabindex="0" id="listbox-label" class="tabindex0 inMain">Trier par </div>
-        <div tabindex="-1" class="listbox-container">
-          <div tabindex="0" role="listbox" aria-expanded="false" aria-labelledby="listbox-label" class="tabindex0 inMain listbox listbox--close">
-            <div tabindex="-1" role="option" aria-selected="false" id="popularity" class="tabindex0 inMain option option--notSelected option1">Popularité</div>
-            <div tabindex="-1" role="option" aria-selected="true" id="date" class="tabindex0 inMain option option--selected option2">Date</div>
-            <div tabindex="-1" role="option" aria-selected="false" id="title" class="tabindex0 inMain option option--notSelected option3">Titre</div>
-          </div>
-          <div tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false" class="tabindex0 inMain expandBtn expandBtn--more"></div>
-        </div>
-      </div>
-*/
-
+    
 
     create () {
         const comboboxContainer = document.createElement('div');
@@ -50,16 +38,21 @@ class Combobox {
     createComboboxButton () {
         const comboboxButton = document.createElement('div');
         comboboxButton.setAttribute('role', 'button');
+        comboboxButton.setAttribute('aria-haspopup', 'listbox');
+        comboboxButton.setAttribute('aria-expanded', false);
         comboboxButton.classList.add('combobox__btn', 'expandBtn', 'expandBtn--more');
 
         //////////// Fonction utile pour l'évenement sur le bouton expand de la combobox /////////////////
         function changeDatalistDisplay (label, input, datalist) {
 
-           // const comboboxDatalist = document.querySelector(`combobox__datalist--${this._number}`);
             let state = datalist.getAttribute('aria-expanded');
-            console.log("HELLO", state);
 
-            //On masque le label, on affiche l'input du combobox
+            
+            clickIndex++ ;
+            datalist.setAttribute('click-index', clickIndex);
+
+
+            //On masque le label, on affiche l'input du combobox ou l'inverse
             label.classList.toggle('combobox__label--hidden');
             input.classList.toggle('combobox__input--hidden');
 
@@ -85,6 +78,45 @@ class Combobox {
             //Selon l'état de la comboboxDatalist enregistré au clic
             if (state == "false") {
                 datalist.setAttribute('aria-expanded', true);
+
+                //On ferme les filtres déjà ouverts
+        /*    const allDatalists = Array.from(document.getElementsByClassName('combobox__datalist'));
+            console.log(allDatalists);
+            allDatalists.forEach((list) => {
+                let a = list.getAttribute('click-index');
+                let b = datalist.getAttribute('click-index');
+                console.log(list.getAttribute('aria-expanded'));
+                if (a < b) {
+                    console.log("inférieur");
+                } else {
+                    console.log("c'est le même");
+                }
+                if (list.getAttribute('click-index') < datalist.getAttribute('click-index')) {
+                    console.log( list.parentElement.firstChild);
+                    const listLabel = list.parentElement.firstChild.firstChild;
+                    const listInput = listLabel.nextSibling;
+                    const listButton = listInput.nextSibling;
+                    listLabel.classList.remove('combobox__label--hidden');
+                    listInput.classList.add('combobox__input--hidden');
+                    listButton.classList.toggle('expandBtn--less');
+                    ['combobox__datalist--closed', 'combobox__datalist--open'].map(element => list.classList.toggle(element));
+                    listButton.setAttribute('aria-expanded', false);
+                    list.setAttribute('aria-expanded', false);
+                } else {
+                    console.log("c l'élément cliqué");
+                }
+            })*/
+
+
+
+
+
+
+
+
+
+
+
             } else {
                 comboboxButton.setAttribute('aria-expanded', false);
                 datalist.setAttribute('aria-expanded', false);
@@ -99,9 +131,7 @@ class Combobox {
         }
 
 
-        //////////// Evenement sur le bouton expand de la listbox /////////////////
-
-        //au  clic sur le bouton expand
+        //////////// Evenement sur le bouton expand de la listbox au  clic sur le bouton expand /////////////////
         comboboxButton.addEventListener('click', function(e){
             e.preventDefault();
             const label = e.target.parentElement.firstChild;
@@ -113,6 +143,7 @@ class Combobox {
 
         return comboboxButton;
     }
+
 
     createComboboxLabel () {
         //console.log(this._options);
@@ -127,8 +158,6 @@ class Combobox {
         return label;
     }
 
-    //<label for="monNavigateur">Veuillez choisir un navigateur parmi ceux-ci :</label>
-    //<input list="navigateurs" id="monNavigateur" name="monNavigateur"/>
 
     createComboboxInput () {
         const input = document.createElement('input');
@@ -145,6 +174,7 @@ class Combobox {
         datalist.setAttribute('role', 'datalist');
         datalist.setAttribute('aria-expanded', false);
         datalist.setAttribute('aria-labelledby', `combobox__label--${this._number}`);
+        datalist.setAttribute('click-index', '0');
         ['combobox__datalist', `combobox__datalist--${this._number}`,'combobox__datalist--closed'].map(element => datalist.classList.add(element));
 
         let integer = 1;
@@ -162,8 +192,28 @@ class Combobox {
         option.setAttribute('role', 'option');
         option.setAttribute('aria-selected', false);
         option.setAttribute('id', `'option--${integer}'`);
-        option.classList.add('option', 'option--notSelected');
+        option.classList.add('option', 'option--notSelected', `option--${this._number}`);
         option.textContent = text;
+
+        option.addEventListener('click', function(e) {
+            e.preventDefault();
+            const optionClone = e.target.cloneNode(true);
+            optionClone.setAttribute('aria-selected', true);
+
+            const closeBtn = document.createElement('div');
+            closeBtn.setAttribute('role', 'button');
+            closeBtn.classList.add('closeBtn');
+
+            closeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const option = e.target.parentElement;
+                option.parentElement.removeChild(option);
+            })
+
+            optionClone.appendChild(closeBtn);
+            document.querySelector('.tagsList').appendChild(optionClone);
+        })
+
         return option;
     }
 }
