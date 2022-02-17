@@ -19,7 +19,7 @@ class Combobox {
     
 
     create () {
-        const comboboxContainer = document.createElement('div');
+        const comboboxContainer = document.createElement('form');
         comboboxContainer.classList.add('combobox-container', `combobox-container--${this._number}`);
         [this._comboboxHeader, this._comboboxDatalist].map(element => comboboxContainer.appendChild(element));
 
