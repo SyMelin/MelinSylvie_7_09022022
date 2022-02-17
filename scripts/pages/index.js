@@ -84,5 +84,11 @@ function init() {
 
     //On affiche les recettes
     displayData(recipes);
+
+    //ajout de la fonction search sur le champ de rechercher principal onInput
+    const mainSearchField = document.getElementById('mainSearchField');
+    mainSearchField.addEventListener('input', function(e){
+        search(e.target);
+    });
 };
 init();

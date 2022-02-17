@@ -24,7 +24,7 @@ class Combobox {
         [this._comboboxHeader, this._comboboxDatalist].map(element => comboboxContainer.appendChild(element));
 
         const filters = document.querySelector('.filters');
-        console.log(filters);
+        //console.log(filters);
         filters.appendChild(comboboxContainer);
     }
 
@@ -137,7 +137,7 @@ class Combobox {
             const label = e.target.parentElement.firstChild;
             const input = label.nextSibling;
             const datalist = e.target.parentElement.parentElement.lastChild;
-            console.log("datalist", datalist);
+           // console.log("datalist", datalist);
             changeDatalistDisplay(label, input, datalist);
         });
 
@@ -149,12 +149,12 @@ class Combobox {
         //console.log(this._options);
        //// console.log(this._name);
         const label = document.createElement('div');
-        console.log(this._number);
+       // console.log(this._number);
         label.setAttribute('id', `combobox__label--${this._number}`); //
         label.setAttribute('for', `${this._name}`)
         label.classList.add('combobox__label');
         label.textContent = this._name;
-        console.log(label);
+        //console.log(label);
         return label;
     }
 
