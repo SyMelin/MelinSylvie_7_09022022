@@ -7,20 +7,14 @@ let isTextValid = function (element) {
 function lookForString(array, value) {
     let matchingRecipes = [];
    // let notmatchingRecipes = [];
-    let regex = "(^|\\s)" + value.toLowerCase() + "?[^$]*(\\w)";
+    let regex = "(^|\\s)" + value + "?[ ]?[^$]*(\\w)";
    // console.log('regex')
     let regexForString = new RegExp(regex, 'g');
     console.log(regexForString);
     for (let i = 0; i < array.length; i++) {
-        if (array[i]._name.toLowerCase().match(regexForString)) {
-            //const recipeCard = document.getElementById(`recipe-card--${array[i]._id}`);
-            //recipeCard.classList.add('recipe-card--visible');
-           // recipeCard.classList.remove('recipe-card--hidden');
+        if (strNoAccent(array[i]._name.toLowerCase()).match(regexForString)) {
            matchingRecipes.push(array[i]);
         } else {
-            //const recipeCard = document.getElementById(`recipe-card--${array[i]._id}`);
-           // recipeCard.classList.remove('recipe-card--visible');
-           // recipeCard.classList.add('recipe-card--hidden');
             notMatchingRecipes.push(array[i]);
         }
     }
@@ -62,7 +56,7 @@ function search(element) {
             if (isTextValid (element) === true){
                 //element.style.backgroundColor = 'green';
                 element.parentElement.parentElement.setAttribute("data-error-visible", false);
-                let modifiedInput = element.value.toLowerCase();
+                let modifiedInput = strNoAccent(element.value.toLowerCase());
                 if (modifiedInput.length > mainSearchFieldValue.length) {
                     lookForString (displayedRecipes, modifiedInput);
                 } else {

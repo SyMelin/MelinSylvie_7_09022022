@@ -151,7 +151,7 @@ class Combobox {
         const label = document.createElement('div');
        // console.log(this._number);
         label.setAttribute('id', `combobox__label--${this._number}`); //
-        label.setAttribute('for', `${this._name}`)
+        label.setAttribute('for', `${strNoAccent(this._name)}`)
         label.classList.add('combobox__label');
         label.textContent = this._name;
         //console.log(label);
