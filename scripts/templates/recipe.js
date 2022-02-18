@@ -14,6 +14,7 @@ class Recipe {
         this._name = data.name;
         this._time =  data.time;
         this._description = data.description;
+        this._recipeCardDOM = this.getRecipeCardDOM();
     }
 
     getRecipeCardDOM() {
@@ -21,7 +22,8 @@ class Recipe {
         const recipeCard = document.createElement('a');
         recipeCard.setAttribute('role', 'link');
         recipeCard.setAttribute('href', '');
-        recipeCard.classList.add('recipe-card');
+        recipeCard.setAttribute('id', `recipe-card--${this._id}`);
+        recipeCard.classList.add('recipe-card', 'recipe-card--visible');
 
         //On crée la division image
         const recipeCardImg = document.createElement('div');

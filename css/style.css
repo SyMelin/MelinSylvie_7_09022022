@@ -192,7 +192,10 @@ body {
   margin: 0 auto;
 }
 
-.recipe-card {
+.recipe-card--hidden {
+  display: none;
+}
+.recipe-card--visible {
   z-index: 0;
   height: 22.75em;
   border-radius: 5px;

@@ -1,10 +1,27 @@
 let allIngredients = [];
 let allAppliances = [];
 let allUstensils = [];
-let matchingRecipes = [];
-let notmatchingRecipes = [];
+let displayedRecipes = [];
+let notDisplayedRecipes = [];
 let clickIndex = 0; //sert à savoir quel filtre a été cliqué le dernier afin d'ouvrir celui-ci et fermer les autres
 
+let dataModified = [];
+
+let mainSearchFieldValue = 0;
+
+
+
+//Affiche la carte de chaque recette
+function displayData(data) {
+    const recipeWrapper = document.querySelector('.recipe-wrapper');
+    data.forEach((recipe) => {
+        const template = new Recipe(recipe);
+        dataModified.push(template);
+        recipeCard = template.getRecipeCardDOM();
+        recipeWrapper.appendChild(recipeCard);
+    });
+   // console.log(dataModified);
+}
 
 function capitaliseString(item) {
     item = item.charAt(0).toUpperCase() + item.slice(1).toLowerCase();
@@ -51,10 +68,10 @@ let getAllUstensils = function (data) {
    
 }
 
-function InitialiseFilters (data) {
-    getAllIngredients(data);
-    getAllAppliances(data);
-    getAllUstensils(data);
+function InitialiseFilters (dataModified) {
+    getAllIngredients(dataModified);
+    getAllAppliances(dataModified);
+    getAllUstensils(dataModified);
     new Combobox (allIngredients, '1', 'Ingrédients').create();
     new Combobox (allAppliances, '2', 'Appareils').create();
     new Combobox (allUstensils, '3', 'Ustensiles').create();
@@ -66,14 +83,7 @@ function InitialiseFilters (data) {
 
 
 
-//Affiche la carte de chaque recette
-function displayData(data) {
-    const recipeWrapper = document.querySelector('.recipe-wrapper');
-    data.forEach((recipe) => {
-        const recipeCard = new Recipe(recipe).getRecipeCardDOM();
-        recipeWrapper.appendChild(recipeCard);
-    });
-}
+
 
 
 //Initialise la page index.html
