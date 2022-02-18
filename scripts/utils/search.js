@@ -13,14 +13,14 @@ function lookForString(array, value) {
     console.log(regexForString);
     for (let i = 0; i < array.length; i++) {
         if (array[i]._name.toLowerCase().match(regexForString)) {
-           // const recipeCard = document.getElementById(`recipe-card--${array[i]._id}`);
-          //  recipeCard.classList.add('recipe-card--visible');
+            //const recipeCard = document.getElementById(`recipe-card--${array[i]._id}`);
+            //recipeCard.classList.add('recipe-card--visible');
            // recipeCard.classList.remove('recipe-card--hidden');
            matchingRecipes.push(array[i]);
         } else {
-           // const recipeCard = document.getElementById(`recipe-card--${array[i]._id}`);
-            //recipeCard.classList.remove('recipe-card--visible');
-          //  recipeCard.classList.add('recipe-card--hidden');
+            //const recipeCard = document.getElementById(`recipe-card--${array[i]._id}`);
+           // recipeCard.classList.remove('recipe-card--visible');
+           // recipeCard.classList.add('recipe-card--hidden');
             notMatchingRecipes.push(array[i]);
         }
     }
@@ -32,7 +32,17 @@ function lookForString(array, value) {
 
     // On actualise le tableau des recettes affichées
     displayedRecipes = matchingRecipes;
+    for (let i = 0; i < displayedRecipes.length; i++) {
+        const recipeCard = document.getElementById(`recipe-card--${displayedRecipes[i]._id}`);
+        recipeCard.classList.add('recipe-card--visible');
+        recipeCard.classList.remove('recipe-card--hidden');
+    }
     //notDisplayedRecipes = notMatchingRecipes;
+    for (let i = 0; i < notMatchingRecipes.length; i++) {
+        const recipeCard = document.getElementById(`recipe-card--${notMatchingRecipes[i]._id}`);
+        recipeCard.classList.remove('recipe-card--visible');
+        recipeCard.classList.add('recipe-card--hidden');
+    }
 }
 
 function search(element) {
