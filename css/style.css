@@ -9,16 +9,16 @@ body {
   color: #D04F4F;
 }
 
-#searchField {
+#mainSearchField {
   background: #E7E7E7;
   border: none;
   outline: none;
   border-style: none;
 }
-#searchField:focus {
+#mainSearchField:focus {
   border: 2px solid #D04F4F;
 }
-#searchField::placeholder {
+#mainSearchField::placeholder {
   opacity: 25%;
 }
 
@@ -136,6 +136,10 @@ body {
   flex-direction: column;
   gap: 1em;
   align-items: center;
+}
+
+.container {
+  width: 100%;
 }
 
 /*header {
@@ -285,11 +289,6 @@ body {
 }
 
 /************* Validation / invalidation des champs du formulaire *****************/
-/*
-.search-form[data-error-visible="true"] .search-form__input {
-    border: 0.5em solid black;
-  }
-*/
 .search-form[data-error-visible=false] .data-error {
   display: none;
 }

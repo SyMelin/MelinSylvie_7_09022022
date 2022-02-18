@@ -7,7 +7,7 @@ let isTextValid = function (element) {
 function lookForString(array, value) {
     let matchingRecipes = [];
    // let notmatchingRecipes = [];
-    let regex = "(^|\\s)" + value.toLowerCase() + "[ ]*[^$]*(\\w)";
+    let regex = "(^|\\s)" + value.toLowerCase() + "?[^$]*(\\w)";
    // console.log('regex')
     let regexForString = new RegExp(regex, 'g');
     console.log(regexForString);
@@ -70,7 +70,7 @@ function search(element) {
                     lookForString (dataModified, modifiedInput);
                 }
                 // on stock la valeur entrée
-                mainSearchFieldValue =  modifiedInput;
+                mainSearchFieldValue = modifiedInput;
                 console.log("mainSearchFieldValue", mainSearchFieldValue);
             } else {
                 //element.style.backgroundColor = 'yellow';
