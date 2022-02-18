@@ -6,8 +6,8 @@ let isTextValid = function (element) {
 
 function lookForString(array, value) {
     let matchingRecipes = [];
-    let notmatchingRecipes = [];
-    let regex = "(^|\\s)" + value.toLowerCase() + "(\\w)";
+   // let notmatchingRecipes = [];
+    let regex = "(^|\\s)" + value.toLowerCase() + "[ ]*[^$]*(\\w)";
    // console.log('regex')
     let regexForString = new RegExp(regex, 'g');
     console.log(regexForString);
@@ -21,18 +21,18 @@ function lookForString(array, value) {
            // const recipeCard = document.getElementById(`recipe-card--${array[i]._id}`);
             //recipeCard.classList.remove('recipe-card--visible');
           //  recipeCard.classList.add('recipe-card--hidden');
-            notmatchingRecipes.push(array[i]);
+            notMatchingRecipes.push(array[i]);
         }
     }
     console.log("matchingRecipes", matchingRecipes);
-    console.log("unmatch", notmatchingRecipes);
+    console.log("unmatch", notMatchingRecipes);
     if (matchingRecipes.length == 0) {
         document.querySelector('.search-form'). setAttribute('data-error-visible', true);
     }
 
     // On actualise le tableau des recettes affichées
     displayedRecipes = matchingRecipes;
-    notDisplayedRecipes = notmatchingRecipes;
+    //notDisplayedRecipes = notMatchingRecipes;
 }
 
 function search(element) {
@@ -56,6 +56,7 @@ function search(element) {
                 if (modifiedInput.length > mainSearchFieldValue.length) {
                     lookForString (displayedRecipes, modifiedInput);
                 } else {
+                    notMatchingRecipes = [];
                     lookForString (dataModified, modifiedInput);
                 }
                 // on stock la valeur entrée
