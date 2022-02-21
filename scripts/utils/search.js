@@ -30,7 +30,15 @@ function lookForString(array, value) {
             }
             /////////////////////////////////////////////////////
             if (test == false) {
-                notMatchingRecipes.push(array[i]);  
+                //let regex = "\\b[ ]*" + value + "$";
+                let regex = "\\b[ ]*" + value;
+                let regexForString = new RegExp(regex, 'g');
+               // console.log(regexForString);
+                if (strNoAccent(recipe._description.toLowerCase()).match(regexForString)) {
+                    matchingRecipes.push(recipe);
+                } else {
+                    notMatchingRecipes.push(array[i]);  
+                }
             }     
         }
     }
