@@ -12,14 +12,30 @@ function lookForString(array, value) {
     let regexForString = new RegExp(regex, 'g');
    // console.log(regexForString);
     for (let i = 0; i < array.length; i++) {
+        //s'il y a correspondance sur le nom de la recette, on ajoute la recette au tableau des correspondance et on passe à la recette suivante (si celel-ci existe)
         if (strNoAccent(array[i]._name.toLowerCase()).match(regexForString)) {
             matchingRecipes.push(array[i]);
-        } else {
-            notMatchingRecipes.push(array[i]);
+        }
+        //sinon on cherche une correspondance au niveau des ingrédients de la recette
+        else {
+            let recipe = array[i];
+            let test = false;
+            for (let j = 0; j < recipe._ingredients.length; j++) {
+                //s'il y a correspondance sur un ingédient, le test sur les ingrédients s'arrête, on ajoute la recette au tableau des correspondances et on passe à la recette suivante (si celle-ci existe)
+                if (strNoAccent(recipe._ingredients[j].ingredient.toLowerCase()).match(regexForString)) {
+                    test = true;
+                    matchingRecipes.push(recipe);
+                    break;
+                }
+            }
+            /////////////////////////////////////////////////////
+            if (test == false) {
+                notMatchingRecipes.push(array[i]);  
+            }     
         }
     }
-   // console.log("matchingRecipes", matchingRecipes);
-   // console.log("unmatch", notMatchingRecipes);
+   console.log("matchingRecipes", matchingRecipes);
+   console.log("unmatch", notMatchingRecipes);
     if (matchingRecipes.length == 0) {
         document.querySelector('.search-form'). setAttribute('data-error-visible', true);
     }
