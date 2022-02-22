@@ -100,5 +100,12 @@ function init() {
     mainSearchField.addEventListener('input', function(e){
         search(e.target);
     });
+    
+    //on évite le rechargement de la page avec la touche Entrée sur le champ de saisie principale
+    mainSearchField.addEventListener('keydown', function(e){
+        if (e.key === "Enter") {
+            e.preventDefault();
+        }
+    });
 };
 init();

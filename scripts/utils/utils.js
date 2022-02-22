@@ -14,4 +14,3 @@ function strNoAccent(a) {
   //strNoAccent('tést');
   //console.log(strNoAccent("évènement"));
   // renvoie : "test"
-  

@@ -6,11 +6,11 @@ let isTextValid = function (element) {
 
 function lookForString(array, value) {
     let matchingRecipes = [];
-    //let regex = "(^|\\s)" + value + "?[ ]?[^$]*(\\w)";
+    //on cherche une correspondance au niveau du nom de la recette
     let regex = value;
-   // console.log('regex')
+    //console.log('regex')
     let regexForString = new RegExp(regex, 'g');
-   // console.log(regexForString);
+    //console.log(regexForString);
     for (let i = 0; i < array.length; i++) {
         //s'il y a correspondance sur le nom de la recette, on ajoute la recette au tableau des correspondance et on passe à la recette suivante (si celel-ci existe)
         if (strNoAccent(array[i]._name.toLowerCase()).match(regexForString)) {
@@ -29,15 +29,14 @@ function lookForString(array, value) {
                 }
             }
             /////////////////////////////////////////////////////
+            //test description
             if (test == false) {
-                //let regex = "\\b[ ]*" + value + "$";
-                let regex = "\\b[ ]*" + value;
-                let regexForString = new RegExp(regex, 'g');
-               // console.log(regexForString);
+               // let regex = value;
+               // let regexForString = new RegExp(regex, 'g');
                 if (strNoAccent(recipe._description.toLowerCase()).match(regexForString)) {
                     matchingRecipes.push(recipe);
                 } else {
-                    notMatchingRecipes.push(array[i]);  
+                    notMatchingRecipes.push(recipe);  
                 }
             }     
         }
@@ -68,30 +67,43 @@ function search(element) {
     //console.log ("element.value.length", element.value.length);
     //console.log("mainSearchFieldValue", mainSearchFieldValue);
     for (let i = 0; i < dataModified.length; i++) {
+        //on rend visible toutes les cartes au début du test
         const recipeCard = document.getElementById(`recipe-card--${dataModified[i]._id}`);
         recipeCard.classList.add('recipe-card--visible');
         recipeCard.classList.remove('recipe-card--hidden');
     }
     //on vérifie qu'au moins 3 caractères sont saisis
     if (element.value.length >= element.getAttribute('minlength')) {
+        document.querySelector('.data-info').classList.add('data-info--hidden');
+        document.querySelector('.data-info').classList.remove('data-info--visible');
     //on vérifie que les caractères saisis sont valides
         if (isTextValid (element) === true){
             element.parentElement.parentElement.setAttribute("data-error-visible", false);
             let modifiedInput = strNoAccent(element.value.toLowerCase());
+            //Si la longueur de la valeur nouvellement saisie est supérieure à celle de la valeur stockée
             if (modifiedInput.length > mainSearchFieldValue.length) {
                 lookForString (displayedRecipes, modifiedInput);
             } else {
                 notMatchingRecipes = [];
                 lookForString (dataModified, modifiedInput);
             }
-            // on stocke  la valeur entrée
+            //on stocke  la valeur entrée
             mainSearchFieldValue = modifiedInput;
             //console.log("mainSearchFieldValue", mainSearchFieldValue);
         } else {
             console.log("le format du texte n'est pas valide");
             element.parentElement.parentElement.setAttribute("data-error-visible", true);
+            for (let i = 0; i < dataModified.length; i++) {
+                //On n'affiche aucune recette
+                const recipeCard = document.getElementById(`recipe-card--${dataModified[i]._id}`);
+                recipeCard.classList.add('recipe-card--hidden');
+                recipeCard.classList.remove('recipe-card--visible');
+            }
         }
     } else {
         element.parentElement.parentElement.setAttribute("data-error-visible", false);
+        // On affiche un message invitant l'utilisateur à saisir le nombre minimum de caractères
+        document.querySelector('.data-info').classList.add('data-info--visible');
+        document.querySelector('.data-info').classList.remove('data-info--hidden');
     }
 }
