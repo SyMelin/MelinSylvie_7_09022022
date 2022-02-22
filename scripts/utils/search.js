@@ -31,8 +31,8 @@ function lookForString(array, value) {
             /////////////////////////////////////////////////////
             //test description
             if (test == false) {
-               // let regex = value;
-               // let regexForString = new RegExp(regex, 'g');
+                regex = "\\b" + value;
+                regexForString = new RegExp(regex, 'g');
                 if (strNoAccent(recipe._description.toLowerCase()).match(regexForString)) {
                     matchingRecipes.push(recipe);
                 } else {
