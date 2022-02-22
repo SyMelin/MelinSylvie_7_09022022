@@ -1,14 +1,10 @@
+let dataModified = [];
 let allIngredients = [];
 let allAppliances = [];
 let allUstensils = [];
 let displayedRecipes = [];
 let notMatchingRecipes = [];
-let clickIndex = 0; //sert à savoir quel filtre a été cliqué le dernier afin d'ouvrir celui-ci et fermer les autres
-
-let dataModified = [];
-
 let mainSearchFieldValue = 0;
-
 
 
 //Affiche la carte de chaque recette
