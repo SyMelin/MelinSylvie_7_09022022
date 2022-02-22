@@ -18,13 +18,15 @@
                 </div>
             </header>
             <main class="container">
-                <form class="search-form">
-                    <label class="search-form__label" for="searchField">
-                        <input type="text" placeholder="Rechercher une recette (minimum 3 caractères)" name="searchField" class="search-form__input" id="searchField">
+                <form class="search-form" data-error-visible="false">
+                    <label class="search-form__label" for="mainSearchField" >
+                        <input type="text" placeholder="Rechercher une recette (minimum 3 caractères)" name="searchField" class="search-form__input" id="mainSearchField" minlength="3">
                         <div class="search-form__icon">
                             <i class="fa fa-search" ></i>
                         </div>
                     </label>
+                    <span class="data-error">Aucune recette ne correspond à votre critère. Vous pouvez chercher « tarte aux pommes », « poisson », etc</span>
+                    <span class="data-info data-info--hidden">Veuillez saisir au minimum 3 caractères</span>
                 </form>
                 <div class="sorting">
                     <div class="tags-container">
@@ -40,9 +42,15 @@
         <!-- data -->
         <script src="data/recipe.js"></script>
 
+        <!-- utils -->
+        <script src="scripts/utils/utils.js"></script>
+
         <!-- templates -->
         <script src="scripts/templates/recipe.js"></script>
         <script src="scripts/templates/combobox.js"></script>
+
+        <!-- utils -->
+        <script src="scripts/utils/search.js"></script>
 
         <!-- pages -->
         <script src="scripts/pages/index.js"></script>

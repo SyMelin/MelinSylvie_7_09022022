@@ -9,16 +9,16 @@ body {
   color: #D04F4F;
 }
 
-#searchField {
+#mainSearchField {
   background: #E7E7E7;
   border: none;
   outline: none;
   border-style: none;
 }
-#searchField:focus {
+#mainSearchField:focus {
   border: 2px solid #D04F4F;
 }
-#searchField::placeholder {
+#mainSearchField::placeholder {
   opacity: 25%;
 }
 
@@ -138,6 +138,10 @@ body {
   align-items: center;
 }
 
+.container {
+  width: 100%;
+}
+
 /*header {
     display: flex;
     flex-direction: column;
@@ -192,7 +196,10 @@ body {
   margin: 0 auto;
 }
 
-.recipe-card {
+.recipe-card--hidden {
+  display: none;
+}
+.recipe-card--visible {
   z-index: 0;
   height: 22.75em;
   border-radius: 5px;
@@ -279,6 +286,20 @@ body {
   right: 1em;
   display: flex;
   align-items: center;
+}
+
+/************* Validation / invalidation des champs du formulaire *****************/
+.search-form[data-error-visible=false] .data-error, .data-info--hidden {
+  display: none;
+}
+
+.search-form[data-error-visible=true] .data-error, .data-info--visible {
+  font-size: 1em;
+  font-weight: bold;
+  color: black;
+  display: block;
+  margin-top: 0.5em;
+  text-align: left;
 }
 
 .option {

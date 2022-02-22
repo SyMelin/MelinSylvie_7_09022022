@@ -4,3 +4,7 @@ body {
     @include flex-col-gap($gapSize-body);
     align-items: center;
 }
+
+.container {
+    width: 100%;
+}

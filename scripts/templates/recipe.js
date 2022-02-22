@@ -2,7 +2,7 @@
  * La classe recipe renvoie un objet avec les éléments qui sont nécessaires à la carte de la recette
  */
 
-class Recipe {
+ class Recipe {
 
     /**
      * @param {Object} data objet contenant toutes les données d'une recette
@@ -10,10 +10,14 @@ class Recipe {
 
     constructor (data) {
         this._id = data.id;
-        this._ingredients = data.ingredients;
         this._name = data.name;
+        this._servings = data.servings;
+        this._ingredients = data.ingredients;
         this._time =  data.time;
         this._description = data.description;
+        this._appliance = data.appliance;
+        this._ustensils = data.ustensils;
+        this._recipeCardDOM = this.getRecipeCardDOM();
     }
 
     getRecipeCardDOM() {
@@ -21,7 +25,8 @@ class Recipe {
         const recipeCard = document.createElement('a');
         recipeCard.setAttribute('role', 'link');
         recipeCard.setAttribute('href', '');
-        recipeCard.classList.add('recipe-card');
+        recipeCard.setAttribute('id', `recipe-card--${this._id}`);
+        recipeCard.classList.add('recipe-card', 'recipe-card--visible');
 
         //On crée la division image
         const recipeCardImg = document.createElement('div');

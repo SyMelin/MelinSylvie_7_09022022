@@ -20,3 +20,18 @@
         align-items: center;
     }
 }
+
+/************* Validation / invalidation des champs du formulaire *****************/
+
+.search-form[data-error-visible="false"] .data-error, .data-info--hidden {
+    display: none;
+}
+ 
+.search-form[data-error-visible="true"] .data-error, .data-info--visible {
+font-size: 1em;
+font-weight: bold;
+color: black;
+display: block;
+margin-top: 0.5em;
+text-align: left;
+}
