@@ -47,11 +47,6 @@ class Combobox {
 
             let state = datalist.getAttribute('aria-expanded');
 
-            
-            clickIndex++ ;
-            datalist.setAttribute('click-index', clickIndex);
-
-
             //On masque le label, on affiche l'input du combobox ou l'inverse
             label.classList.toggle('combobox__label--hidden');
             input.classList.toggle('combobox__input--hidden');
@@ -78,45 +73,6 @@ class Combobox {
             //Selon l'état de la comboboxDatalist enregistré au clic
             if (state == "false") {
                 datalist.setAttribute('aria-expanded', true);
-
-                //On ferme les filtres déjà ouverts
-        /*    const allDatalists = Array.from(document.getElementsByClassName('combobox__datalist'));
-            console.log(allDatalists);
-            allDatalists.forEach((list) => {
-                let a = list.getAttribute('click-index');
-                let b = datalist.getAttribute('click-index');
-                console.log(list.getAttribute('aria-expanded'));
-                if (a < b) {
-                    console.log("inférieur");
-                } else {
-                    console.log("c'est le même");
-                }
-                if (list.getAttribute('click-index') < datalist.getAttribute('click-index')) {
-                    console.log( list.parentElement.firstChild);
-                    const listLabel = list.parentElement.firstChild.firstChild;
-                    const listInput = listLabel.nextSibling;
-                    const listButton = listInput.nextSibling;
-                    listLabel.classList.remove('combobox__label--hidden');
-                    listInput.classList.add('combobox__input--hidden');
-                    listButton.classList.toggle('expandBtn--less');
-                    ['combobox__datalist--closed', 'combobox__datalist--open'].map(element => list.classList.toggle(element));
-                    listButton.setAttribute('aria-expanded', false);
-                    list.setAttribute('aria-expanded', false);
-                } else {
-                    console.log("c l'élément cliqué");
-                }
-            })*/
-
-
-
-
-
-
-
-
-
-
-
             } else {
                 comboboxButton.setAttribute('aria-expanded', false);
                 datalist.setAttribute('aria-expanded', false);
@@ -151,7 +107,7 @@ class Combobox {
         const label = document.createElement('div');
        // console.log(this._number);
         label.setAttribute('id', `combobox__label--${this._number}`); //
-        label.setAttribute('for', `${strNoAccent(this._name)}`)
+        label.setAttribute('for', `${strNoAccent(this._name).toLowerCase()}`)
         label.classList.add('combobox__label');
         label.textContent = this._name;
         //console.log(label);
@@ -161,10 +117,11 @@ class Combobox {
 
     createComboboxInput () {
         const input = document.createElement('input');
-        input.setAttribute('id', `${this._name}`);
+        input.setAttribute('id', `${strNoAccent(this._name).toLowerCase()}`);
         input.setAttribute('name', `${this._name}`);
         input.setAttribute('type', 'text');
-        input.setAttribute('placeholder', `Rechercher un ${this._name}`);
+        input.setAttribute('minlength', 3);
+        input.setAttribute('placeholder', `Rechercher un ${this._name.toLowerCase()}`);
         input.classList.add('combobox__input',`combobox__input--${this._number}`, 'combobox__input--hidden');
         return input;
     }
@@ -191,12 +148,28 @@ class Combobox {
         const option = document.createElement('li');
         option.setAttribute('role', 'option');
         option.setAttribute('aria-selected', false);
-        option.setAttribute('id', `'option--${integer}'`);
-        option.classList.add('option', 'option--notSelected', `option--${this._number}`);
+        option.setAttribute('id', `option--${integer}`);
+        option.classList.add('option', 'option--notSelected', `option--${this._number}`, 'option--visible');
         option.textContent = text;
 
         option.addEventListener('click', function(e) {
             e.preventDefault();
+            const optionValue = strNoAccent(e.target.textContent.toLowerCase());
+            console.log("optionValue",optionValue);
+            if (mainSearchFieldValue == 0) {
+                lookForString (dataModified, optionValue);
+            } else {
+                lookForString (displayedRecipes, optionValue);
+                
+            }
+            //on stocke  la valeur entrée
+            mainSearchFieldValue = optionValue;
+            //console.log("mainSearchFieldValue", mainSearchFieldValue);
+
+
+
+            option.classList.add('option--hidden');
+            option.classList.remove('option--visible');
             const optionClone = e.target.cloneNode(true);
             optionClone.setAttribute('aria-selected', true);
 
@@ -207,7 +180,11 @@ class Combobox {
             closeBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 const option = e.target.parentElement;
+                const id = option.getAttribute('id');
                 option.parentElement.removeChild(option);
+                const optionInList = document.querySelector(`.combobox__datalist--1 #${id}`);
+                optionInList.classList.remove('option--hidden');
+                optionInList.classList.add('option--visible');
             })
 
             optionClone.appendChild(closeBtn);

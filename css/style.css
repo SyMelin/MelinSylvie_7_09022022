@@ -265,44 +265,48 @@ body {
   text-overflow: ellipsis;
 }
 
-.search-form {
+.main-search {
+  width: 100%;
+}
+
+.main-search__formField {
   width: 100%;
   position: relative;
 }
-.search-form__label {
+.main-search__formField .formField__label {
   display: flex;
   flex-direction: row;
+  align-items: baseline;
 }
-.search-form__input {
+.main-search__formField .formField__input {
   width: 100%;
   border-radius: 5px;
   padding: 1.5em;
+  padding-right: 5em;
 }
-.search-form__icon {
+.main-search__formField .formField__icon {
   z-index: 1;
-  position: absolute;
-  height: 100%;
-  top: 0;
-  right: 1em;
+  margin-left: -2.5em;
   display: flex;
   align-items: center;
 }
 
 /************* Validation / invalidation des champs du formulaire *****************/
-.search-form[data-error-visible=false] .data-error, .data-info--hidden {
+.main-search__formField[data-error-visible=false] .data-error, .data-info--hidden {
   display: none;
 }
 
-.search-form[data-error-visible=true] .data-error, .data-info--visible {
+.main-search__formField[data-error-visible=true] .data-error, .data-info--visible {
   font-size: 1em;
   font-weight: bold;
   color: black;
   display: block;
   margin-top: 0.5em;
   text-align: left;
+  width: 100%;
 }
 
-.option {
+.option--visible {
   display: block;
   list-style: none;
   margin-top: 0.5em;
@@ -311,6 +315,10 @@ body {
   margin-left: -2em;
   padding: 0;
   cursor: pointer;
+}
+
+.option--hidden {
+  display: none;
 }
 
 .tagsList .option {

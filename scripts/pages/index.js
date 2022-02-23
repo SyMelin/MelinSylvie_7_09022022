@@ -3,11 +3,15 @@ let allAppliances = [];
 let allUstensils = [];
 let displayedRecipes = [];
 let notMatchingRecipes = [];
-let clickIndex = 0; //sert à savoir quel filtre a été cliqué le dernier afin d'ouvrir celui-ci et fermer les autres
 
 let dataModified = [];
 
 let mainSearchFieldValue = 0;
+
+
+let secondarySearchFieldValue = 0;
+let displayedOptions = [];
+let notMatchingOptions = [];
 
 
 
@@ -106,6 +110,12 @@ function init() {
         if (e.key === "Enter") {
             e.preventDefault();
         }
+    });
+
+    //ajout de la fonction searchOnCombox sur le champ de recherche par ingrédient
+    const ingredientInput = document.getElementById('ingredients');
+    ingredientInput.addEventListener('input', function(e){
+        searchOnCombobox(e.target);
     });
 };
 init();

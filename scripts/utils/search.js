@@ -4,21 +4,20 @@ let isTextValid = function (element) {
         return true;
     }};
 
+
 function lookForString(array, value) {
     let matchingRecipes = [];
-    //on cherche une correspondance au niveau du nom de la recette
+    //on cherche une correspondance au niveau du nom de chaque recette
     let regex = value;
-    //console.log('regex')
     let regexForString = new RegExp(regex, 'g');
-    //console.log(regexForString);
     for (let i = 0; i < array.length; i++) {
-        //s'il y a correspondance sur le nom de la recette, on ajoute la recette au tableau des correspondance et on passe à la recette suivante (si celel-ci existe)
-        if (strNoAccent(array[i]._name.toLowerCase()).match(regexForString)) {
-            matchingRecipes.push(array[i]);
+        let recipe = array[i];
+        //s'il y a correspondance sur le nom de la recette, on ajoute la recette au tableau des correspondance et on passe à la recette suivante (si celle-ci existe)
+        if (strNoAccent(recipe._name.toLowerCase()).match(regexForString)) {
+            matchingRecipes.push(recipe);
         }
         //sinon on cherche une correspondance au niveau des ingrédients de la recette
         else {
-            let recipe = array[i];
             let test = false;
             for (let j = 0; j < recipe._ingredients.length; j++) {
                 //s'il y a correspondance sur un ingédient, le test sur les ingrédients s'arrête, on ajoute la recette au tableau des correspondances et on passe à la recette suivante (si celle-ci existe)
@@ -44,13 +43,12 @@ function lookForString(array, value) {
    console.log("matchingRecipes", matchingRecipes);
    console.log("unmatch", notMatchingRecipes);
     if (matchingRecipes.length == 0) {
-        document.querySelector('.search-form'). setAttribute('data-error-visible', true);
+        document.querySelector('.main-search__formField'). setAttribute('data-error-visible', true);
     }
 
     // On actualise le tableau des recettes affichées
     displayedRecipes = matchingRecipes;
     for (let i = 0; i < displayedRecipes.length; i++) {
-        const recipeCard = document.getElementById(`recipe-card--${displayedRecipes[i]._id}`);
         recipeCard.classList.add('recipe-card--visible');
         recipeCard.classList.remove('recipe-card--hidden');
     }
@@ -66,11 +64,12 @@ function search(element) {
     //console.log ("element.value", element.value);
     //console.log ("element.value.length", element.value.length);
     //console.log("mainSearchFieldValue", mainSearchFieldValue);
+    
+    //on rend visible toutes les cartes au début du test
+    const recipeCards = document.getElementsByClassName('recipe-card');
     for (let i = 0; i < dataModified.length; i++) {
-        //on rend visible toutes les cartes au début du test
-        const recipeCard = document.getElementById(`recipe-card--${dataModified[i]._id}`);
-        recipeCard.classList.add('recipe-card--visible');
-        recipeCard.classList.remove('recipe-card--hidden');
+        recipeCards[i].classList.add('recipe-card--visible');
+        recipeCards[i].classList.remove('recipe-card--hidden');
     }
     //on vérifie qu'au moins 3 caractères sont saisis
     if (element.value.length >= element.getAttribute('minlength')) {
@@ -93,11 +92,11 @@ function search(element) {
         } else {
             console.log("le format du texte n'est pas valide");
             element.parentElement.parentElement.setAttribute("data-error-visible", true);
+            //On n'affiche aucune recette
+            const recipeCards = document.getElementsByClassName('recipe-card');
             for (let i = 0; i < dataModified.length; i++) {
-                //On n'affiche aucune recette
-                const recipeCard = document.getElementById(`recipe-card--${dataModified[i]._id}`);
-                recipeCard.classList.add('recipe-card--hidden');
-                recipeCard.classList.remove('recipe-card--visible');
+                recipeCards[i].classList.add('recipe-card--hidden');
+                recipeCards[i].classList.remove('recipe-card--visible');
             }
         }
     } else {

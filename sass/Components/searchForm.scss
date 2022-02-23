@@ -1,37 +1,43 @@
-.search-form {
+.main-search {
+    width: 100%;
+}
+
+.main-search__formField {
     width: 100%;
     position: relative;
-    &__label{
-        display: flex;
-        flex-direction: row;
-    }
-    &__input {
-        width: 100%;
-        border-radius: $radius-d;
-        padding: 1.5em;
-    }
-    &__icon {
-        z-index: 1;
-        position: absolute;
-        height: 100%;
-        top: 0;
-        right: 1em;
-        display: flex;
-        align-items: center;
-    }
+    & .formField {
+        &__label{
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            }
+        &__input {
+            width: 100%;
+            border-radius: $radius-d;
+            padding: 1.5em;
+            padding-right: 5em;
+        }
+        &__icon {
+            z-index: 1;
+            margin-left: -2.5em;
+            display: flex;
+            align-items: center;
+        }
+    }     
 }
 
 /************* Validation / invalidation des champs du formulaire *****************/
 
-.search-form[data-error-visible="false"] .data-error, .data-info--hidden {
+.main-search__formField[data-error-visible="false"] .data-error, .data-info--hidden {
     display: none;
 }
  
-.search-form[data-error-visible="true"] .data-error, .data-info--visible {
+.main-search__formField[data-error-visible="true"] .data-error, .data-info--visible {
 font-size: 1em;
 font-weight: bold;
 color: black;
 display: block;
 margin-top: 0.5em;
 text-align: left;
+width: 100%;
 }
