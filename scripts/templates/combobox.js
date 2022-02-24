@@ -56,33 +56,12 @@ class Combobox {
             comboboxButton.classList.toggle('expandBtn--less');
             ['combobox__datalist--closed', 'combobox__datalist--open'].map(element => datalist.classList.toggle(element));
 
-            /*
-            options.forEach((option) => {
-                option.setAttribute('tabindex', 0);
-
-                option.addEventListener('keydown', function(e) {
-                    moveToOption (e, option);
-                });
-
-                if (option.classList.contains('option--notSelected')) {
-                    ['option--notSelected', 'option--selected'].map(element => option.classList.toggle(element));
-                }
-            });
-            */
-
             //Selon l'état de la comboboxDatalist enregistré au clic
             if (state == "false") {
                 datalist.setAttribute('aria-expanded', true);
             } else {
                 comboboxButton.setAttribute('aria-expanded', false);
                 datalist.setAttribute('aria-expanded', false);
-                /*
-                options.forEach((option)=> {
-                    option.setAttribute('tabindex', -1);
-                    if ((option.getAttribute('aria-selected')) == "false") { 
-                        ['option--notSelected', 'option--selected'].map(element => option.classList.toggle(element));
-                    }
-                })*/ 
             }
         }
 
