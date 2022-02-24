@@ -10,6 +10,7 @@ function lookForString(array, value) {
     //on cherche une correspondance au niveau du nom de chaque recette
     let regex = value;
     let regexForString = new RegExp(regex, 'g');
+    console.log(regexForString);
     for (let i = 0; i < array.length; i++) {
         let recipe = array[i];
         //s'il y a correspondance sur le nom de la recette, on ajoute la recette au tableau des correspondance et on passe à la recette suivante (si celle-ci existe)

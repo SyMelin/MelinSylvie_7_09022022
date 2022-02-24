@@ -1,12 +1,15 @@
 function lookForStringInSecondary(array, value) {
     let matchingOptions = [];
     //on cherche une correspondance au niveau de chaque option
-    let regex = value;
+    let regex = "\\b" + value;
     let regexForString = new RegExp(regex, 'g');
+    console.log(regexForString);
     for (let i = 0; i < array.length; i++) {
         //console.log("option", array[i]);
         let option = array[i];
         //s'il y a correspondance sur le texte de l'option, on ajoute l'option au tableau des correspondance et on passe à l'option suivante (si celle-ci existe)
+        //console.log(option.childNodes[0].nodeValue);
+        console.log(option.textContent);
         if (strNoAccent(option.textContent.toLowerCase()).match(regexForString)) {
             matchingOptions.push(option);
         }
