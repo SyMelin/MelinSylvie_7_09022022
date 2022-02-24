@@ -13,6 +13,9 @@ let secondarySearchFieldValue = 0;
 let displayedOptions = [];
 let notMatchingOptions = [];
 
+let indexFilterIteration = 0;
+let displayedRecipesTag = [];
+
 
 
 //Affiche la carte de chaque recette
@@ -103,6 +106,8 @@ function init() {
     const mainSearchField = document.getElementById('mainSearchField');
     mainSearchField.addEventListener('input', function(e){
         search(e.target);
+        indexFilterIteration = 0;
+        console.log("hello", indexFilterIteration);
     });
     
     //on évite le rechargement de la page avec la touche Entrée sur le champ de saisie principale

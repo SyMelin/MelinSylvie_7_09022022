@@ -152,20 +152,78 @@ class Combobox {
         option.classList.add('option', 'option--notSelected', `option--${this._number}`, 'option--visible');
         option.textContent = text;
 
+        function lookForTagString(array, value) {
+            console.log("array utilisé", array);
+            let matchingRecipes = [];
+            //on cherche une correspondance au niveau du nom de chaque recette
+            let regex = value;
+            let regexForString = new RegExp(regex, 'g');
+            //console.log(regexForString);
+            for (let i = 0; i < array.length; i++) {
+                let recipe = array[i];
+                //On cherche une correspondance au niveau des ingrédients de la recette
+                let test = false;
+                for (let j = 0; j < recipe._ingredients.length; j++) {
+                    //s'il y a correspondance sur un ingédient, le test sur les ingrédients s'arrête, on ajoute la recette au tableau des correspondances et on passe à la recette suivante (si celle-ci existe)
+                    if (strNoAccent(recipe._ingredients[j].ingredient.toLowerCase()).match(regexForString)) {
+                        test = true;
+                        matchingRecipes.push(recipe);
+                        break;
+                    }
+                }
+                if (test == false) {
+                    notMatchingRecipes.push(recipe);  
+                }  
+            }
+            console.log("matchingRecipes", matchingRecipes);
+            console.log("unmatch", notMatchingRecipes);
+            if (matchingRecipes.length == 0) {
+                //document.querySelector('.main-search__formField'). setAttribute('data-error-visible', true);
+            }
+
+            // On actualise le tableau des recettes affichées
+            displayedRecipesTag = matchingRecipes;
+            console.log("displayedRecipesTag", displayedRecipesTag);
+            for (let i = 0; i < displayedRecipesTag.length; i++) {
+                recipeCard.classList.add('recipe-card--visible');
+                recipeCard.classList.remove('recipe-card--hidden');
+            }
+            //notDisplayedRecipes = notMatchingRecipes;
+            for (let i = 0; i < notMatchingRecipes.length; i++) {
+                const recipeCard = document.getElementById(`recipe-card--${notMatchingRecipes[i]._id}`);
+                recipeCard.classList.remove('recipe-card--visible');
+                recipeCard.classList.add('recipe-card--hidden');
+            }
+        }
+
+
         option.addEventListener('click', function(e) {
             e.preventDefault();
+            console.log("index", indexFilterIteration);
             const optionValue = strNoAccent(e.target.textContent.toLowerCase());
-            console.log("optionValue",optionValue);
+           // console.log("optionValue",optionValue);
             if (mainSearchFieldValue == 0) {
-                lookForString (dataModified, optionValue);
+                if (indexFilterIteration == 0) {
+                    //console.log("displayedRecipes", displayedRecipes);
+                    lookForTagString (dataModified, optionValue);
+                } else {
+                    lookForTagString (displayedRecipesTag, optionValue);
+                    //console.log("displayedRecipesTag", displayedRecipes);
+                }
             } else {
-                lookForString (displayedRecipes, optionValue);
-                
+                if (indexFilterIteration == 0) {
+                    //console.log("displayedRecipes", displayedRecipes);
+                    lookForTagString (displayedRecipes, optionValue);
+                } else {
+                    lookForTagString (displayedRecipesTag, optionValue);
+                    //console.log("displayedRecipesTag", displayedRecipes);
+                }
             }
+            //on ajoute une iteration à l'indice des tags
+            indexFilterIteration++ ;
             //on stocke  la valeur entrée
             mainSearchFieldValue = optionValue;
             //console.log("mainSearchFieldValue", mainSearchFieldValue);
-
 
 
             option.classList.add('option--hidden');
@@ -185,6 +243,10 @@ class Combobox {
                 const optionInList = document.querySelector(`.combobox__datalist--1 #${id}`);
                 optionInList.classList.remove('option--hidden');
                 optionInList.classList.add('option--visible');
+
+                //let indexIteration = indexFilterIteration-- ;
+               // if (indexIteration
+
             })
 
             optionClone.appendChild(closeBtn);
