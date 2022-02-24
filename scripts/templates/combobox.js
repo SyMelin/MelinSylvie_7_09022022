@@ -156,11 +156,12 @@ class Combobox {
             console.log("array utilisé", array);
             let matchingRecipes = [];
             //on cherche une correspondance au niveau du nom de chaque recette
-            let regex = value;
+            let regex = "\\b" + value;
             let regexForString = new RegExp(regex, 'g');
             //console.log(regexForString);
             for (let i = 0; i < array.length; i++) {
                 let recipe = array[i];
+                //console.log(array[i]);
                 //On cherche une correspondance au niveau des ingrédients de la recette
                 let test = false;
                 for (let j = 0; j < recipe._ingredients.length; j++) {
@@ -172,11 +173,11 @@ class Combobox {
                     }
                 }
                 if (test == false) {
-                    notMatchingRecipes.push(recipe);  
+                    notMatchingRecipesTag.push(recipe);  
                 }  
             }
             console.log("matchingRecipes", matchingRecipes);
-            console.log("unmatch", notMatchingRecipes);
+            console.log("notMatchingRecipesTag", notMatchingRecipesTag);
             if (matchingRecipes.length == 0) {
                 //document.querySelector('.main-search__formField'). setAttribute('data-error-visible', true);
             }
@@ -185,14 +186,15 @@ class Combobox {
             displayedRecipesTag = matchingRecipes;
             console.log("displayedRecipesTag", displayedRecipesTag);
             for (let i = 0; i < displayedRecipesTag.length; i++) {
-                recipeCard.classList.add('recipe-card--visible');
-                recipeCard.classList.remove('recipe-card--hidden');
+            const recipeCardOn = document.getElementById(`recipe-card--${displayedRecipesTag[i]._id}`);
+                recipeCardOn.classList.add('recipe-card--visible');
+                recipeCardOn.classList.remove('recipe-card--hidden');
             }
             //notDisplayedRecipes = notMatchingRecipes;
-            for (let i = 0; i < notMatchingRecipes.length; i++) {
-                const recipeCard = document.getElementById(`recipe-card--${notMatchingRecipes[i]._id}`);
-                recipeCard.classList.remove('recipe-card--visible');
-                recipeCard.classList.add('recipe-card--hidden');
+            for (let i = 0; i < notMatchingRecipesTag.length; i++) {
+                const recipeCardOff = document.getElementById(`recipe-card--${notMatchingRecipesTag[i]._id}`);
+                recipeCardOff.classList.remove('recipe-card--visible');
+                recipeCardOff.classList.add('recipe-card--hidden');
             }
         }
 
@@ -235,6 +237,53 @@ class Combobox {
             closeBtn.setAttribute('role', 'button');
             closeBtn.classList.add('closeBtn');
 
+
+
+            function lookForTagStringInTagList(array, value) {
+               // console.log("array utilisé", array);
+                let matchingRecipes = [];
+                //on cherche une correspondance au niveau du nom de chaque recette
+                let regex = "\\b" + value;
+                let regexForString = new RegExp(regex, 'g');
+                //console.log(regexForString);
+                for (let i = 0; i < array.length; i++) {
+                    let recipe = array[i];
+                    //On cherche une correspondance au niveau des ingrédients de la recette
+                    let test = false;
+                    for (let j = 0; j < recipe._ingredients.length; j++) {
+                        //s'il y a correspondance sur un ingédient, le test sur les ingrédients s'arrête, on ajoute la recette au tableau des correspondances et on passe à la recette suivante (si celle-ci existe)
+                        if (strNoAccent(recipe._ingredients[j].ingredient.toLowerCase()).match(regexForString)) {
+                            test = true;
+                            matchingRecipes.push(recipe);
+                            break;
+                        }
+                    }
+                    if (test == false) {
+                        notMatchingRecipesTag.push(recipe);  
+                    }  
+                }
+                console.log("matchingRecipes", matchingRecipes);
+                console.log("notMatchingRecipesTag", notMatchingRecipesTag);
+                if (matchingRecipes.length == 0) {
+                    //document.querySelector('.main-search__formField'). setAttribute('data-error-visible', true);
+                }
+    
+                // On actualise le tableau des recettes affichées
+                displayedRecipesTag = matchingRecipes;
+                console.log("displayedRecipesTag", displayedRecipesTag);
+                for (let i = 0; i < displayedRecipesTag.length; i++) {
+                    const recipeCardOn = document.getElementById(`recipe-card--${displayedRecipesTag[i]._id}`);
+                    recipeCardOn.classList.add('recipe-card--visible');
+                    recipeCardOn.classList.remove('recipe-card--hidden');
+                }
+                //notDisplayedRecipes = notMatchingRecipes;
+                for (let i = 0; i < notMatchingRecipesTag.length; i++) {
+                    const recipeCardOff = document.getElementById(`recipe-card--${notMatchingRecipesTag[i]._id}`);
+                    recipeCardOff.classList.remove('recipe-card--visible');
+                    recipeCardOff.classList.add('recipe-card--hidden');
+                }
+            }
+
             closeBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 const option = e.target.parentElement;
@@ -244,9 +293,49 @@ class Combobox {
                 optionInList.classList.remove('option--hidden');
                 optionInList.classList.add('option--visible');
 
-                //let indexIteration = indexFilterIteration-- ;
-               // if (indexIteration
+                let matchingRecipes = [];
+                notMatchingRecipesTag = [];
 
+                let tagsAll = document.querySelector('.tagsList').children;
+                if (tagsAll.length == 0) {
+                    matchingRecipes = displayedRecipes;
+                    notMatchingRecipesTag = [];
+                    indexFilterIteration = 0;
+                    for (let i = 0; i < matchingRecipes.length; i++) {
+                        const recipeCardOn = document.getElementById(`recipe-card--${matchingRecipes[i]._id}`);
+                        recipeCardOn.classList.add('recipe-card--visible');
+                        recipeCardOn.classList.remove('recipe-card--hidden');
+                    }
+                } else {
+                    //console.log("tags", tagsAll);
+                    let tagsText = [];
+                    for (let i = 0; i < tagsAll.length; i++) {
+                        tagsText.push(strNoAccent(tagsAll[i].textContent.toLocaleLowerCase()));
+                    }
+                    //console.log(tagsText);
+                    
+                    //On réduit le nombre de recettes à tester à celles dont la longueur de la liste d'ingrédient correspond à la longueur de la liste de tags
+                    console.log("displayedRecipes", displayedRecipes);
+                    console.log(tagsText);
+                    for (let i = 0; i < displayedRecipes.length; i++) {
+                        let recipe = displayedRecipes[i];
+                        //Si le nombre d'ingrédients de la liste d'ingrédients de la recette i est inférieur aux nombres de tags recherchés, on ajoute directement la recette au non correspondance par tag
+                        if (recipe._ingredients.length < tagsText.length ) {
+                            notMatchingRecipesTag.push(recipe); 
+                        //Sinon, on l'ajoute au tableau des non-correspondance par tag
+                        } else {
+                            matchingRecipes.push(recipe);
+                        }
+                    }
+                    lookForTagStringInTagList(matchingRecipes, tagsText[0]);
+                        //console.log("tagsText[0] tableau utilisé", displayedRecipes);
+                        //console.log("tagsText[0] mot", tagsText[0]);
+                    for (let i = 1; i < tagsText.length; i++) {
+                        //console.log("tagsText[i] tableau utilisé", displayedRecipesTag);
+                        //console.log("tagsText[i] tableau mot", tagsText[i]);
+                        lookForTagStringInTagList(displayedRecipesTag, tagsText[i]);
+                    }
+                }
             })
 
             optionClone.appendChild(closeBtn);

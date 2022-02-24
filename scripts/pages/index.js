@@ -15,6 +15,8 @@ let notMatchingOptions = [];
 
 let indexFilterIteration = 0;
 let displayedRecipesTag = [];
+let notMatchingRecipesTag = [];
+
 
 
 
