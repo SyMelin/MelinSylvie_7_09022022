@@ -87,9 +87,9 @@ function initialiseFilters (dataModified) {
     getAllIngredients(dataModified);
     getAllAppliances(dataModified);
     getAllUstensils(dataModified);
-    filter1 = new Combobox (allIngredients, '1', 'Ingrédients');
-    filter2 = new Combobox (allAppliances, '2', 'Appareils');
-    filter3 = new Combobox (allUstensils, '3', 'Ustensiles');
+    filter1 = new Combobox (allIngredients, '1', 'Ingrédients', 'ingredients');
+    filter2 = new Combobox (allAppliances, '2', 'Appareils', 'appliance');
+    filter3 = new Combobox (allUstensils, '3', 'Ustensiles', 'ustensils');
     [filter1, filter2, filter3].map(element => element.create());
 }
 
@@ -173,10 +173,13 @@ function init() {
         }
     });
 
-    //ajout de la fonction searchOnCombox sur le champ de recherche par ingrédient
-    const ingredientInput = document.getElementById('ingredients');
-    ingredientInput.addEventListener('input', function(e){
-        searchOnCombobox(e.target);
-    });
+    //ajout de la fonction searchOnCombox sur le champ de recherche des combobox
+    const comboboxInputs = Array.from(document.getElementsByClassName('combobox__input'));
+    //console.log(comboboxInputs);
+    comboboxInputs.forEach((input) => {
+        input.addEventListener('input', function(e){
+            searchOnCombobox(e.target);
+        });
+    })
 };
 init();

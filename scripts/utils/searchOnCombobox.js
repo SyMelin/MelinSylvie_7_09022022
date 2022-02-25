@@ -40,7 +40,8 @@ function lookForStringInSecondary(array, value) {
 
 function searchOnCombobox (element) {
     //on rend visible toutes les options au début du test
-    const optionsI = document.querySelectorAll('.combobox__datalist--1 .option');
+   const optionsI = element.parentElement.nextSibling.children;
+   console.log(optionsI);
     for (let i = 0; i < optionsI.length; i++) {
         let option = optionsI[i];
         option.classList.add('option--visible');

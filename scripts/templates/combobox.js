@@ -3,13 +3,15 @@ class Combobox {
     /**
      *  @param {Array} options tableau regroupant les options
      *  @param {String} number chiffre de numérotation
-     *  @param {String} name nom de la liste
+     *  @param {String} name nom de la liste à afficher (en français)
+     *  @param {String} type nom de la liste pour le code (en anglais)
      */
 
-    constructor (options, number, name) {
+    constructor (options, number, name, type) {
         this._options = options;
         this._number = number;
         this._name = name;
+        this._type = type;
         this._comboboxLabel = this.createComboboxLabel();
         this._comboboxInput = this.createComboboxInput();
         this._comboboxDatalist = this.createComboboxDatalist();
@@ -81,7 +83,7 @@ class Combobox {
     createComboboxLabel () {
         const label = document.createElement('div');
         label.setAttribute('id', `combobox__label--${this._number}`); //
-        label.setAttribute('for', `${strNoAccent(this._name).toLowerCase()}`)
+        label.setAttribute('for', `${this._type}`)
         label.classList.add('combobox__label');
         label.textContent = this._name;
         return label;
@@ -90,8 +92,8 @@ class Combobox {
 
     createComboboxInput () {
         const input = document.createElement('input');
-        input.setAttribute('id', `${strNoAccent(this._name).toLowerCase()}`);
-        input.setAttribute('name', `${this._name}`);
+        input.setAttribute('id', `${this._type}`);
+        input.setAttribute('name', `${this._type}`);
         input.setAttribute('type', 'text');
         input.setAttribute('minlength', 3);
         input.setAttribute('placeholder', `Rechercher un ${this._name.toLowerCase()}`);
@@ -109,7 +111,7 @@ class Combobox {
 
         let integer = 1;
         this._options.forEach((option) => {
-            const optionDOM = this.createOption(integer, option);
+            const optionDOM = this.createOption(integer, option, this._type);
             datalist.appendChild(optionDOM);
             integer++ ;
         })
@@ -124,6 +126,8 @@ class Combobox {
             datalist.removeChild(option);
         })
         let integer = 1;
+        console.log(this._type);
+
         updatedList.forEach((option) =>{
             const optionDOM = this.createOption(integer, option);
             datalist.appendChild(optionDOM);
@@ -137,11 +141,13 @@ class Combobox {
         const option = document.createElement('li');
         option.setAttribute('role', 'option');
         option.setAttribute('aria-selected', false);
-        option.setAttribute('id', `option--${integer}`);
-        option.classList.add('option', 'option--notSelected', `option--${this._number}`, 'option--visible');
+        //option.setAttribute('id', `option--${integer}`);
+        option.setAttribute('id', `${this._type}--${integer}`);
+        option.classList.add('option', `option--${this._number}`, 'option--notSelected', 'option--visible');
         option.textContent = text;
 
-        function lookForTagString(array, value) {
+        function lookForTagString(array, value, type) {
+            console.log(type);
             console.log("array utilisé", array);
             let matchingRecipes = [];
             //on cherche une correspondance au niveau du nom de chaque recette
@@ -151,20 +157,43 @@ class Combobox {
             for (let i = 0; i < array.length; i++) {
                 let recipe = array[i];
                 //console.log(array[i]);
-                //On cherche une correspondance au niveau des ingrédients de la recette
-                let test = false;
-                for (let j = 0; j < recipe._ingredients.length; j++) {
-                    //s'il y a correspondance sur un ingédient, le test sur les ingrédients s'arrête, on ajoute la recette au tableau des correspondances et on passe à la recette suivante (si celle-ci existe)
-                    if (strNoAccent(recipe._ingredients[j].ingredient.toLowerCase()).match(regexForString)) {
-                        test = true;
-                        matchingRecipes.push(recipe);
-                        break;
+                if (type == 'ingredients') {
+                    //On cherche une correspondance au niveau des ingrédients de la recette
+                    let test = false;
+                    for (let j = 0; j < recipe._ingredients.length; j++) {
+                        //s'il y a correspondance sur un ingédient, le test sur les ingrédients s'arrête, on ajoute la recette au tableau des correspondances et on passe à la recette suivante (si celle-ci existe)
+                        if (strNoAccent(recipe._ingredients[j].ingredient.toLowerCase()).match(regexForString)) {
+                            test = true;
+                            matchingRecipes.push(recipe);
+                            break;
+                        }
                     }
+                    if (test == false) {
+                        notMatchingRecipesTag.push(recipe);  
+                    }  
+                } else if (type == 'appliance') {
+                    console.log('appliance', recipe._appliance);
+                    console.log('nmrTags', notMatchingRecipesTag);
+                    if (strNoAccent(recipe._appliance.toLowerCase()).match(regexForString)) {
+                        matchingRecipes.push(recipe);
+                    }
+                    //sinon on ajoute l'option dans le table des non-correspondance et on passe à l'option suivante (si celle-ci existe) 
+                    else {
+                        notMatchingRecipesTag.push(recipe);  
+                    }  
+                } else if (type == 'ustensils') {
+                    //On cherche une correspondance au niveau des ustensils de la recette
+                   // console.log(recipe._ustensils.toString());
+                    if (strNoAccent(recipe._ustensils.toString()).match(regexForString)) {
+                        matchingRecipes.push(recipe);
+                        //console.log(recipe);
+                    } else {
+                        notMatchingRecipesTag.push(recipe);  
+                    }  
+                } else {
+                    console.log("pas de fonction");
                 }
-                if (test == false) {
-                    notMatchingRecipesTag.push(recipe);  
-                }  
-            }
+            } 
             console.log("matchingRecipes", matchingRecipes);
             console.log("notMatchingRecipesTag", notMatchingRecipesTag);
             if (matchingRecipes.length == 0) {
@@ -192,17 +221,20 @@ class Combobox {
             e.preventDefault();
             console.log("index", indexFilterIteration);
             const optionValue = strNoAccent(e.target.textContent.toLowerCase());
+            const optionTypeId = e.target.getAttribute('id');
+            const optionType = optionTypeId.substring(0, optionTypeId.indexOf('--')); //Sur l'id de l'option, on détermine l'index de '--' et on extrait la chaîne de caractères se situant avant cet index pour récupérer le type de l'option
+           // console.log('type', optionType);
             if (mainSearchFieldValue == 0) {
                 if (indexFilterIteration == 0) {
-                    lookForTagString (dataModified, optionValue);
+                    lookForTagString (dataModified, optionValue, optionType);
                 } else {
-                    lookForTagString (displayedRecipesTag, optionValue);
+                    lookForTagString (displayedRecipesTag, optionValue, optionType);
                 }
             } else {
                 if (indexFilterIteration == 0) {
-                    lookForTagString (displayedRecipes, optionValue);
+                    lookForTagString (displayedRecipes, optionValue, optionType);
                 } else {
-                    lookForTagString (displayedRecipesTag, optionValue);
+                    lookForTagString (displayedRecipesTag, optionValue, optionType);
                 }
             }
             //on ajoute une iteration à l'indice des tags
@@ -211,10 +243,11 @@ class Combobox {
             mainSearchFieldValue = optionValue;
 
 
-            option.classList.add('option--hidden');
-            option.classList.remove('option--visible');
+            
             const optionClone = e.target.cloneNode(true);
             optionClone.setAttribute('aria-selected', true);
+            e.target.classList.add('option--hidden');
+            e.target.classList.remove('option--visible');
 
             const closeBtn = document.createElement('div');
             closeBtn.setAttribute('role', 'button');
