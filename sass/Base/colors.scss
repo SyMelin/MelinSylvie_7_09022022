@@ -70,17 +70,21 @@ body {
     }
 }
 
-.tagsList .option {
-    color: white;
-    &--1 {
-        background-color: $color-comboboxContainer--1;
+.tagsList {
+    & .option {
+        color: white;
     }
-    &--2 {
-        background-color: $color-comboboxContainer--2;
-    }
-    &--3 {
-        background-color: $color-comboboxContainer--3;
-    }
+    & .optionOfDatalist {
+        &--1 {
+            background-color: $color-comboboxContainer--1;
+        }
+        &--2 {
+            background-color: $color-comboboxContainer--2;
+        }
+        &--3 {
+            background-color: $color-comboboxContainer--3;
+        }
+    } 
 }
 
 .recipe-card {

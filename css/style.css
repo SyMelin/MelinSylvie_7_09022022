@@ -72,13 +72,13 @@ body {
 .tagsList .option {
   color: white;
 }
-.tagsList .option--1 {
+.tagsList .optionOfDatalist--1 {
   background-color: #3282F7;
 }
-.tagsList .option--2 {
+.tagsList .optionOfDatalist--2 {
   background-color: #68D9A4;
 }
-.tagsList .option--3 {
+.tagsList .optionOfDatalist--3 {
   background-color: #ED6454;
 }
 

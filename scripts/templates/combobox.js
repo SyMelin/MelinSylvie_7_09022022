@@ -143,7 +143,7 @@ class Combobox {
         option.setAttribute('aria-selected', false);
         //option.setAttribute('id', `option--${integer}`);
         option.setAttribute('id', `${this._type}--${integer}`);
-        option.classList.add('option', `option--${this._number}`, 'option--notSelected', 'option--visible');
+        option.classList.add('option', `optionOfDatalist--${this._number}`, 'option--notSelected', 'option--visible');
         option.textContent = text;
 
         function lookForTagString(array, value, type) {
@@ -172,8 +172,8 @@ class Combobox {
                         notMatchingRecipesTag.push(recipe);  
                     }  
                 } else if (type == 'appliance') {
-                    console.log('appliance', recipe._appliance);
-                    console.log('nmrTags', notMatchingRecipesTag);
+                    //console.log('appliance', recipe._appliance);
+                    //console.log('nmrTags', notMatchingRecipesTag);
                     if (strNoAccent(recipe._appliance.toLowerCase()).match(regexForString)) {
                         matchingRecipes.push(recipe);
                     }
@@ -304,7 +304,14 @@ class Combobox {
                 const option = e.target.parentElement;
                 const id = option.getAttribute('id');
                 option.parentElement.removeChild(option);
-                const optionInList = document.querySelector(`.combobox__datalist--1 #${id}`);
+                //const optionClassList = option.classList;
+               // console.log(optionClassList);
+                const optionOfDatalist = Array.from(option.classList).find(element => element.match('optionOfDatalist'));
+                console.log(optionOfDatalist);
+                const datalistNumber = optionOfDatalist.substring(optionOfDatalist.lastIndexOf('-') + 1, optionOfDatalist.length);
+                console.log(datalistNumber);
+                //const optionType = optionTypeId.substring(0, optionTypeId.indexOf('--'));
+                const optionInList = document.querySelector(`.combobox__datalist--${datalistNumber} #${id}`);
                 optionInList.classList.remove('option--hidden');
                 optionInList.classList.add('option--visible');
 
