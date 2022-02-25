@@ -39,7 +39,6 @@ function lookForStringInSecondary(array, value) {
 
 
 function searchOnCombobox (element) {
-    
     //on rend visible toutes les options au début du test
     const optionsI = document.querySelectorAll('.combobox__datalist--1 .option');
     for (let i = 0; i < optionsI.length; i++) {
@@ -49,10 +48,7 @@ function searchOnCombobox (element) {
     }
      //on vérifie qu'au moins 3 caractères sont saisis
     if (element.value.length >= element.getAttribute('minlength')) {
-    //document.querySelector('.data-info').classList.add('data-info--hidden');
-    //document.querySelector('.data-info').classList.remove('data-info--visible');
         if (isTextValid (element) === true){
-           // element.parentElement.parentElement.setAttribute("data-error-visible", false);
             let modifiedInput = strNoAccent(element.value.toLowerCase());
             //Si la longueur de la valeur nouvellement saisie est supérieure à celle de la valeur stockée
             if (modifiedInput.length > secondarySearchFieldValue.length) {
@@ -65,11 +61,8 @@ function searchOnCombobox (element) {
             secondarySearchFieldValue = modifiedInput;
             //console.log("mainSearchFieldValue", mainSearchFieldValue);
         } else {
-            console.log("le format du texte n'est pas valide");
-            //element.parentElement.parentElement.setAttribute("data-error-visible", true);
-           
+            console.log("le format du texte n'est pas valide");           
             //On n'affiche aucune option
-            //const options = document.querySelectorAll('.combobox__datalist--1 .option');
             for (let i = 0; i < optionsI.length; i++) {
                 let option = optionsI[i];
                 option.classList.add('option--hidden');

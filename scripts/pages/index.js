@@ -1,6 +1,12 @@
 let allIngredients = [];
 let allAppliances = [];
 let allUstensils = [];
+
+let filter1;
+let filter2;
+let filter3;
+
+
 let displayedRecipes = [];
 let notMatchingRecipes = [];
 
@@ -26,7 +32,7 @@ function displayData(data) {
     data.forEach((recipe) => {
         const template = new Recipe(recipe);
         dataModified.push(template);
-        recipeCard = template.getRecipeCardDOM();
+        recipeCard = template.createRecipeCardDOM();
         recipeWrapper.appendChild(recipeCard);
     });
    // console.log(dataModified);
@@ -77,29 +83,77 @@ let getAllUstensils = function (data) {
    
 }
 
-function InitialiseFilters (dataModified) {
+function initialiseFilters (dataModified) {
     getAllIngredients(dataModified);
     getAllAppliances(dataModified);
     getAllUstensils(dataModified);
-    new Combobox (allIngredients, '1', 'Ingrédients').create();
-    new Combobox (allAppliances, '2', 'Appareils').create();
-    new Combobox (allUstensils, '3', 'Ustensiles').create();
-   // console.log(getAllIngredients(data).sort());
-    //console.log(getAllAppliances(data).sort());
-    //console.log(getAllUstensils(data).sort());
+    filter1 = new Combobox (allIngredients, '1', 'Ingrédients');
+    filter2 = new Combobox (allAppliances, '2', 'Appareils');
+    filter3 = new Combobox (allUstensils, '3', 'Ustensiles');
+    [filter1, filter2, filter3].map(element => element.create());
 }
 
+let updateAllIngredients = function (data) {
+    allIngredients = [];
+    data.forEach(((recipe) => {
+        (recipe._ingredients).forEach((ingredient) => {
+            let item = capitaliseString(ingredient.ingredient);
+            if (!(allIngredients.includes(item))) {
+                allIngredients.push(item);
+            }
+        });
+    }));
+    allIngredients.sort();
+    return allIngredients;
+}
 
+let updateAllAppliances = function (data) {
+    allAppliances = [];
+    data.forEach(((recipe) => {
+        let item = capitaliseString(recipe._appliance);
+        if (!(allAppliances.includes(item))) {
+            allAppliances.push(item);
+        } 
+    }));
+    allAppliances.sort();
+    return allAppliances;
+}
 
+let updateAllUstensils = function (data) {
+    allUstensils = [];
+    data.forEach(((recipe) => {
+        (recipe._ustensils).forEach((ustensil) => {
+            let item = capitaliseString(ustensil);
+            if (!(allUstensils.includes(item))) {
+                allUstensils.push(item);
+            }
+        });
+    }));
+    allUstensils.sort();
+    return allUstensils; 
+}
 
+//on actualise les filtres
+    
+function updateFilters (data) {
+    console.log(data);
+    updateAllIngredients(data);
+    updateAllAppliances(data);
+    updateAllUstensils(data);
+    console.log(updateAllIngredients(data));
+    console.log(updateAllAppliances(data));
 
+    filter1.updateComboboxDatalist(allIngredients);
+    filter2.updateComboboxDatalist(allAppliances);
+    filter3.updateComboboxDatalist(allUstensils);
+}
 
 
 //Initialise la page index.html
 function init() {
 
     //On initialise les filtres: par défaut, ils contiennent toutes les options
-    InitialiseFilters(recipes);
+    initialiseFilters(recipes);
 
     //On affiche les recettes
     displayData(recipes);
@@ -109,7 +163,7 @@ function init() {
     mainSearchField.addEventListener('input', function(e){
         search(e.target);
         indexFilterIteration = 0;
-        console.log("hello", indexFilterIteration);
+        updateFilters(displayedRecipes);
     });
     
     //on évite le rechargement de la page avec la touche Entrée sur le champ de saisie principale

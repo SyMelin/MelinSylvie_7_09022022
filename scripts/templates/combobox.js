@@ -24,7 +24,6 @@ class Combobox {
         [this._comboboxHeader, this._comboboxDatalist].map(element => comboboxContainer.appendChild(element));
 
         const filters = document.querySelector('.filters');
-        //console.log(filters);
         filters.appendChild(comboboxContainer);
     }
 
@@ -72,7 +71,6 @@ class Combobox {
             const label = e.target.parentElement.firstChild;
             const input = label.nextSibling;
             const datalist = e.target.parentElement.parentElement.lastChild;
-           // console.log("datalist", datalist);
             changeDatalistDisplay(label, input, datalist);
         });
 
@@ -81,15 +79,11 @@ class Combobox {
 
 
     createComboboxLabel () {
-        //console.log(this._options);
-       //// console.log(this._name);
         const label = document.createElement('div');
-       // console.log(this._number);
         label.setAttribute('id', `combobox__label--${this._number}`); //
         label.setAttribute('for', `${strNoAccent(this._name).toLowerCase()}`)
         label.classList.add('combobox__label');
         label.textContent = this._name;
-        //console.log(label);
         return label;
     }
 
@@ -115,6 +109,22 @@ class Combobox {
 
         let integer = 1;
         this._options.forEach((option) => {
+            const optionDOM = this.createOption(integer, option);
+            datalist.appendChild(optionDOM);
+            integer++ ;
+        })
+
+        return datalist;
+    }
+
+    updateComboboxDatalist (updatedList) {
+        const datalist = document.querySelector(`.combobox__datalist--${this._number}`);
+        let datalistOptions = Array.from(datalist.children);
+        datalistOptions.forEach((option) => {
+            datalist.removeChild(option);
+        })
+        let integer = 1;
+        updatedList.forEach((option) =>{
             const optionDOM = this.createOption(integer, option);
             datalist.appendChild(optionDOM);
             integer++ ;
@@ -182,29 +192,23 @@ class Combobox {
             e.preventDefault();
             console.log("index", indexFilterIteration);
             const optionValue = strNoAccent(e.target.textContent.toLowerCase());
-           // console.log("optionValue",optionValue);
             if (mainSearchFieldValue == 0) {
                 if (indexFilterIteration == 0) {
-                    //console.log("displayedRecipes", displayedRecipes);
                     lookForTagString (dataModified, optionValue);
                 } else {
                     lookForTagString (displayedRecipesTag, optionValue);
-                    //console.log("displayedRecipesTag", displayedRecipes);
                 }
             } else {
                 if (indexFilterIteration == 0) {
-                    //console.log("displayedRecipes", displayedRecipes);
                     lookForTagString (displayedRecipes, optionValue);
                 } else {
                     lookForTagString (displayedRecipesTag, optionValue);
-                    //console.log("displayedRecipesTag", displayedRecipes);
                 }
             }
             //on ajoute une iteration à l'indice des tags
             indexFilterIteration++ ;
             //on stocke  la valeur entrée
             mainSearchFieldValue = optionValue;
-            //console.log("mainSearchFieldValue", mainSearchFieldValue);
 
 
             option.classList.add('option--hidden');
@@ -244,10 +248,9 @@ class Combobox {
                 console.log("matchingRecipes", matchingRecipes);
                 console.log("notMatchingRecipesTag", notMatchingRecipesTag);
                 if (matchingRecipes.length == 0) {
-                    //document.querySelector('.main-search__formField'). setAttribute('data-error-visible', true);
                 }
     
-                // On actualise le tableau des recettes affichées
+                // On actualise le tableau des recettes à afficher et on les affiche
                 displayedRecipesTag = matchingRecipes;
                 console.log("displayedRecipesTag", displayedRecipesTag);
                 for (let i = 0; i < displayedRecipesTag.length; i++) {
@@ -255,7 +258,7 @@ class Combobox {
                     recipeCardOn.classList.add('recipe-card--visible');
                     recipeCardOn.classList.remove('recipe-card--hidden');
                 }
-                //notDisplayedRecipes = notMatchingRecipes;
+                //On masque les recettes non correspondantes
                 for (let i = 0; i < notMatchingRecipesTag.length; i++) {
                     const recipeCardOff = document.getElementById(`recipe-card--${notMatchingRecipesTag[i]._id}`);
                     recipeCardOff.classList.remove('recipe-card--visible');

@@ -10,14 +10,17 @@ class Recipe {
 
     constructor (data) {
         this._id = data.id;
-        this._ingredients = data.ingredients;
         this._name = data.name;
+        this._servings = data.servings;
+        this._ingredients = data.ingredients;
         this._time =  data.time;
         this._description = data.description;
-        this._recipeCardDOM = this.getRecipeCardDOM();
+        this._appliance = data.appliance;
+        this._ustensils = data.ustensils;
+        this._recipeCardDOM = this.createRecipeCardDOM();
     }
 
-    getRecipeCardDOM() {
+    createRecipeCardDOM() {
 
         const recipeCard = document.createElement('a');
         recipeCard.setAttribute('role', 'link');

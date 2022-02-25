@@ -8,7 +8,7 @@ let isTextValid = function (element) {
 function lookForString(array, value) {
     let matchingRecipes = [];
     //on cherche une correspondance au niveau du nom de chaque recette
-    let regex = value;
+    let regex = "\\b" + value;
     let regexForString = new RegExp(regex, 'g');
     //console.log(regexForString);
     for (let i = 0; i < array.length; i++) {
@@ -41,14 +41,13 @@ function lookForString(array, value) {
             }     
         }
     }
-   console.log("matchingRecipes", matchingRecipes);
-   console.log("unmatch", notMatchingRecipes);
     if (matchingRecipes.length == 0) {
         document.querySelector('.main-search__formField'). setAttribute('data-error-visible', true);
     }
 
     // On actualise le tableau des recettes affichées
     displayedRecipes = matchingRecipes;
+    console.log('displayedRecipes', displayedRecipes);
     for (let i = 0; i < displayedRecipes.length; i++) {
         recipeCard.classList.add('recipe-card--visible');
         recipeCard.classList.remove('recipe-card--hidden');
@@ -62,21 +61,18 @@ function lookForString(array, value) {
 }
 
 function search(element) {
-    //console.log ("element.value", element.value);
-    //console.log ("element.value.length", element.value.length);
-    //console.log("mainSearchFieldValue", mainSearchFieldValue);
-    
     //on rend visible toutes les cartes au début du test
     const recipeCards = document.getElementsByClassName('recipe-card');
     for (let i = 0; i < dataModified.length; i++) {
         recipeCards[i].classList.add('recipe-card--visible');
         recipeCards[i].classList.remove('recipe-card--hidden');
     }
+    displayedRecipes = dataModified;
     //on vérifie qu'au moins 3 caractères sont saisis
     if (element.value.length >= element.getAttribute('minlength')) {
         document.querySelector('.data-info').classList.add('data-info--hidden');
         document.querySelector('.data-info').classList.remove('data-info--visible');
-    //on vérifie que les caractères saisis sont valides
+        //on vérifie que les caractères saisis sont valides
         if (isTextValid (element) === true){
             element.parentElement.parentElement.setAttribute("data-error-visible", false);
             let modifiedInput = strNoAccent(element.value.toLowerCase());
@@ -87,9 +83,8 @@ function search(element) {
                 notMatchingRecipes = [];
                 lookForString (dataModified, modifiedInput);
             }
-            //on stocke  la valeur entrée
+            //on stocke la valeur entrée
             mainSearchFieldValue = modifiedInput;
-            //console.log("mainSearchFieldValue", mainSearchFieldValue);
         } else {
             console.log("le format du texte n'est pas valide");
             element.parentElement.parentElement.setAttribute("data-error-visible", true);
