@@ -153,9 +153,9 @@ class Combobox {
                 if (type == 'ingredients') {
                     //On cherche une correspondance au niveau des ingrédients de la recette
                     let test = false;
-                    for (let j = 0; j < recipe._ingredients.length; j++) {
+                    for (let j = 0; j < recipe.ingredients.length; j++) {
                         //s'il y a correspondance sur un ingédient, le test sur les ingrédients s'arrête, on ajoute la recette au tableau des correspondances et on passe à la recette suivante (si celle-ci existe)
-                        if (strNoAccent(recipe._ingredients[j].ingredient.toLowerCase()).match(regexForString)) {
+                        if (strNoAccent(recipe.ingredients[j].ingredient.toLowerCase()).match(regexForString)) {
                             test = true;
                             matchingRecipes.push(recipe);
                             break;
@@ -165,7 +165,7 @@ class Combobox {
                         notMatchingRecipesTag.push(recipe);  
                     }  
                 } else if (type == 'appliance') {
-                    if (strNoAccent(recipe._appliance.toLowerCase()).match(regexForString)) {
+                    if (strNoAccent(recipe.appliance.toLowerCase()).match(regexForString)) {
                         matchingRecipes.push(recipe);
                     }
                     //sinon on ajoute l'option dans le table des non-correspondance et on passe à l'option suivante (si celle-ci existe) 
@@ -174,7 +174,7 @@ class Combobox {
                     }  
                 } else if (type == 'ustensils') {
                     //On cherche une correspondance au niveau des ustensils de la recette
-                    if (strNoAccent(recipe._ustensils.toString()).match(regexForString)) {
+                    if (strNoAccent(recipe.ustensils.toString()).match(regexForString)) {
                         matchingRecipes.push(recipe);
                     } else {
                         notMatchingRecipesTag.push(recipe);  
@@ -192,13 +192,13 @@ class Combobox {
             displayedRecipesTag = matchingRecipes;
             console.log("displayedRecipesTag", displayedRecipesTag);
             for (let i = 0; i < displayedRecipesTag.length; i++) {
-            const recipeCardOn = document.getElementById(`recipe-card--${displayedRecipesTag[i]._id}`);
+            const recipeCardOn = document.getElementById(`recipe-card--${displayedRecipesTag[i].id}`);
                 recipeCardOn.classList.add('recipe-card--visible');
                 recipeCardOn.classList.remove('recipe-card--hidden');
             }
             //notDisplayedRecipes = notMatchingRecipes;
             for (let i = 0; i < notMatchingRecipesTag.length; i++) {
-                const recipeCardOff = document.getElementById(`recipe-card--${notMatchingRecipesTag[i]._id}`);
+                const recipeCardOff = document.getElementById(`recipe-card--${notMatchingRecipesTag[i].id}`);
                 recipeCardOff.classList.remove('recipe-card--visible');
                 recipeCardOff.classList.add('recipe-card--hidden');
             }
@@ -214,7 +214,7 @@ class Combobox {
             const datalist = e.target.parentElement;
             if (mainSearchFieldValue == 0) {
                 if (indexFilterIteration == 0) {
-                    lookForTagString (dataModified, optionValue, optionType);
+                    lookForTagString (recipes, optionValue, optionType);
                 } else {
                     lookForTagString (displayedRecipesTag, optionValue, optionType);
                 }
@@ -272,9 +272,9 @@ class Combobox {
                     if (type == 'ingredients') {
                          //On cherche une correspondance au niveau des ingrédients de la recette
                         let test = false;
-                        for (let j = 0; j < recipe._ingredients.length; j++) {
+                        for (let j = 0; j < recipe.ingredients.length; j++) {
                             //s'il y a correspondance sur un ingédient, le test sur les ingrédients s'arrête, on ajoute la recette au tableau des correspondances et on passe à la recette suivante (si celle-ci existe)
-                            if (strNoAccent(recipe._ingredients[j].ingredient.toLowerCase()).match(regexForString)) {
+                            if (strNoAccent(recipe.ingredients[j].ingredient.toLowerCase()).match(regexForString)) {
                                 test = true;
                                 matchingRecipes.push(recipe);
                                 break;
@@ -284,13 +284,13 @@ class Combobox {
                             notMatchingRecipesTag.push(recipe);
                         }
                     } else if (type == 'appliance') {
-                        if (strNoAccent(recipe._appliance.toLowerCase()).match(regexForString)) {
+                        if (strNoAccent(recipe.appliance.toLowerCase()).match(regexForString)) {
                             matchingRecipes.push(recipe);
                         } else {
                             notMatchingRecipesTag.push(recipe);  
                         }
                     } else if (type == 'ustensils') {
-                        if (strNoAccent(recipe._ustensils.toString()).match(regexForString)) {
+                        if (strNoAccent(recipe.ustensils.toString()).match(regexForString)) {
                             matchingRecipes.push(recipe);
                         } else {
                             notMatchingRecipesTag.push(recipe);  
@@ -308,13 +308,13 @@ class Combobox {
                 displayedRecipesTag = matchingRecipes;
                 console.log("displayedRecipesTag", displayedRecipesTag);
                 for (let i = 0; i < displayedRecipesTag.length; i++) {
-                    const recipeCardOn = document.getElementById(`recipe-card--${displayedRecipesTag[i]._id}`);
+                    const recipeCardOn = document.getElementById(`recipe-card--${displayedRecipesTag[i].id}`);
                     recipeCardOn.classList.add('recipe-card--visible');
                     recipeCardOn.classList.remove('recipe-card--hidden');
                 }
                 //On masque les recettes non correspondantes
                 for (let i = 0; i < notMatchingRecipesTag.length; i++) {
-                    const recipeCardOff = document.getElementById(`recipe-card--${notMatchingRecipesTag[i]._id}`);
+                    const recipeCardOff = document.getElementById(`recipe-card--${notMatchingRecipesTag[i].id}`);
                     recipeCardOff.classList.remove('recipe-card--visible');
                     recipeCardOff.classList.add('recipe-card--hidden');
                 }
@@ -330,14 +330,14 @@ class Combobox {
                 let tagsAll = document.querySelector('.tagsList').children;
 
                 if (mainSearchFieldValue == 0) {
-                    displayedRecipes = dataModified;
+                    displayedRecipes = recipes;
                 }
                 if (tagsAll.length == 0) {
                     matchingRecipes = displayedRecipes;
                     notMatchingRecipesTag = [];
                     indexFilterIteration = 0;
                     for (let i = 0; i < matchingRecipes.length; i++) {
-                        const recipeCardOn = document.getElementById(`recipe-card--${matchingRecipes[i]._id}`);
+                        const recipeCardOn = document.getElementById(`recipe-card--${matchingRecipes[i].id}`);
                         recipeCardOn.classList.add('recipe-card--visible');
                         recipeCardOn.classList.remove('recipe-card--hidden');
                     }
@@ -366,7 +366,7 @@ class Combobox {
                     for (let i = 0; i < displayedRecipes.length; i++) {
                         let recipe = displayedRecipes[i];
                         //Si le nombre d'ingrédients de la liste d'ingrédients de la recette i est inférieur aux nombres de tags recherchés, on ajoute directement la recette au non correspondance par tag
-                        if ((tagsIngredients.length > 0) && (recipe._ingredients.length < tagsIngredients.length) ) {
+                        if ((tagsIngredients.length > 0) && (recipe.ingredients.length < tagsIngredients.length) ) {
                             notMatchingRecipesTag.push(recipe); 
                         //Sinon, on l'ajoute au tableau des non-correspondance par tag
                         } else {
@@ -381,8 +381,7 @@ class Combobox {
                     }
                     //on met à jour les datalists (= filtres)
                     updateFilters(displayedRecipesTag);
-                }
-               
+                } 
             })
 
             optionClone.appendChild(closeBtn);

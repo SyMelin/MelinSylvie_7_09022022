@@ -14,15 +14,15 @@ function lookForString(array, value) {
     for (let i = 0; i < array.length; i++) {
         let recipe = array[i];
         //s'il y a correspondance sur le nom de la recette, on ajoute la recette au tableau des correspondance et on passe à la recette suivante (si celle-ci existe)
-        if (strNoAccent(recipe._name.toLowerCase()).match(regexForString)) {
+        if (strNoAccent(recipe.name.toLowerCase()).match(regexForString)) {
             matchingRecipes.push(recipe);
         }
         //sinon on cherche une correspondance au niveau des ingrédients de la recette
         else {
             let test = false;
-            for (let j = 0; j < recipe._ingredients.length; j++) {
+            for (let j = 0; j < recipe.ingredients.length; j++) {
                 //s'il y a correspondance sur un ingédient, le test sur les ingrédients s'arrête, on ajoute la recette au tableau des correspondances et on passe à la recette suivante (si celle-ci existe)
-                if (strNoAccent(recipe._ingredients[j].ingredient.toLowerCase()).match(regexForString)) {
+                if (strNoAccent(recipe.ingredients[j].ingredient.toLowerCase()).match(regexForString)) {
                     test = true;
                     matchingRecipes.push(recipe);
                     break;
@@ -33,7 +33,7 @@ function lookForString(array, value) {
             if (test == false) {
                 regex = "\\b" + value;
                 regexForString = new RegExp(regex, 'g');
-                if (strNoAccent(recipe._description.toLowerCase()).match(regexForString)) {
+                if (strNoAccent(recipe.description.toLowerCase()).match(regexForString)) {
                     matchingRecipes.push(recipe);
                 } else {
                     notMatchingRecipes.push(recipe);  
@@ -54,7 +54,7 @@ function lookForString(array, value) {
     }
     //notDisplayedRecipes = notMatchingRecipes;
     for (let i = 0; i < notMatchingRecipes.length; i++) {
-        const recipeCard = document.getElementById(`recipe-card--${notMatchingRecipes[i]._id}`);
+        const recipeCard = document.getElementById(`recipe-card--${notMatchingRecipes[i].id}`);
         recipeCard.classList.remove('recipe-card--visible');
         recipeCard.classList.add('recipe-card--hidden');
     }
@@ -63,11 +63,11 @@ function lookForString(array, value) {
 function search(element) {
     //on rend visible toutes les cartes au début du test
     const recipeCards = document.getElementsByClassName('recipe-card');
-    for (let i = 0; i < dataModified.length; i++) {
+    for (let i = 0; i < recipes.length; i++) {
         recipeCards[i].classList.add('recipe-card--visible');
         recipeCards[i].classList.remove('recipe-card--hidden');
     }
-    displayedRecipes = dataModified;
+    displayedRecipes = recipes;
     //on vérifie qu'au moins 3 caractères sont saisis
     if (element.value.length >= element.getAttribute('minlength')) {
         document.querySelector('.data-info').classList.add('data-info--hidden');
@@ -81,7 +81,7 @@ function search(element) {
                 lookForString (displayedRecipes, modifiedInput);
             } else {
                 notMatchingRecipes = [];
-                lookForString (dataModified, modifiedInput);
+                lookForString (recipes, modifiedInput);
             }
             //on stocke la valeur entrée
             mainSearchFieldValue = modifiedInput;
@@ -90,7 +90,7 @@ function search(element) {
             element.parentElement.parentElement.setAttribute("data-error-visible", true);
             //On n'affiche aucune recette
             const recipeCards = document.getElementsByClassName('recipe-card');
-            for (let i = 0; i < dataModified.length; i++) {
+            for (let i = 0; i < recipes.length; i++) {
                 recipeCards[i].classList.add('recipe-card--hidden');
                 recipeCards[i].classList.remove('recipe-card--visible');
             }

@@ -10,7 +10,7 @@ let filter3;
 let displayedRecipes = [];
 let notMatchingRecipes = [];
 
-let dataModified = [];
+//let dataModified = [];
 
 let mainSearchFieldValue = 0;
 
@@ -31,7 +31,7 @@ function displayData(data) {
     const recipeWrapper = document.querySelector('.recipe-wrapper');
     data.forEach((recipe) => {
         const template = new Recipe(recipe);
-        dataModified.push(template);
+       // dataModified.push(template);
         recipeCard = template.createRecipeCardDOM();
         recipeWrapper.appendChild(recipeCard);
     });
@@ -83,10 +83,10 @@ let getAllUstensils = function (data) {
    
 }
 
-function initialiseFilters (dataModified) {
-    getAllIngredients(dataModified);
-    getAllAppliances(dataModified);
-    getAllUstensils(dataModified);
+function initialiseFilters (data) {
+    getAllIngredients(data);
+    getAllAppliances(data);
+    getAllUstensils(data);
     filter1 = new Combobox (allIngredients, '1', 'Ingrédients', 'ingredients');
     filter2 = new Combobox (allAppliances, '2', 'Appareils', 'appliance');
     filter3 = new Combobox (allUstensils, '3', 'Ustensiles', 'ustensils');
@@ -96,7 +96,7 @@ function initialiseFilters (dataModified) {
 let updateAllIngredients = function (data) {
     allIngredients = [];
     data.forEach(((recipe) => {
-        (recipe._ingredients).forEach((ingredient) => {
+        (recipe.ingredients).forEach((ingredient) => {
             let item = capitaliseString(ingredient.ingredient);
             if (!(allIngredients.includes(item))) {
                 allIngredients.push(item);
@@ -110,7 +110,7 @@ let updateAllIngredients = function (data) {
 let updateAllAppliances = function (data) {
     allAppliances = [];
     data.forEach(((recipe) => {
-        let item = capitaliseString(recipe._appliance);
+        let item = capitaliseString(recipe.appliance);
         if (!(allAppliances.includes(item))) {
             allAppliances.push(item);
         } 
@@ -122,7 +122,7 @@ let updateAllAppliances = function (data) {
 let updateAllUstensils = function (data) {
     allUstensils = [];
     data.forEach(((recipe) => {
-        (recipe._ustensils).forEach((ustensil) => {
+        (recipe.ustensils).forEach((ustensil) => {
             let item = capitaliseString(ustensil);
             if (!(allUstensils.includes(item))) {
                 allUstensils.push(item);
@@ -133,8 +133,8 @@ let updateAllUstensils = function (data) {
     return allUstensils; 
 }
 
-//on actualise les filtres
-    
+
+//Actualise les filtres
 function updateFilters (data) {
     updateAllIngredients(data);
     updateAllAppliances(data);
