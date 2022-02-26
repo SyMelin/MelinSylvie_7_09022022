@@ -240,7 +240,7 @@ class Combobox {
             //on ajoute une iteration à l'indice des tags
             indexFilterIteration++ ;
             //on stocke  la valeur entrée
-            mainSearchFieldValue = optionValue;
+            secondarySearchFieldValue = optionValue;
 
 
             
@@ -302,16 +302,14 @@ class Combobox {
             closeBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 const option = e.target.parentElement;
-                const id = option.getAttribute('id');
+                const optionId = option.getAttribute('id');
+
                 option.parentElement.removeChild(option);
-                //const optionClassList = option.classList;
-               // console.log(optionClassList);
                 const optionOfDatalist = Array.from(option.classList).find(element => element.match('optionOfDatalist'));
                 console.log(optionOfDatalist);
                 const datalistNumber = optionOfDatalist.substring(optionOfDatalist.lastIndexOf('-') + 1, optionOfDatalist.length);
                 console.log(datalistNumber);
-                //const optionType = optionTypeId.substring(0, optionTypeId.indexOf('--'));
-                const optionInList = document.querySelector(`.combobox__datalist--${datalistNumber} #${id}`);
+                const optionInList = document.querySelector(`.combobox__datalist--${datalistNumber} #${optionId}`);
                 optionInList.classList.remove('option--hidden');
                 optionInList.classList.add('option--visible');
 
@@ -319,8 +317,14 @@ class Combobox {
                 notMatchingRecipesTag = [];
 
                 let tagsAll = document.querySelector('.tagsList').children;
+               // console.log('tagsAll', tagsAll);
+                console.log('mainValue', mainSearchFieldValue);
+                if (mainSearchFieldValue == 0) {
+                    displayedRecipes = dataModified;
+                }
                 if (tagsAll.length == 0) {
                     matchingRecipes = displayedRecipes;
+                    console.log(displayedRecipes);
                     notMatchingRecipesTag = [];
                     indexFilterIteration = 0;
                     for (let i = 0; i < matchingRecipes.length; i++) {
@@ -330,32 +334,45 @@ class Combobox {
                     }
                 } else {
                     //console.log("tags", tagsAll);
-                    let tagsText = [];
+                    let tags = [];
                     for (let i = 0; i < tagsAll.length; i++) {
-                        tagsText.push(strNoAccent(tagsAll[i].textContent.toLocaleLowerCase()));
+                        const tagName = strNoAccent(tagsAll[i].textContent.toLocaleLowerCase());
+                        const tagId = tagsAll[i].getAttribute('id');
+                        const tagType = tagId.substring(0, tagId.indexOf('--'));
+                        const tag = {"tagname": tagName, "tagtype": tagType};
+                        //console.log ('tag', tag);
+                        tags.push(tag);
                     }
-                    //console.log(tagsText);
+                    console.log('tags', tags);
+
+                    let tagsIngredients = [];
+                    for (let i = 0; i < tags.length; i++) {
+                        if (tags[i].tagtype == 'ingredients') {
+                            tagsIngredients.push(tags[i]);
+                        }
+                    }
+                    console.log('tagsIngredients', tagsIngredients);
                     
                     //On réduit le nombre de recettes à tester à celles dont la longueur de la liste d'ingrédient correspond à la longueur de la liste de tags
                     console.log("displayedRecipes", displayedRecipes);
-                    console.log(tagsText);
+                    console.log("tagsIngredients", tagsIngredients);
                     for (let i = 0; i < displayedRecipes.length; i++) {
                         let recipe = displayedRecipes[i];
                         //Si le nombre d'ingrédients de la liste d'ingrédients de la recette i est inférieur aux nombres de tags recherchés, on ajoute directement la recette au non correspondance par tag
-                        if (recipe._ingredients.length < tagsText.length ) {
+                        if ((tagsIngredients.length > 0) && (recipe._ingredients.length < tagsIngredients.length) ) {
                             notMatchingRecipesTag.push(recipe); 
                         //Sinon, on l'ajoute au tableau des non-correspondance par tag
                         } else {
                             matchingRecipes.push(recipe);
                         }
                     }
-                    lookForTagStringInTagList(matchingRecipes, tagsText[0]);
+                    lookForTagStringInTagList(matchingRecipes, tagsIngredients[0].tagname);
                         //console.log("tagsText[0] tableau utilisé", displayedRecipes);
                         //console.log("tagsText[0] mot", tagsText[0]);
-                    for (let i = 1; i < tagsText.length; i++) {
+                    for (let i = 1; i < tagsIngredients.length; i++) {
                         //console.log("tagsText[i] tableau utilisé", displayedRecipesTag);
                         //console.log("tagsText[i] tableau mot", tagsText[i]);
-                        lookForTagStringInTagList(displayedRecipesTag, tagsText[i]);
+                        lookForTagStringInTagList(displayedRecipesTag, tagsIngredients[i].tagname);
                     }
                 }
             })
