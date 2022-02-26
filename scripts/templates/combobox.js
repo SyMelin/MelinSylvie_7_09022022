@@ -255,7 +255,7 @@ class Combobox {
 
 
 
-            function lookForTagStringInTagList(array, value) {
+            function lookForTagStringInTagList(array, value, type) {
                // console.log("array utilisé", array);
                 let matchingRecipes = [];
                 //on cherche une correspondance au niveau du nom de chaque recette
@@ -264,19 +264,36 @@ class Combobox {
                 //console.log(regexForString);
                 for (let i = 0; i < array.length; i++) {
                     let recipe = array[i];
-                    //On cherche une correspondance au niveau des ingrédients de la recette
-                    let test = false;
-                    for (let j = 0; j < recipe._ingredients.length; j++) {
-                        //s'il y a correspondance sur un ingédient, le test sur les ingrédients s'arrête, on ajoute la recette au tableau des correspondances et on passe à la recette suivante (si celle-ci existe)
-                        if (strNoAccent(recipe._ingredients[j].ingredient.toLowerCase()).match(regexForString)) {
-                            test = true;
-                            matchingRecipes.push(recipe);
-                            break;
+
+                    if (type == 'ingredients') {
+                         //On cherche une correspondance au niveau des ingrédients de la recette
+                        let test = false;
+                        for (let j = 0; j < recipe._ingredients.length; j++) {
+                            //s'il y a correspondance sur un ingédient, le test sur les ingrédients s'arrête, on ajoute la recette au tableau des correspondances et on passe à la recette suivante (si celle-ci existe)
+                            if (strNoAccent(recipe._ingredients[j].ingredient.toLowerCase()).match(regexForString)) {
+                                test = true;
+                                matchingRecipes.push(recipe);
+                                break;
+                            }
                         }
-                    }
-                    if (test == false) {
-                        notMatchingRecipesTag.push(recipe);  
-                    }  
+                        if (test == false) {
+                            notMatchingRecipesTag.push(recipe);
+                        }
+                    } else if (type == 'appliance') {
+                        if (strNoAccent(recipe._appliance.toLowerCase()).match(regexForString)) {
+                            matchingRecipes.push(recipe);
+                        } else {
+                            notMatchingRecipesTag.push(recipe);  
+                        }
+                    } else if (type == 'ustensils') {
+                        if (strNoAccent(recipe._ustensils.toString()).match(regexForString)) {
+                            matchingRecipes.push(recipe);
+                        } else {
+                            notMatchingRecipesTag.push(recipe);  
+                        }  
+                    } else {
+                        console.log("pas de fonction");
+                    }   
                 }
                 console.log("matchingRecipes", matchingRecipes);
                 console.log("notMatchingRecipesTag", notMatchingRecipesTag);
@@ -366,13 +383,11 @@ class Combobox {
                             matchingRecipes.push(recipe);
                         }
                     }
-                    lookForTagStringInTagList(matchingRecipes, tagsIngredients[0].tagname);
-                        //console.log("tagsText[0] tableau utilisé", displayedRecipes);
-                        //console.log("tagsText[0] mot", tagsText[0]);
-                    for (let i = 1; i < tagsIngredients.length; i++) {
-                        //console.log("tagsText[i] tableau utilisé", displayedRecipesTag);
-                        //console.log("tagsText[i] tableau mot", tagsText[i]);
-                        lookForTagStringInTagList(displayedRecipesTag, tagsIngredients[i].tagname);
+
+                    //On teste les recettes restantes selon les tags
+                    lookForTagStringInTagList(matchingRecipes, tags[0].tagname, tags[0].tagtype);
+                    for (let i = 1; i < tags.length; i++) {
+                        lookForTagStringInTagList(displayedRecipesTag, tags[i].tagname, tags[i].tagtype);
                     }
                 }
             })
