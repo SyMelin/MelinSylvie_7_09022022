@@ -3,13 +3,9 @@ function lookForStringInSecondary(array, value) {
     //on cherche une correspondance au niveau de chaque option
     let regex = "\\b" + value;
     let regexForString = new RegExp(regex, 'g');
-    //console.log(regexForString);
     for (let i = 0; i < array.length; i++) {
-        //console.log("option", array[i]);
         let option = array[i];
         //s'il y a correspondance sur le texte de l'option, on ajoute l'option au tableau des correspondance et on passe à l'option suivante (si celle-ci existe)
-        //console.log(option.childNodes[0].nodeValue);
-       // console.log(option.textContent);
         if (strNoAccent(option.textContent.toLowerCase()).match(regexForString)) {
             matchingOptions.push(option);
         }
@@ -18,10 +14,7 @@ function lookForStringInSecondary(array, value) {
             notMatchingOptions.push(option);  
         }     
     }
-    //console.log("matchingOptions", matchingOptions);
-    //console.log("unmatch", notMatchingOptions);
     if (matchingOptions.length == 0) {
-       // document.querySelector('.main-search__formField'). setAttribute('data-error-visible', true);
     }
 
     // On actualise le tableau des options affichées
@@ -71,9 +64,6 @@ function searchOnCombobox (element) {
             }
         }
     } else {
-        //element.parentElement.parentElement.setAttribute("data-error-visible", false);
-        // On affiche un message invitant l'utilisateur à saisir le nombre minimum de caractères
-       // document.querySelector('.data-info').classList.add('data-info--visible');
-       // document.querySelector('.data-info').classList.remove('data-info--hidden');
+        console.log('le nombre de carcatères saisis est insuffisant');
     }
 }

@@ -136,13 +136,9 @@ let updateAllUstensils = function (data) {
 //on actualise les filtres
     
 function updateFilters (data) {
-    console.log(data);
     updateAllIngredients(data);
     updateAllAppliances(data);
     updateAllUstensils(data);
-    console.log(updateAllIngredients(data));
-    console.log(updateAllAppliances(data));
-
     filter1.updateComboboxDatalist(allIngredients);
     filter2.updateComboboxDatalist(allAppliances);
     filter3.updateComboboxDatalist(allUstensils);
