@@ -1,4 +1,4 @@
-function updateDisplayedRecipes (arrayToDisplay, noMatchArray) {
+function updateDisplayOfRecipes (arrayToDisplay, noMatchArray) {
     console.log('arrayToDisplay', arrayToDisplay);
     //on affiche les recettes correspondantes
     for (let i = 0; i < arrayToDisplay.length; i++) {

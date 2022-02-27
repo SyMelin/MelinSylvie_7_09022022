@@ -45,6 +45,6 @@ function lookForTagString(array, value, type) {
 
     //on actualise le tableau des recettes affichées
     displayedRecipesTag = matchingRecipes;
-    updateDisplayedRecipes(displayedRecipesTag, notMatchingRecipesTag);
+    updateDisplayOfRecipes(displayedRecipesTag, notMatchingRecipesTag);
 
 }
