@@ -29,7 +29,7 @@ function lookForTagString(array, value, type) {
             }  
         } else if (type == 'ustensils') {
             //On cherche une correspondance au niveau des ustensils de la recette (donc sur un tableau.toString())
-            if (strNoAccent(recipe.ustensils.toString()).match(regexForString)) {
+            if (strNoAccent(recipe.ustensils.toString().toLowerCase()).match(regexForString)) {
                 matchingRecipes.push(recipe);
             } else {
                 notMatchingRecipesTag.push(recipe);  
