@@ -143,6 +143,8 @@ class Combobox {
         option.classList.add('option', `optionOfDatalist--${this._number}`, 'option--notSelected', 'option--visible');
         option.textContent = text;
 
+    /*
+
         function lookForTagString(array, value, type) {
             let matchingRecipes = [];
             //on cherche une correspondance au niveau du nom de chaque recette
@@ -204,6 +206,8 @@ class Combobox {
             }
         }
 
+    */
+
 
         option.addEventListener('click', function(e) {
             e.preventDefault();
@@ -261,7 +265,7 @@ class Combobox {
             closeBtn.setAttribute('role', 'button');
             closeBtn.classList.add('closeBtn');
 
-
+/*
             function lookForTagStringInTagList(array, value, type) {
                 let matchingRecipes = [];
                 //on cherche une correspondance au niveau du nom de chaque recette
@@ -319,6 +323,8 @@ class Combobox {
                     recipeCardOff.classList.add('recipe-card--hidden');
                 }
             }
+
+*/
 
             closeBtn.addEventListener('click', function(e) {
                 e.preventDefault();
