@@ -1,3 +1,4 @@
+/*
 function lookForTagStringInTagList(array, value, type) {
     let matchingRecipes = [];
     //on cherche une correspondance au niveau du nom de chaque recette
@@ -55,3 +56,4 @@ function lookForTagStringInTagList(array, value, type) {
         recipeCardOff.classList.add('recipe-card--hidden');
     }
 }
+*/
