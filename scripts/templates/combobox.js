@@ -1,3 +1,5 @@
+//La class Combobox correspond visuellement aux filtres, qui, une fois ouverts, affichent un champs de recherche ainsi qu'une liste d'options
+
 class Combobox {
 
     /**
@@ -178,11 +180,11 @@ class Combobox {
 
 
             //on met à jour les datalists (= filtres)
-            updateFilters(displayedRecipesTag);
+            updateFilters(displayedRecipesTag);//updateFilters est situé dans pages/index.js
 
 
             //on masque l'option de la datalist d'origine
-            let datalistChildren =  datalist.children;
+            let datalistChildren = datalist.children;
             let optionInList;
             for (let i = 0; i < datalistChildren.length; i++) {
                 //quand la valeur de l'option d'origine est rencontrée, la boucle stoppe et on masque l'option correspondante

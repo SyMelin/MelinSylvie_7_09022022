@@ -1,3 +1,6 @@
+///////// Variables globales /////////
+
+//Variables pour les filtres (=comboboxes)
 let allIngredients = [];
 let allAppliances = [];
 let allUstensils = [];
@@ -6,19 +9,31 @@ let filter1;
 let filter2;
 let filter3;
 
-
+//Variables des recettes affichées / non-correspondantes
 let displayedRecipes = [];
 let notMatchingRecipes = [];
 
-//let dataModified = [];
-
+//Variable contenant la valeur du champ de recherche principal
 let mainSearchFieldValue = 0;
+
+//Variable contenant la valeur du champ de recherche secondaire
 let secondarySearchFieldValue = 0;
+
+//Variables des options affichées / non-correspondantes
 let displayedOptions = [];
 let notMatchingOptions = [];
+
+//Variable qui compte le nombre d'interaction avec les filtres
 let indexFilterIteration = 0;
+
+//Variables des recettes affichées / non-correspondantes suite à la recherche par tag
 let displayedRecipesTag = [];
 let notMatchingRecipesTag = [];
+
+
+
+
+///////// Fonctions de l'initialisation ////////
 
 //Affiche la carte de chaque recette
 function displayData(data) {
@@ -33,34 +48,37 @@ function displayData(data) {
 }
 
 //Retourne un tableau contenant tous les ingrédients des recettes passées en paramètre 'data'
-let getAllIngredients = function (data) {
+function getAllIngredients (data) {
+    allIngredients = [];//nécessaire pour le mise à jour du tableau après recherche
     data.forEach(((recipe) => {
         (recipe.ingredients).forEach((ingredient) => {
-            let item = capitaliseString(ingredient.ingredient);
+            let item = capitaliseString(ingredient.ingredient);//capitaliseString() est situé dans le utils/utils
             if (!(allIngredients.includes(item))) {
                 allIngredients.push(item);
             }
         });
     }));
-    allIngredients.sort();
+    allIngredients.sort(Intl.Collator().compare);//sort(Intl.Collator().compare) permet de trier le tableau en prenant en compte les accents
     //console.log("allIngredients", allIngredients);
     return allIngredients;
 }
 
 //Retourne un tableau contenant tous les appareils des recettes passées en paramètre 'data'
-let getAllAppliances = function (data) {
+function getAllAppliances (data) {
+    allAppliances = [];//nécessaire pour le mise à jour du tableau après recherche
     data.forEach(((recipe) => {
         let item = capitaliseString(recipe.appliance);
         if (!(allAppliances.includes(item))) {
             allAppliances.push(item);
         } 
     }));
-    allAppliances.sort();
+    allAppliances.sort(Intl.Collator().compare);
     return allAppliances;
 }
 
 //Retourne un tableau contenant tous les ustensiles des recettes passées en paramètre 'data'
-let getAllUstensils = function (data) {
+function getAllUstensils (data) {
+    allUstensils = [];//nécessaire pour le mise à jour du tableau après recherche
     data.forEach(((recipe) => {
         (recipe.ustensils).forEach((ustensil) => {
             let item = capitaliseString(ustensil);
@@ -69,13 +87,13 @@ let getAllUstensils = function (data) {
             }
         });
     }));
-    allUstensils.sort();
+    allUstensils.sort(Intl.Collator().compare);
     //console.log("allUstensils", allUstensils);
     return allUstensils;
    
 }
 
-//Initialise les filtres (= combobox)
+//Initialise les filtres (= comboboxes)
 function initialiseFilters (data) {
     getAllIngredients(data);
     getAllAppliances(data);
@@ -86,53 +104,12 @@ function initialiseFilters (data) {
     [filter1, filter2, filter3].map(element => element.create());
 }
 
-let updateAllIngredients = function (data) {
-    allIngredients = [];
-    data.forEach(((recipe) => {
-        (recipe.ingredients).forEach((ingredient) => {
-            let item = capitaliseString(ingredient.ingredient);
-            if (!(allIngredients.includes(item))) {
-                allIngredients.push(item);
-            }
-        });
-    }));
-    allIngredients.sort();
-    return allIngredients;
-}
-
-let updateAllAppliances = function (data) {
-    allAppliances = [];
-    data.forEach(((recipe) => {
-        let item = capitaliseString(recipe.appliance);
-        if (!(allAppliances.includes(item))) {
-            allAppliances.push(item);
-        } 
-    }));
-    allAppliances.sort();
-    return allAppliances;
-}
-
-let updateAllUstensils = function (data) {
-    allUstensils = [];
-    data.forEach(((recipe) => {
-        (recipe.ustensils).forEach((ustensil) => {
-            let item = capitaliseString(ustensil);
-            if (!(allUstensils.includes(item))) {
-                allUstensils.push(item);
-            }
-        });
-    }));
-    allUstensils.sort();
-    return allUstensils; 
-}
-
-
-//Actualise les filtres
+//Actualise les filtres (= comboboxes)
 function updateFilters (data) {
-    updateAllIngredients(data);
-    updateAllAppliances(data);
-    updateAllUstensils(data);
-    filter1.updateComboboxDatalist(allIngredients);
+    getAllIngredients(data);
+    getAllAppliances(data);
+    getAllUstensils(data);
+    filter1.updateComboboxDatalist(allIngredients);//updateComboboxDatalist est une méthode associée à la class d'objet Combobox
     filter2.updateComboboxDatalist(allAppliances);
     filter3.updateComboboxDatalist(allUstensils);
 }
