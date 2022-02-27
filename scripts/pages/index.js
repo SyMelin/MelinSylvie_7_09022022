@@ -13,18 +13,12 @@ let notMatchingRecipes = [];
 //let dataModified = [];
 
 let mainSearchFieldValue = 0;
-
-
 let secondarySearchFieldValue = 0;
 let displayedOptions = [];
 let notMatchingOptions = [];
-
 let indexFilterIteration = 0;
 let displayedRecipesTag = [];
 let notMatchingRecipesTag = [];
-
-
-
 
 //Affiche la carte de chaque recette
 function displayData(data) {
@@ -38,11 +32,7 @@ function displayData(data) {
    // console.log(dataModified);
 }
 
-function capitaliseString(item) {
-    item = item.charAt(0).toUpperCase() + item.slice(1).toLowerCase();
-    return item;
-}
-
+//Retourne un tableau contenant tous les ingrédients des recettes passées en paramètre 'data'
 let getAllIngredients = function (data) {
     data.forEach(((recipe) => {
         (recipe.ingredients).forEach((ingredient) => {
@@ -57,6 +47,7 @@ let getAllIngredients = function (data) {
     return allIngredients;
 }
 
+//Retourne un tableau contenant tous les appareils des recettes passées en paramètre 'data'
 let getAllAppliances = function (data) {
     data.forEach(((recipe) => {
         let item = capitaliseString(recipe.appliance);
@@ -68,6 +59,7 @@ let getAllAppliances = function (data) {
     return allAppliances;
 }
 
+//Retourne un tableau contenant tous les ustensiles des recettes passées en paramètre 'data'
 let getAllUstensils = function (data) {
     data.forEach(((recipe) => {
         (recipe.ustensils).forEach((ustensil) => {
@@ -83,6 +75,7 @@ let getAllUstensils = function (data) {
    
 }
 
+//Initialise les filtres (= combobox)
 function initialiseFilters (data) {
     getAllIngredients(data);
     getAllAppliances(data);
