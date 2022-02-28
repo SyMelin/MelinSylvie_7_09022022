@@ -67,22 +67,8 @@ class Option {
 
             //on met à jour les datalists (= filtres)
             let tagsAll = document.querySelector('.tagsList').children;
-            console.log(tagsAll);
+            //console.log(tagsAll);
             updateFiltersTag(displayedRecipesTag, tagsAll);//updateFilters est situé dans pages/index.js
-
-
-            //on masque l'option de la datalist d'origine
-            let datalistChildren = datalist.children;
-            let optionInList;
-            for (let i = 0; i < datalistChildren.length; i++) {
-                //quand la valeur de l'option d'origine est rencontrée, la boucle stoppe et on masque l'option correspondante
-                if (strNoAccent(datalistChildren[i].textContent.toLowerCase()) == optionValue) {
-                    optionInList = datalistChildren[i];
-                    optionInList.classList.add('option--hidden');
-                    optionInList.classList.remove('option--visible');
-                    break;
-                }
-            }
 
 
             //on crée le bouton de fermeture du clone(= tag)
@@ -151,7 +137,8 @@ class Option {
                         lookForTagString(displayedRecipesTag, tags[i].tagname, tags[i].tagtype);
                     }
                     //on met à jour les datalists (= filtres)
-                    updateFilters(displayedRecipesTag);
+                    tagsAll = document.querySelector('.tagsList').children;
+                    updateFiltersTag(displayedRecipesTag, tagsAll);
                 } 
             })
 

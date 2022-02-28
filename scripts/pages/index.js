@@ -95,6 +95,7 @@ function getAllUstensils (data) {
    
 }
 
+
 //Initialise les filtres (= comboboxes)
 function initialiseFilters (data) {
     getAllIngredients(data);
@@ -119,6 +120,7 @@ function updateFilters (data) {
 
 //Actualise les filtres au clic sur les options (= comboboxes)
 function updateFiltersTag (data, list) {
+    console.log('HELOOOOO');
     getAllIngredients(data);
     getAllAppliances(data);
     getAllUstensils(data);
@@ -127,27 +129,47 @@ function updateFiltersTag (data, list) {
         const tagName = strNoAccent(list[i].textContent.toLocaleLowerCase());
         const tagId = list[i].getAttribute('id');
         const tagType = tagId.substring(tagId.indexOf('--'), tagId.indexOf('-') + 1);
-        console.log('tagtype', tagType);
+       // console.log('tagtype', tagType);
         const tag = {"tagname": tagName, "tagtype": tagType};
         tags.push(tag);
     }
-    console.log(tags);
-    for (let i = 0; i < list.length; i++) {
-        let type;
-        type = list[i].tagType;
-        let index;
+    console.log('tags', tags);
+    for (let i = 0; i < tags.length; i++) {
+        type = tags[i].tagtype;
+        console.log('type', type);
+        let regex = "\\b" + tags[i].tagname;
+        let regexForString = new RegExp(regex, 'g');
+        console.log('regexforstring', regexForString);
         switch (type) {
             case 'ingredients' :
-                index = allIngredients.indexOf(list[i]);
-                return allIngredients = allIngredients(index, 1);
+                let newArray1 = [];
+                for (let j=0; j < allIngredients.length; j++) {
+                    if(!(strNoAccent(allIngredients[j].toLocaleLowerCase()).match(regexForString))) {
+                        newArray1.push(allIngredients[j]);
+                    }
+                }
+                console.log('newArray1', newArray1);
+                allIngredients = newArray1;
             break;
             case 'appliance' :
-                index = allAppliances.indexOf(list[i]);
-                return allAppliances = allIngredients(index, 1);
+                let newArray2 = [];
+                for (let j=0; j < allAppliances.length; j++) {
+                    if(!(strNoAccent(allAppliances[j].toLocaleLowerCase()).match(regexForString))) {
+                        newArray2.push(allAppliances[j]);
+                    }
+                }
+                console.log('newArray1', newArray2);
+                allAppliances = newArray2;
             break;
             case 'ustensils' :
-                index = allUstensils.indexOf(list[i]);
-                return allUstensils = allIngredients(index, 1);
+                let newArray3 = [];
+                for (let j=0; j < allUstensils.length; j++) {
+                    if(!(strNoAccent(allUstensils[j].toLocaleLowerCase()).match(regexForString))) {
+                        newArray3.push(allUstensils[j]);
+                    }
+                }
+                console.log('newArray3', newArray3);
+                allUstensils = newArray3;
             break;
         }
     }
@@ -183,14 +205,5 @@ function init() {
             e.preventDefault();
         }
     });
-
-    //ajout de la fonction searchOnCombox sur le champ de recherche des combobox
-    //const comboboxInputs = Array.from(document.getElementsByClassName('combobox__input'));
-    //console.log(comboboxInputs);
-  /*  comboboxInputs.forEach((input) => {
-        input.addEventListener('input', function(e){
-            searchOnCombobox(e.target);
-        });
-    })*/
 };
 init();
