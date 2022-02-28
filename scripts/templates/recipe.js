@@ -61,66 +61,42 @@ class Recipe {
         this._ingredientList.classList.add('recipe-ingredientList');
 
         this._ingredients.forEach((ingredient) => {
-            if (ingredient.quantity == 1) {
-                //console.log( ingredient.quantity);
-                if (ingredient.unit) {
-                    if (ingredient.unit.length > 3) {
-                       // console.log( ingredient.unit);
-                      
-                        if (!(strNoAccent(ingredient.unit).match(/cuillere|cuilleres/g))) {
-                           // console.log(ingredient.unit.lastIndexOf('s'));
-                           // console.log(ingredient.unit.length);
-     
-                           if (ingredient.unit.lastIndexOf('s') == ingredient.unit.length - 1) {
-
-                              ingredient.unit = ingredient.unit.substring(0, ingredient.unit.length - 1);
-                              //  console.log( ingredient.quantity);
-                              // console.log(ingredient.unit);
-                              //  console.log('hello');
+            //gestion du singulier/pluriel des unités selon les quantités
+            if (ingredient.unit) {
+                if (ingredient.unit.length > 3) {
+                    //Si l'unité (sans accent) ne contient pas la chaîne de caractères 'cuillere'
+                    if (!(strNoAccent(ingredient.unit).match(/cuillere/g))) {
+                        if (ingredient.quantity <= 1) {
+                            if (ingredient.unit.lastIndexOf('s') == ingredient.unit.length - 1) {
+                                ingredient.unit = ingredient.unit.substring(0, ingredient.unit.length - 1);
                             } 
-                        }
-                    }
-                }    
-            } else if (ingredient.quantity > 1) {
-                //console.log( ingredient.quantity);
-                if (ingredient.unit) {
-                    if (ingredient.unit.length > 3) {
-                       // console.log( ingredient.unit);
-                      
-                        if (!(strNoAccent(ingredient.unit).match(/cuillere|cuilleres/g))) {
-                            //console.log(ingredient.unit);
-                            //console.log(ingredient.unit.lastIndexOf('s'));
-                            //console.log(ingredient.unit.length);
-                            
-     
-                           if (ingredient.unit.lastIndexOf('s') < ingredient.unit.length - 1) {
-
-                              //ingredient.unit = ingredient.unit.substring(0, ingredient.unit.length - 1);
-                              //  console.log( ingredient.quantity);
-                               //console.log(ingredient.unit);
+                        } else if (ingredient.quantity > 1) {
+                            if (ingredient.unit.lastIndexOf('s') < ingredient.unit.length - 1) {
                                 ingredient.unit = ingredient.unit.concat('s');
-                               // console.log(ingredient.unit);
                             } 
                         }
+                    } //Sinon si l'unité (sans accent) contient la chaîne de caractères 'cuillere'
+                    else if ((strNoAccent(ingredient.unit).match(/cuillere/g))) {
+                        //Si l'unité (sans accent) contient exactement le mot 'cuillere'
+                        if ((strNoAccent(ingredient.unit).match(/\bcuillere\b/g))) {
+                            if (ingredient.quantity > 1) {
+                                ingredient.unit = 'cuillères';
+                            }
+                        }//Sinon si l'unité (sans accent) contient exactement le mot 'cuilleres'
+                        else if ((strNoAccent(ingredient.unit).match(/\bcuilleres\b/g))) {
+                            if (ingredient.quantity <= 1) {
+                                ingredient.unit = 'cuillère';
+                            }
+                        }
                     }
-                } 
-            }   
-
-
-
-
-
-           // if (ingredient.quantity = 1) {
-                //ingredient.unit = ingredient.unit.substring(0, ingredient.unit.length - 1);
-
-                //${this._name.toLowerCase().substring(0, this._name.length - 1)}`)
-          //  }
+                }
+            }
+            //Création du contenu des éléments de la liste d'ingrédients
             let li = document.createElement('li');
             for (let [key, value] of Object.entries(ingredient)) {
                 let span = document.createElement('span');
 
                 switch (key) {
-
                     case 'ingredient' :
                         span.textContent = value;
                         span.classList.add('recipe-ingredient');
@@ -130,17 +106,15 @@ class Recipe {
                         span.classList.add('ingredient-quantity');
                     break;
                     case 'unit' :
-                        let wordToFind;
-                        if (strNoAccent(value).match(/cuilleres/g)) {
-                            wordToFind = 'cuillères';
-                            span.textContent = ' ' + wordToFind;
-                        }/*
-                        else if (strNoAccent(value).match(/cuillere/g)) {
-                            wordToFind = 'cuillère';
-                            console.log('hello!');
-                            span.textContent = ' ' + wordToFind;
-                        }*/
-                        else if (value == "grammes"){
+                        let wordToDisplay;
+                        if (strNoAccent(value).match(/cuillere/g)) {
+                            if (strNoAccent(value).match(/\bcuillere\b/g)) {
+                                wordToDisplay = 'cuillère';
+                            } else if (strNoAccent(value).match(/\bcuilleres\b/g)) {
+                                wordToDisplay = 'cuillères';
+                            }
+                            span.textContent = ' ' + wordToDisplay;
+                        } else if (value == "grammes"){
                             span.textContent = "g";
                         } else if (value.length > 2) {
                             span.textContent = " "+ value;
