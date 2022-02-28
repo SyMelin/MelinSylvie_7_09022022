@@ -68,20 +68,48 @@ class Recipe {
                        // console.log( ingredient.unit);
                       
                         if (!(strNoAccent(ingredient.unit).match(/cuillere|cuilleres/g))) {
-                            console.log(ingredient.unit.lastIndexOf('s'));
-                            console.log(ingredient.unit.length);
+                           // console.log(ingredient.unit.lastIndexOf('s'));
+                           // console.log(ingredient.unit.length);
      
                            if (ingredient.unit.lastIndexOf('s') == ingredient.unit.length - 1) {
 
                               ingredient.unit = ingredient.unit.substring(0, ingredient.unit.length - 1);
                               //  console.log( ingredient.quantity);
-                               console.log(ingredient.unit);
+                              // console.log(ingredient.unit);
                               //  console.log('hello');
                             } 
                         }
                     }
                 }    
-            }
+            } else if (ingredient.quantity > 1) {
+                //console.log( ingredient.quantity);
+                if (ingredient.unit) {
+                    if (ingredient.unit.length > 3) {
+                       // console.log( ingredient.unit);
+                      
+                        if (!(strNoAccent(ingredient.unit).match(/cuillere|cuilleres/g))) {
+                            //console.log(ingredient.unit);
+                            //console.log(ingredient.unit.lastIndexOf('s'));
+                            //console.log(ingredient.unit.length);
+                            
+     
+                           if (ingredient.unit.lastIndexOf('s') < ingredient.unit.length - 1) {
+
+                              //ingredient.unit = ingredient.unit.substring(0, ingredient.unit.length - 1);
+                              //  console.log( ingredient.quantity);
+                               //console.log(ingredient.unit);
+                                ingredient.unit = ingredient.unit.concat('s');
+                               // console.log(ingredient.unit);
+                            } 
+                        }
+                    }
+                } 
+            }   
+
+
+
+
+
            // if (ingredient.quantity = 1) {
                 //ingredient.unit = ingredient.unit.substring(0, ingredient.unit.length - 1);
 
