@@ -7,7 +7,7 @@ class Combobox {
      *  @param {String} number chiffre de numérotation
      *  @param {String} name nom de la liste à afficher (en français)
      *  @param {String} type nom de la liste pour le code (en anglais)
-     *  @param {} secondarySearchFieldValue variable de stockage de la valeur saisi sur le champ de recherche secondaire
+     *  @param {} secondarySearchFieldValue variable de stockage de la valeur saisie sur le champ de recherche secondaire
      */
 
     constructor (options, number, name, type, secondarySearchFieldValue) {

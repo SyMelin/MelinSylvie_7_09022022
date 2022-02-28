@@ -1,7 +1,7 @@
 function testElement (type, regex, element, elementToTest, matchArray, noMatchArray) {
     //console.log(type, element, elementToTest);
 
-    switch (type ) {
+    switch (type) {
 
         case 'string' :
             //On cherche une correspondance au niveau de l'élément à tester

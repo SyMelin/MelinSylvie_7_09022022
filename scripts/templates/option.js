@@ -26,6 +26,7 @@ class Option {
         optionDOM.classList.add('option', `optionOfDatalist--${this._number}`, 'option--notSelected', 'option--visible');
         optionDOM.textContent = this._text;
 
+
         //Ajout évènement au clic sur l'option
         optionDOM.addEventListener('click', function(e) {
             e.preventDefault();
@@ -59,9 +60,15 @@ class Option {
             const cloneId = `clone-${optionId}`;
             optionClone.setAttribute('id', cloneId);
 
+           
+            //on ajout le clone de l'option cliquée à la liste de tags
+            document.querySelector('.tagsList').appendChild(optionClone);
+            
 
             //on met à jour les datalists (= filtres)
-            updateFilters(displayedRecipesTag);//updateFilters est situé dans pages/index.js
+            let tagsAll = document.querySelector('.tagsList').children;
+            console.log(tagsAll);
+            updateFiltersTag(displayedRecipesTag, tagsAll);//updateFilters est situé dans pages/index.js
 
 
             //on masque l'option de la datalist d'origine
@@ -118,6 +125,7 @@ class Option {
                         const tag = {"tagname": tagName, "tagtype": tagType};
                         tags.push(tag);
                     }
+                    //On réduit le nombre de recettes à tester à celles dont la longueur de la liste d'ingrédient correspond à la longueur de la liste de tags
                     let tagsIngredients = [];
                     for (let i = 0; i < tags.length; i++) {
                         console.log('tags[i].tagtype', tags[i].tagtype );
@@ -125,8 +133,6 @@ class Option {
                             tagsIngredients.push(tags[i]);
                         }
                     }
-
-                    //On réduit le nombre de recettes à tester à celles dont la longueur de la liste d'ingrédient correspond à la longueur de la liste de tags
                     console.log("displayedRecipes", displayedRecipes);
                     for (let i = 0; i < displayedRecipes.length; i++) {
                         let recipe = displayedRecipes[i];
@@ -150,7 +156,7 @@ class Option {
             })
 
             optionClone.appendChild(closeBtn);
-            document.querySelector('.tagsList').appendChild(optionClone);
+
         })
 
         return optionDOM;

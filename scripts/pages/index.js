@@ -106,11 +106,54 @@ function initialiseFilters (data) {
     [filter1, filter2, filter3].map(element => element.create());
 }
 
-//Actualise les filtres (= comboboxes)
+//Actualise les filtres
 function updateFilters (data) {
     getAllIngredients(data);
     getAllAppliances(data);
     getAllUstensils(data);
+    filter1.updateComboboxDatalist(allIngredients);//updateComboboxDatalist est une méthode associée à la class d'objet Combobox
+    filter2.updateComboboxDatalist(allAppliances);
+    filter3.updateComboboxDatalist(allUstensils);
+}
+
+
+//Actualise les filtres au clic sur les options (= comboboxes)
+function updateFiltersTag (data, list) {
+    getAllIngredients(data);
+    getAllAppliances(data);
+    getAllUstensils(data);
+    let tags = [];
+    for (let i = 0; i < list.length; i++) {
+        const tagName = strNoAccent(list[i].textContent.toLocaleLowerCase());
+        const tagId = list[i].getAttribute('id');
+        const tagType = tagId.substring(tagId.indexOf('--'), tagId.indexOf('-') + 1);
+        console.log('tagtype', tagType);
+        const tag = {"tagname": tagName, "tagtype": tagType};
+        tags.push(tag);
+    }
+    console.log(tags);
+    for (let i = 0; i < list.length; i++) {
+        let type;
+        type = list[i].tagType;
+        let index;
+        switch (type) {
+            case 'ingredients' :
+                index = allIngredients.indexOf(list[i]);
+                return allIngredients = allIngredients(index, 1);
+            break;
+            case 'appliance' :
+                index = allAppliances.indexOf(list[i]);
+                return allAppliances = allIngredients(index, 1);
+            break;
+            case 'ustensils' :
+                index = allUstensils.indexOf(list[i]);
+                return allUstensils = allIngredients(index, 1);
+            break;
+        }
+    }
+    console.log('allIngredients', allIngredients);
+    console.log('allAppliances', allAppliances);
+    console.log('allUstensils', allUstensils);
     filter1.updateComboboxDatalist(allIngredients);//updateComboboxDatalist est une méthode associée à la class d'objet Combobox
     filter2.updateComboboxDatalist(allAppliances);
     filter3.updateComboboxDatalist(allUstensils);

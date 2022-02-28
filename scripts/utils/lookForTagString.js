@@ -5,7 +5,7 @@ function lookForTagString(array, value, type) {
     console.log('valueModif', value);
     let regex = "\\b" + value;
     let regexForString = new RegExp(regex, 'g');
-    console.log(regexForString);
+    //console.log(regexForString);
     for (let i = 0; i < array.length; i++) {
         let recipe = array[i];
 
