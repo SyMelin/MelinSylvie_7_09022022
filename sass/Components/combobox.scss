@@ -11,27 +11,36 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        height: 4.125em;
+       // height: 4.125em;
+        padding: 0.5em 1em 0.75em 1em;
         border-radius: $radius-d;
+        //position: relative;
+    }
+    &__input {
+        width: 100%;
+        //height: 5em;
+        padding: 0.75em 1.25em 0.75em 1.25em;
     }
     &__datalist {
-        z-index: 2;
-        border-radius: 0 0 $radius-d $radius-d;
+        //@include border;
         &--closed {
             display: none;
         }
         &--open {
-            margin-top: 0;
-        display: grid;
-        border: 2px solid red;
-        grid-template-columns: repeat(1, 1fr);
-        grid-column-gap: 3em;
-        @include MediumScreen-only {
-            grid-template-columns: repeat(2, 1fr); 
-        }
-        @include LargeScreen-only {
-            grid-template-columns: repeat(3, 1fr); 
-        }
+            margin-top: -0.75em;
+            padding: 0 3.25em 0.5em 3.25em;
+            z-index: 2;
+            border-radius: 0 0 $radius-d $radius-d;
+            display: grid;
+            //border: 2px solid red;
+            grid-template-columns: repeat(1, 1fr);
+            grid-column-gap: 3em;
+            @include MediumScreen-only {
+                grid-template-columns: repeat(2, 1fr); 
+            }
+            @include LargeScreen-only {
+                grid-template-columns: repeat(3, 1fr); 
+            }
         }
     }
 }

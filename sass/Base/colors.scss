@@ -15,7 +15,7 @@ body {
         border: 2px solid $color-primary;
     }
     &::placeholder {
-        opacity: 25%;
+        opacity: 60%;
     }
 }
 
@@ -54,7 +54,7 @@ body {
         }
         &::placeholder {
             color: $color-white;
-            opacity: 50%;
+            opacity: 60%;
         }
     }
     & .combobox__datalist {

@@ -19,7 +19,7 @@ body {
   border: 2px solid #D04F4F;
 }
 #mainSearchField::placeholder {
-  opacity: 25%;
+  opacity: 60%;
 }
 
 .combobox-container {
@@ -57,7 +57,7 @@ body {
 }
 .combobox-container .combobox__input::placeholder {
   color: #FFFFFF;
-  opacity: 50%;
+  opacity: 60%;
 }
 .combobox-container .combobox__datalist--1 .option:hover {
   background-color: #0751bc;
@@ -132,36 +132,48 @@ body {
 body {
   width: 90vw;
   margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  align-items: center;
 }
 
 .container {
   width: 100%;
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
 }
 
 header {
-  /* display: flex;
-   flex-direction: column;
-   align-items: center;*/
+  padding-top: 2.625em;
 }
 
-/*main {
-    width: 90%;
-  /*  @include border;*/
-.filters {
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
+}
+
+.sorting {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: 7em;
+}
+.sorting .tags-container .tagsList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 1em;
+  padding-left: 2em;
+  margin: 0;
+}
+.sorting .filters {
   z-index: 1;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   column-gap: 0.25em;
   flex-wrap: nowrap;
-  height: 7em;
+  height: 4em;
   padding: 0;
-  border: 1px solid black;
 }
 
 .recipe-wrapper {
@@ -254,9 +266,7 @@ header {
   margin-left: -3.25em;
 }
 .recipe-card .recipe-ingredientList li {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: " ";
+  white-space: wrap;
 }
 .recipe-card .recipe-description {
   box-sizing: border-box;
@@ -274,7 +284,6 @@ header {
 }
 
 .main-search__formField {
-  width: 100%;
   position: relative;
 }
 .main-search__formField .formField__label {
@@ -283,6 +292,7 @@ header {
   align-items: baseline;
 }
 .main-search__formField .formField__input {
+  box-sizing: border-box;
   width: 100%;
   border-radius: 5px;
   padding: 1.5em;
@@ -326,6 +336,8 @@ header {
 }
 
 .tagsList .option {
+  margin-top: 0;
+  margin-bottom: 1em;
   display: flex;
   padding: 0.5em 1em;
   border-radius: 5px;
@@ -341,13 +353,6 @@ header {
   cursor: pointer;
 }
 
-.tagsList {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  column-gap: 1em;
-}
-
 .combobox-container {
   padding-right: 1.25em;
   z-index: 2;
@@ -359,20 +364,22 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 4.125em;
+  padding: 0.5em 1em 0.75em 1em;
   border-radius: 5px;
 }
-.combobox__datalist {
-  z-index: 2;
-  border-radius: 0 0 5px 5px;
+.combobox__input {
+  width: 100%;
+  padding: 0.75em 1.25em 0.75em 1.25em;
 }
 .combobox__datalist--closed {
   display: none;
 }
 .combobox__datalist--open {
-  margin-top: 0;
+  margin-top: -0.75em;
+  padding: 0 3.25em 0.5em 3.25em;
+  z-index: 2;
+  border-radius: 0 0 5px 5px;
   display: grid;
-  border: 2px solid red;
   grid-template-columns: repeat(1, 1fr);
   grid-column-gap: 3em;
 }
@@ -397,6 +404,7 @@ header {
   background-position: center;
   width: 2.25em;
   height: 2.25em;
+  margin-left: 1em;
   z-index: 2;
 }
 
