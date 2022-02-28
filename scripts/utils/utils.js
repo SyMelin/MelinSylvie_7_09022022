@@ -6,7 +6,7 @@ function capitaliseString(item) {
 
 
 
-//"strNoAccent" est une fonction JavaScript qui retourne un texte passé en paramètre de la fonction après en avoir retiré tous les accents.
+//"strNoAccent" est une fonction qui retourne un texte passé en paramètre de la fonction après en avoir retiré tous les accents.
 function strNoAccent(a) {
     var b="áàâäãåçéèêëíïîìñóòôöõúùûüýÁÀÂÄÃÅÇÉÈÊËÍÏÎÌÑÓÒÔÖÕÚÙÛÜÝ",
         c="aaaaaaceeeeiiiinooooouuuuyAAAAAACEEEEIIIINOOOOOUUUUY",

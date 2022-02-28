@@ -1,9 +1,9 @@
 function searchOnCombobox (element, secondarySearchFieldValue) {
     //on rend visible toutes les options au début du test
-   const optionsI = element.parentElement.nextSibling.children;
-   //console.log(optionsI);
-    for (let i = 0; i < optionsI.length; i++) {
-        let option = optionsI[i];
+   const optionsOfDatalist = element.parentElement.nextSibling.children;
+   //console.log(optionsOfDatalist);
+    for (let i = 0; i < optionsOfDatalist.length; i++) {
+        let option = optionsOfDatalist[i];
         option.classList.add('option--visible');
         option.classList.remove('option--hidden');
     }
@@ -16,7 +16,7 @@ function searchOnCombobox (element, secondarySearchFieldValue) {
                 lookForStringInSecondary (displayedOptions, modifiedInput);
             } else {
                 notMatchingOptions = [];
-                lookForStringInSecondary (optionsI, modifiedInput);
+                lookForStringInSecondary (optionsOfDatalist, modifiedInput);
             }
             //on stocke  la valeur entrée
             secondarySearchFieldValue = modifiedInput;
@@ -24,8 +24,8 @@ function searchOnCombobox (element, secondarySearchFieldValue) {
         } else {
             console.log("le format du texte n'est pas valide");           
             //On n'affiche aucune option
-            for (let i = 0; i < optionsI.length; i++) {
-                let option = optionsI[i];
+            for (let i = 0; i < optionsOfDatalist.length; i++) {
+                let option = optionsOfDatalist[i];
                 option.classList.add('option--hidden');
                 option.classList.remove('option--visible');
             }
