@@ -1,5 +1,5 @@
 function testElement (type, regex, element, elementToTest, matchArray, noMatchArray) {
-    console.log(type, element, elementToTest);
+    //console.log(type, element, elementToTest);
 
     switch (type ) {
 

@@ -7,13 +7,15 @@ class Combobox {
      *  @param {String} number chiffre de numérotation
      *  @param {String} name nom de la liste à afficher (en français)
      *  @param {String} type nom de la liste pour le code (en anglais)
+     *  @param {} secondarySearchFieldValue variable de stockage de la valeur saisi sur le champ de recherche secondaire
      */
 
-    constructor (options, number, name, type) {
+    constructor (options, number, name, type, secondarySearchFieldValue) {
         this._options = options;
         this._number = number;
         this._name = name;
         this._type = type;
+        this._secondarySearchFieldValue = secondarySearchFieldValue;
         this._comboboxLabel = this.createComboboxLabel();
         this._comboboxInput = this.createComboboxInput();
         this._comboboxDatalist = this.createComboboxDatalist();
@@ -29,6 +31,7 @@ class Combobox {
 
         const filters = document.querySelector('.filters');
         filters.appendChild(comboboxContainer);
+        console.log('second search', this._secondarySearchFieldValue)
     }
 
     createComboboxHeader () {
@@ -100,6 +103,13 @@ class Combobox {
         input.setAttribute('minlength', 3);
         input.setAttribute('placeholder', `Rechercher un ${this._name.toLowerCase()}`);
         input.classList.add('combobox__input',`combobox__input--${this._number}`, 'combobox__input--hidden');
+
+        //Evènement à l'input sur le champ de recherche secondaire
+        input.addEventListener('input', (e) => {
+            console.log('second', this._secondarySearchFieldValue)
+            searchOnCombobox(e.target, this._secondarySearchFieldValue);
+        });
+
         return input;
     }
 
@@ -169,7 +179,7 @@ class Combobox {
             //on ajoute une iteration à l'indice des tags
             indexFilterIteration++ ;
             //on stocke  la valeur entrée
-            secondarySearchFieldValue = optionValue;
+            this._secondarySearchFieldValue = optionValue;
 
 
             //On ajoute un clone de l'option (= tag) à la taglist

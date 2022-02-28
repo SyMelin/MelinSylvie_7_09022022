@@ -17,7 +17,9 @@ let notMatchingRecipes = [];
 let mainSearchFieldValue = 0;
 
 //Variable contenant la valeur du champ de recherche secondaire
-let secondarySearchFieldValue = 0;
+let secondarySearchFieldValue1 = 0;
+let secondarySearchFieldValue2 = 0;
+let secondarySearchFieldValue3 = 0;
 
 //Variables des options affichées / non-correspondantes
 let displayedOptions = [];
@@ -98,9 +100,9 @@ function initialiseFilters (data) {
     getAllIngredients(data);
     getAllAppliances(data);
     getAllUstensils(data);
-    filter1 = new Combobox (allIngredients, '1', 'Ingrédients', 'ingredients');
-    filter2 = new Combobox (allAppliances, '2', 'Appareils', 'appliance');
-    filter3 = new Combobox (allUstensils, '3', 'Ustensiles', 'ustensils');
+    filter1 = new Combobox (allIngredients, '1', 'Ingrédients', 'ingredients', secondarySearchFieldValue1);
+    filter2 = new Combobox (allAppliances, '2', 'Appareils', 'appliance', secondarySearchFieldValue2);
+    filter3 = new Combobox (allUstensils, '3', 'Ustensiles', 'ustensils', secondarySearchFieldValue3);
     [filter1, filter2, filter3].map(element => element.create());
 }
 
@@ -140,12 +142,12 @@ function init() {
     });
 
     //ajout de la fonction searchOnCombox sur le champ de recherche des combobox
-    const comboboxInputs = Array.from(document.getElementsByClassName('combobox__input'));
+    //const comboboxInputs = Array.from(document.getElementsByClassName('combobox__input'));
     //console.log(comboboxInputs);
-    comboboxInputs.forEach((input) => {
+  /*  comboboxInputs.forEach((input) => {
         input.addEventListener('input', function(e){
             searchOnCombobox(e.target);
         });
-    })
+    })*/
 };
 init();

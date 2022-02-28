@@ -1,4 +1,4 @@
-function searchOnCombobox (element) {
+function searchOnCombobox (element, secondarySearchFieldValue) {
     //on rend visible toutes les options au début du test
    const optionsI = element.parentElement.nextSibling.children;
    //console.log(optionsI);
