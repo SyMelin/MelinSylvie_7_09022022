@@ -61,6 +61,32 @@ class Recipe {
         this._ingredientList.classList.add('recipe-ingredientList');
 
         this._ingredients.forEach((ingredient) => {
+            if (ingredient.quantity == 1) {
+                //console.log( ingredient.quantity);
+                if (ingredient.unit) {
+                    if (ingredient.unit.length > 3) {
+                       // console.log( ingredient.unit);
+                      
+                        if (!(strNoAccent(ingredient.unit).match(/cuillere|cuilleres/g))) {
+                            console.log(ingredient.unit.lastIndexOf('s'));
+                            console.log(ingredient.unit.length);
+     
+                           if (ingredient.unit.lastIndexOf('s') == ingredient.unit.length - 1) {
+
+                              ingredient.unit = ingredient.unit.substring(0, ingredient.unit.length - 1);
+                              //  console.log( ingredient.quantity);
+                               console.log(ingredient.unit);
+                              //  console.log('hello');
+                            } 
+                        }
+                    }
+                }    
+            }
+           // if (ingredient.quantity = 1) {
+                //ingredient.unit = ingredient.unit.substring(0, ingredient.unit.length - 1);
+
+                //${this._name.toLowerCase().substring(0, this._name.length - 1)}`)
+          //  }
             let li = document.createElement('li');
             for (let [key, value] of Object.entries(ingredient)) {
                 let span = document.createElement('span');
