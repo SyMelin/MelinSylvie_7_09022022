@@ -76,7 +76,17 @@ class Recipe {
                         span.classList.add('ingredient-quantity');
                     break;
                     case 'unit' :
-                        if (value == "grammes"){
+                        let wordToFind;
+                        if (strNoAccent(value).match(/cuilleres/g)) {
+                            wordToFind = 'cuillères';
+                            span.textContent = ' ' + wordToFind;
+                        }/*
+                        else if (strNoAccent(value).match(/cuillere/g)) {
+                            wordToFind = 'cuillère';
+                            console.log('hello!');
+                            span.textContent = ' ' + wordToFind;
+                        }*/
+                        else if (value == "grammes"){
                             span.textContent = "g";
                         } else if (value.length > 2) {
                             span.textContent = " "+ value;

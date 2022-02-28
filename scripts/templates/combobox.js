@@ -100,7 +100,7 @@ class Combobox {
         input.setAttribute('name', `${this._type}`);
         input.setAttribute('type', 'text');
         input.setAttribute('minlength', 3);
-        input.setAttribute('placeholder', `Rechercher un ${this._name.toLowerCase()}`);
+        input.setAttribute('placeholder', `Rechercher un ${this._name.toLowerCase().substring(0, this._name.length - 1)}`);//On enlève le 's' à la fin de this._name
         input.classList.add('combobox__input',`combobox__input--${this._number}`, 'combobox__input--hidden');
 
         //Evènement à l'input sur le champ de recherche secondaire
