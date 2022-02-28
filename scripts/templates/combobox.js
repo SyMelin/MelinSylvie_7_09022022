@@ -31,7 +31,6 @@ class Combobox {
 
         const filters = document.querySelector('.filters');
         filters.appendChild(comboboxContainer);
-        console.log('second search', this._secondarySearchFieldValue)
     }
 
     createComboboxHeader () {

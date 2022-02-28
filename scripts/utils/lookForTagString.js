@@ -1,7 +1,11 @@
 function lookForTagString(array, value, type) {
+    console.log('tagValue');
     let matchingRecipes = [];
+    value = value.replaceAll(/\)|\(/g, "");//enleve les parenthèses
+    console.log('valueModif', value);
     let regex = "\\b" + value;
     let regexForString = new RegExp(regex, 'g');
+    console.log(regexForString);
     for (let i = 0; i < array.length; i++) {
         let recipe = array[i];
 
@@ -28,8 +32,6 @@ function lookForTagString(array, value, type) {
     }
     console.log("matchingRecipes", matchingRecipes);
     console.log("notMatchingRecipesTag", notMatchingRecipesTag);
-    if (matchingRecipes.length == 0) {
-    }
 
     //on actualise le tableau des recettes affichées
     displayedRecipesTag = matchingRecipes;

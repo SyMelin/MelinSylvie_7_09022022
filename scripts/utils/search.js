@@ -24,6 +24,7 @@ function search(element) {
             if (modifiedInput.length > mainSearchFieldValue.length) {
                 lookForString (displayedRecipes, modifiedInput);
             } else {
+                //Sinon, on ajoute l'élémént à un tableau de non-correspondance
                 notMatchingRecipes = [];
                 lookForString (recipes, modifiedInput);
             }
