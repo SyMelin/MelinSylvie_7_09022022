@@ -7,4 +7,5 @@ body {
 
 .container {
     width: 100%;
+    @include border;
 }

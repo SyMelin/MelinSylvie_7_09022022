@@ -4,6 +4,9 @@
     flex-direction: row;
     justify-content: flex-start;
     column-gap: 0.25em;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     height: 7em;
+    padding: 0;
+    @include border;
+
 }
