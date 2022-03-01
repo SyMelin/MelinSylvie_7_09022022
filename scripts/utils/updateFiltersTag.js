@@ -21,7 +21,7 @@ function updateFiltersTag (data, list) {
             case 'ingredients' :
                 let newArray1 = [];
                 for (let j=0; j < allIngredients.length; j++) {
-                    if(!(strNoAccent(allIngredients[j].toLocaleLowerCase()).match(regexForString))) {
+                    if(!(strNoAccent(allIngredients[j].toLocaleLowerCase()).replaceAll(/\)|\(/g, "").match(regexForString))) {
                         newArray1.push(allIngredients[j]);
                     }
                 }
@@ -31,7 +31,7 @@ function updateFiltersTag (data, list) {
             case 'appliance' :
                 let newArray2 = [];
                 for (let j=0; j < allAppliances.length; j++) {
-                    if(!(strNoAccent(allAppliances[j].toLocaleLowerCase()).match(regexForString))) {
+                    if(!(strNoAccent(allAppliances[j].toLocaleLowerCase()).replaceAll(/\)|\(/g, "").match(regexForString))) {
                         newArray2.push(allAppliances[j]);
                     }
                 }
@@ -41,7 +41,7 @@ function updateFiltersTag (data, list) {
             case 'ustensils' :
                 let newArray3 = [];
                 for (let j=0; j < allUstensils.length; j++) {
-                    if(!(strNoAccent(allUstensils[j].toLocaleLowerCase()).match(regexForString))) {
+                    if(!(strNoAccent(allUstensils[j].toLocaleLowerCase()).replaceAll(/\)|\(/g, "").match(regexForString))) {
                         newArray3.push(allUstensils[j]);
                     }
                 }
