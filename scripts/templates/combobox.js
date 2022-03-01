@@ -103,6 +103,7 @@ class Combobox {
         input.setAttribute('placeholder', `Rechercher un ${this._name.toLowerCase().substring(0, this._name.length - 1)}`);//On enlève le 's' à la fin de this._name
         input.classList.add('combobox__input',`combobox__input--${this._number}`, 'combobox__input--hidden');
 
+    /*
         //Evènement à l'input sur le champ de recherche secondaire
         input.addEventListener('input', (e) => {
             console.log('second', this._secondarySearchFieldValue)
@@ -115,6 +116,7 @@ class Combobox {
                 e.preventDefault();
             }
         });
+    */
 
         return input;
     }

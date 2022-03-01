@@ -26,7 +26,7 @@ class Option {
         optionDOM.classList.add('option', `optionOfDatalist--${this._number}`, 'option--notSelected', 'option--visible');
         optionDOM.textContent = this._text;
 
-
+    /*
         //Ajout évènement au clic sur l'option
         optionDOM.addEventListener('click', function(e) {
             e.preventDefault();
@@ -143,8 +143,8 @@ class Option {
             })
 
             optionClone.appendChild(closeBtn);
-
         })
+    */
 
         return optionDOM;
     }

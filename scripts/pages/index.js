@@ -22,15 +22,15 @@ let secondarySearchFieldValue2 = 0;
 let secondarySearchFieldValue3 = 0;
 
 //Variables des options affichées / non-correspondantes
-let displayedOptions = [];
-let notMatchingOptions = [];
+//let displayedOptions = [];
+//let notMatchingOptions = [];
 
 //Variable qui compte le nombre d'interaction avec les filtres
-let indexFilterIteration = 0;
+//let indexFilterIteration = 0;
 
 //Variables des recettes affichées / non-correspondantes suite à la recherche par tag
-let displayedRecipesTag = [];
-let notMatchingRecipesTag = [];
+//let displayedRecipesTag = [];
+//let notMatchingRecipesTag = [];
 
 
 
@@ -143,7 +143,7 @@ function init() {
     const mainSearchField = document.getElementById('mainSearchField');
     mainSearchField.addEventListener('input', function(e){
         search(e.target);
-        indexFilterIteration = 0;
+        //indexFilterIteration = 0;
         updateFilters(displayedRecipes);
     });
     
