@@ -32,10 +32,6 @@ let indexFilterIteration = 0;
 let displayedRecipesTag = [];
 let notMatchingRecipesTag = [];
 
-let dataModified = [];
-
-let mainSearchFieldValue = 0;
-
 
 
 //Affiche la carte de chaque recette

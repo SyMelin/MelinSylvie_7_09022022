@@ -1,8 +1,9 @@
 //Regex pour validation du texte sur input
-let isTextValid = function (element) {
-    if (/^\b([A-zÀ-ÿ][-,A-zÀ-ÿ. ']+[ ]*)+$/gm.test(element.value)){
+function isTextValid(element) {
+    if (/^\b([A-zÀ-ÿ][-,A-zÀ-ÿ. ']+[ ]*)+$/gm.test(element.value)) {
         return true;
-    }};
+    }
+}
 
 function search(element) {
     //on rend visible toutes les cartes au début du test
