@@ -40,7 +40,7 @@ function lookForString(array, value) {
     //console.log("matchingRecipes", matchingRecipes);
     //console.log("unmatch", notMatchingRecipes);
     if (matchingRecipes.length == 0) {
-        document.querySelector('.search-form'). setAttribute('data-error-visible', true);
+        document.querySelector('.search-form').setAttribute('data-error-visible', true);
     }
 
     // On actualise le tableau des recettes affichées
