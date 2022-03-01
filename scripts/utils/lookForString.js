@@ -41,5 +41,4 @@ function lookForString(array, value) {
     //on actualise le tableau des recettes affichées
     displayedRecipes = matchingRecipes;
     updateDisplayOfRecipes(displayedRecipes, notMatchingRecipes);
-  
 }

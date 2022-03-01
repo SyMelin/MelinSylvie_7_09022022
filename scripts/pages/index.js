@@ -46,8 +46,8 @@ function displayData(data) {
         recipeCard = template.createRecipeCardDOM();
         recipeWrapper.appendChild(recipeCard);
     });
-   // console.log(dataModified);
 }
+
 
 //Retourne un tableau contenant tous les ingrédients des recettes passées en paramètre 'data'
 function getAllIngredients (data) {
@@ -61,9 +61,9 @@ function getAllIngredients (data) {
         });
     }));
     allIngredients.sort(Intl.Collator().compare);//sort(Intl.Collator().compare) permet de trier le tableau en prenant en compte les accents
-    //console.log("allIngredients", allIngredients);
     return allIngredients;
 }
+
 
 //Retourne un tableau contenant tous les appareils des recettes passées en paramètre 'data'
 function getAllAppliances (data) {
@@ -77,6 +77,7 @@ function getAllAppliances (data) {
     allAppliances.sort(Intl.Collator().compare);
     return allAppliances;
 }
+
 
 //Retourne un tableau contenant tous les ustensiles des recettes passées en paramètre 'data'
 function getAllUstensils (data) {
@@ -96,89 +97,36 @@ function getAllUstensils (data) {
 }
 
 
-//Initialise les filtres (= comboboxes)
-function initialiseFilters (data) {
+//récupère les listes à afficher pour chaque filtre
+function getFiltersLists (data) {
     getAllIngredients(data);
     getAllAppliances(data);
     getAllUstensils(data);
+}
+
+
+//Initialise les filtres (= comboboxes)
+function initialiseFilters (data) {
+    getFiltersLists (data);
     filter1 = new Combobox (allIngredients, '1', 'Ingrédients', 'ingredients', secondarySearchFieldValue1);
     filter2 = new Combobox (allAppliances, '2', 'Appareils', 'appliance', secondarySearchFieldValue2);
     filter3 = new Combobox (allUstensils, '3', 'Ustensiles', 'ustensils', secondarySearchFieldValue3);
     [filter1, filter2, filter3].map(element => element.create());
 }
 
-//Actualise les filtres
-function updateFilters (data) {
-    getAllIngredients(data);
-    getAllAppliances(data);
-    getAllUstensils(data);
+
+//Actualise la datalist de chaque combobox
+function updateAllComboboxDatalist () {
     filter1.updateComboboxDatalist(allIngredients);//updateComboboxDatalist est une méthode associée à la class d'objet Combobox
     filter2.updateComboboxDatalist(allAppliances);
     filter3.updateComboboxDatalist(allUstensils);
 }
 
 
-//Actualise les filtres au clic sur les options (= comboboxes)
-function updateFiltersTag (data, list) {
-    console.log('HELOOOOO');
-    getAllIngredients(data);
-    getAllAppliances(data);
-    getAllUstensils(data);
-    let tags = [];
-    for (let i = 0; i < list.length; i++) {
-        const tagName = strNoAccent(list[i].textContent.toLocaleLowerCase());
-        const tagId = list[i].getAttribute('id');
-        const tagType = tagId.substring(tagId.indexOf('--'), tagId.indexOf('-') + 1);
-       // console.log('tagtype', tagType);
-        const tag = {"tagname": tagName, "tagtype": tagType};
-        tags.push(tag);
-    }
-    console.log('tags', tags);
-    for (let i = 0; i < tags.length; i++) {
-        type = tags[i].tagtype;
-        console.log('type', type);
-        let regex = "\\b" + tags[i].tagname;
-        let regexForString = new RegExp(regex, 'g');
-        console.log('regexforstring', regexForString);
-        switch (type) {
-            case 'ingredients' :
-                let newArray1 = [];
-                for (let j=0; j < allIngredients.length; j++) {
-                    if(!(strNoAccent(allIngredients[j].toLocaleLowerCase()).match(regexForString))) {
-                        newArray1.push(allIngredients[j]);
-                    }
-                }
-                console.log('newArray1', newArray1);
-                allIngredients = newArray1;
-            break;
-            case 'appliance' :
-                let newArray2 = [];
-                for (let j=0; j < allAppliances.length; j++) {
-                    if(!(strNoAccent(allAppliances[j].toLocaleLowerCase()).match(regexForString))) {
-                        newArray2.push(allAppliances[j]);
-                    }
-                }
-                console.log('newArray1', newArray2);
-                allAppliances = newArray2;
-            break;
-            case 'ustensils' :
-                let newArray3 = [];
-                for (let j=0; j < allUstensils.length; j++) {
-                    if(!(strNoAccent(allUstensils[j].toLocaleLowerCase()).match(regexForString))) {
-                        newArray3.push(allUstensils[j]);
-                    }
-                }
-                console.log('newArray3', newArray3);
-                allUstensils = newArray3;
-            break;
-        }
-    }
-    console.log('allIngredients', allIngredients);
-    console.log('allAppliances', allAppliances);
-    console.log('allUstensils', allUstensils);
-    filter1.updateComboboxDatalist(allIngredients);//updateComboboxDatalist est une méthode associée à la class d'objet Combobox
-    filter2.updateComboboxDatalist(allAppliances);
-    filter3.updateComboboxDatalist(allUstensils);
+//Actualise les filtres
+function updateFilters (data) {
+    getFiltersLists(data);
+    updateAllComboboxDatalist();
 }
 
 

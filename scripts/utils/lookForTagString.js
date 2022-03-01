@@ -1,8 +1,8 @@
 function lookForTagString(array, value, type) {
-    console.log('tagValue');
+    //console.log('tagValue');
     let matchingRecipes = [];
     value = value.replaceAll(/\)|\(/g, "");//enleve les parenthèses
-    console.log('valueModif', value);
+    //console.log('valueModif', value);
     let regex = "\\b" + value;
     let regexForString = new RegExp(regex, 'g');
     //console.log(regexForString);

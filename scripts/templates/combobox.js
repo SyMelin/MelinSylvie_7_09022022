@@ -109,6 +109,13 @@ class Combobox {
             searchOnCombobox(e.target, this._secondarySearchFieldValue);
         });
 
+        //on évite le rechargement de la page avec la touche Entrée sur le champ de saisie principale
+        input.addEventListener('keydown', function(e){
+            if (e.key === "Enter") {
+                e.preventDefault();
+            }
+        });
+
         return input;
     }
 
