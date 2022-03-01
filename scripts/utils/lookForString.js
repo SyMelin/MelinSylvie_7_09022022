@@ -1,3 +1,5 @@
+//La fonction lookForString recherche une valeur dans les éléments du tableau (valeur et tableau passés en paramètres)
+//Pour chaque recette du tableau, on chercher d'abord une correspondance au niveau du nom de la recette, sinon au niveau des ingrédients, sinon au niveau de la description
 function lookForString(array, value) {
     let matchingRecipes = [];
     //on cherche une correspondance au niveau du nom de chaque recette
@@ -21,11 +23,8 @@ function lookForString(array, value) {
                     break;
                 }
             }
-            /////////////////////////////////////////////////////
-            //test description
+            //Si le test est toujours faux, on chercher une correspondance sur la description
             if (test == false) {
-                regex = "\\b" + value;
-                regexForString = new RegExp(regex, 'g');
                 if (strNoAccent(recipe.description.toLowerCase()).match(regexForString)) {
                     matchingRecipes.push(recipe);
                 } else {

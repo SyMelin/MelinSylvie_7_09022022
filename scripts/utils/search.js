@@ -1,10 +1,13 @@
 //Regex pour validation du texte sur input
-function isTextValid(element) {
+let isTextValid = function(element) {
     if (/^\b([A-zÀ-ÿ][-,A-zÀ-ÿ. ']+[ ]*)+$/gm.test(element.value)) {
         return true;
     }
 }
 
+
+//La fonction search est déclenchée à la frappe sur le champ de saisie
+//Elle vérifie tout d'abord la validité de la saisie puis déclenche ou non l'appel à la fonction lookForString
 function search(element) {
     //on rend visible toutes les cartes au début du test
     const recipeCards = document.getElementsByClassName('recipe-card');
@@ -36,7 +39,7 @@ function search(element) {
             element.parentElement.parentElement.setAttribute("data-error-visible", true);
             //On n'affiche aucune recette
             const recipeCards = document.getElementsByClassName('recipe-card');
-            for (let i = 0; i < recipes.length; i++) {
+            for (let i = 0; i < recipeCards.length; i++) {
                 recipeCards[i].classList.add('recipe-card--hidden');
                 recipeCards[i].classList.remove('recipe-card--visible');
             }
