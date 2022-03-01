@@ -1,5 +1,5 @@
 //Regex pour validation du texte sur input
-let isTextValid = function(element) {
+function isTextValid(element) {
     if (/^\b([A-zÀ-ÿ][-,A-zÀ-ÿ. ']+[ ]*)+$/gm.test(element.value)) {
         return true;
     }
