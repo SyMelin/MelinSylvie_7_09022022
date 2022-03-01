@@ -1,7 +1,4 @@
-/**
- * La classe recipe renvoie un objet avec les éléments qui sont nécessaires à la carte de la recette
- */
-
+//La classe recipe renvoie un objet avec les éléments qui sont nécessaires à la carte de la recette
  class Recipe {
 
     /**

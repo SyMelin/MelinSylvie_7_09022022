@@ -34,20 +34,6 @@ let notMatchingRecipesTag = [];
 
 
 
-//Affiche la carte de chaque recette
-function displayData(data) {
-    const recipeWrapper = document.querySelector('.recipe-wrapper');
-    data.forEach((recipe) => {
-        const template = new Recipe(recipe);
-        dataModified.push(template);
-        recipeCard = template.getRecipeCardDOM();
-        recipeWrapper.appendChild(recipeCard);
-    });
-   // console.log(dataModified);
-}
-
-
-
 ///////// Fonctions de l'initialisation ////////
 
 //Affiche la carte de chaque recette
