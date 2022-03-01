@@ -52,9 +52,7 @@
         width: 50%;
         margin-left: -3.25em;
         & li {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: " "; 
+            white-space: wrap;
         }
     }
     & .recipe-description {

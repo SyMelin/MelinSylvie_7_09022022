@@ -7,15 +7,15 @@
 @import "Base/typography";
 
 @import "Layouts/body";
+@import "Layouts/container";
 @import "Layouts/header";
 @import "Layouts/main.scss";
-@import "Layouts/filters.scss";
+@import "Layouts/sorting.scss";
 @import "Layouts/recipeWrapper.scss";
 
 @import "Components/logo";
 @import "Components/recipeCard";
 @import "Components/searchForm.scss";
 @import "Components/option.scss";
-@import "Components/tagsList.scss";
 @import "Components/combobox.scss";
 @import "Components/expandBtn.scss";

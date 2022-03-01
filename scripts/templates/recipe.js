@@ -17,10 +17,10 @@
         this._description = data.description;
         this._appliance = data.appliance;
         this._ustensils = data.ustensils;
-        this._recipeCardDOM = this.getRecipeCardDOM();
+        this._recipeCardDOM = this.createRecipeCardDOM();
     }
 
-    getRecipeCardDOM() {
+    createRecipeCardDOM() {
 
         const recipeCard = document.createElement('a');
         recipeCard.setAttribute('role', 'link');
@@ -61,12 +61,42 @@
         this._ingredientList.classList.add('recipe-ingredientList');
 
         this._ingredients.forEach((ingredient) => {
+            //gestion du singulier/pluriel des unités selon les quantités
+            if (ingredient.unit) {
+                if (ingredient.unit.length > 3) {
+                    //Si l'unité (sans accent) ne contient pas la chaîne de caractères 'cuillere'
+                    if (!(strNoAccent(ingredient.unit).match(/cuillere/g))) {
+                        if (ingredient.quantity <= 1) {
+                            if (ingredient.unit.lastIndexOf('s') == ingredient.unit.length - 1) {
+                                ingredient.unit = ingredient.unit.substring(0, ingredient.unit.length - 1);
+                            } 
+                        } else if (ingredient.quantity > 1) {
+                            if (ingredient.unit.lastIndexOf('s') < ingredient.unit.length - 1) {
+                                ingredient.unit = ingredient.unit.concat('s');
+                            } 
+                        }
+                    } //Sinon si l'unité (sans accent) contient la chaîne de caractères 'cuillere'
+                    else if ((strNoAccent(ingredient.unit).match(/cuillere/g))) {
+                        //Si l'unité (sans accent) contient exactement le mot 'cuillere'
+                        if ((strNoAccent(ingredient.unit).match(/\bcuillere\b/g))) {
+                            if (ingredient.quantity > 1) {
+                                ingredient.unit = 'cuillères';
+                            }
+                        }//Sinon si l'unité (sans accent) contient exactement le mot 'cuilleres'
+                        else if ((strNoAccent(ingredient.unit).match(/\bcuilleres\b/g))) {
+                            if (ingredient.quantity <= 1) {
+                                ingredient.unit = 'cuillère';
+                            }
+                        }
+                    }
+                }
+            }
+            //Création du contenu des éléments de la liste d'ingrédients
             let li = document.createElement('li');
             for (let [key, value] of Object.entries(ingredient)) {
                 let span = document.createElement('span');
 
                 switch (key) {
-
                     case 'ingredient' :
                         span.textContent = value;
                         span.classList.add('recipe-ingredient');
@@ -76,7 +106,15 @@
                         span.classList.add('ingredient-quantity');
                     break;
                     case 'unit' :
-                        if (value == "grammes"){
+                        let wordToDisplay;
+                        if (strNoAccent(value).match(/cuillere/g)) {
+                            if (strNoAccent(value).match(/\bcuillere\b/g)) {
+                                wordToDisplay = 'cuillère';
+                            } else if (strNoAccent(value).match(/\bcuilleres\b/g)) {
+                                wordToDisplay = 'cuillères';
+                            }
+                            span.textContent = ' ' + wordToDisplay;
+                        } else if (value == "grammes"){
                             span.textContent = "g";
                         } else if (value.length > 2) {
                             span.textContent = " "+ value;

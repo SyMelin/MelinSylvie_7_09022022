@@ -19,7 +19,7 @@ body {
   border: 2px solid #D04F4F;
 }
 #mainSearchField::placeholder {
-  opacity: 25%;
+  opacity: 60%;
 }
 
 .combobox-container {
@@ -57,7 +57,7 @@ body {
 }
 .combobox-container .combobox__input::placeholder {
   color: #FFFFFF;
-  opacity: 50%;
+  opacity: 60%;
 }
 .combobox-container .combobox__datalist--1 .option:hover {
   background-color: #0751bc;
@@ -72,13 +72,13 @@ body {
 .tagsList .option {
   color: white;
 }
-.tagsList .option--1 {
+.tagsList .optionOfDatalist--1 {
   background-color: #3282F7;
 }
-.tagsList .option--2 {
+.tagsList .optionOfDatalist--2 {
   background-color: #68D9A4;
 }
-.tagsList .option--3 {
+.tagsList .optionOfDatalist--3 {
   background-color: #ED6454;
 }
 
@@ -132,32 +132,48 @@ body {
 body {
   width: 90vw;
   margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  align-items: center;
 }
 
 .container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
 }
 
-/*header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}*/
-/*main {
-    width: 90%;
-  /*  @include border;*/
-.filters {
+header {
+  padding-top: 2.625em;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
+}
+
+.sorting {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: 7em;
+}
+.sorting .tags-container .tagsList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 1em;
+  padding-left: 2em;
+  margin: 0;
+}
+.sorting .filters {
   z-index: 1;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   column-gap: 0.25em;
-  flex-wrap: wrap;
-  height: 7em;
+  flex-wrap: nowrap;
+  height: 4em;
+  padding: 0;
 }
 
 .recipe-wrapper {
@@ -250,9 +266,7 @@ body {
   margin-left: -3.25em;
 }
 .recipe-card .recipe-ingredientList li {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: " ";
+  white-space: wrap;
 }
 .recipe-card .recipe-description {
   box-sizing: border-box;
@@ -265,44 +279,48 @@ body {
   text-overflow: ellipsis;
 }
 
-.search-form {
+.main-search {
   width: 100%;
+}
+
+.main-search__formField {
   position: relative;
 }
-.search-form__label {
+.main-search__formField .formField__label {
   display: flex;
   flex-direction: row;
+  align-items: baseline;
 }
-.search-form__input {
+.main-search__formField .formField__input {
+  box-sizing: border-box;
   width: 100%;
   border-radius: 5px;
   padding: 1.5em;
+  padding-right: 5em;
 }
-.search-form__icon {
+.main-search__formField .formField__icon {
   z-index: 1;
-  position: absolute;
-  height: 100%;
-  top: 0;
-  right: 1em;
+  margin-left: -2.5em;
   display: flex;
   align-items: center;
 }
 
 /************* Validation / invalidation des champs du formulaire *****************/
-.search-form[data-error-visible=false] .data-error, .data-info--hidden {
+.main-search__formField[data-error-visible=false] .data-error, .data-info--hidden {
   display: none;
 }
 
-.search-form[data-error-visible=true] .data-error, .data-info--visible {
+.main-search__formField[data-error-visible=true] .data-error, .data-info--visible {
   font-size: 1em;
   font-weight: bold;
   color: black;
   display: block;
   margin-top: 0.5em;
   text-align: left;
+  width: 100%;
 }
 
-.option {
+.option--visible {
   display: block;
   list-style: none;
   margin-top: 0.5em;
@@ -313,7 +331,13 @@ body {
   cursor: pointer;
 }
 
+.option--hidden {
+  display: none;
+}
+
 .tagsList .option {
+  margin-top: 0;
+  margin-bottom: 1em;
   display: flex;
   padding: 0.5em 1em;
   border-radius: 5px;
@@ -329,15 +353,7 @@ body {
   cursor: pointer;
 }
 
-.tagsList {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  column-gap: 1em;
-}
-
 .combobox-container {
-  padding-left: 1.25em;
   padding-right: 1.25em;
   z-index: 2;
   margin: 0;
@@ -348,20 +364,22 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 4.125em;
+  padding: 0.5em 1em 0.75em 1em;
   border-radius: 5px;
 }
-.combobox__datalist {
-  z-index: 2;
-  border-radius: 0 0 5px 5px;
+.combobox__input {
+  width: 100%;
+  padding: 0.75em 1.25em 0.75em 1.25em;
 }
 .combobox__datalist--closed {
   display: none;
 }
 .combobox__datalist--open {
-  margin-top: 0;
+  margin-top: -0.75em;
+  padding: 0 3.25em 0.5em 3.25em;
+  z-index: 2;
+  border-radius: 0 0 5px 5px;
   display: grid;
-  border: 2px solid red;
   grid-template-columns: repeat(1, 1fr);
   grid-column-gap: 3em;
 }
@@ -386,6 +404,7 @@ body {
   background-position: center;
   width: 2.25em;
   height: 2.25em;
+  margin-left: 1em;
   z-index: 2;
 }
 
