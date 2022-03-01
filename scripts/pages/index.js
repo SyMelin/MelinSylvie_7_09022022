@@ -142,7 +142,7 @@ function init() {
     const mainSearchField = document.getElementById('mainSearchField');
     mainSearchField.addEventListener('input', function(e){
         search(e.target);
-        indexFilterIteration = 0;
+        //indexFilterIteration = 0;
         updateFilters(displayedRecipes);
     });
     
