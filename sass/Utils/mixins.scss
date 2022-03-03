@@ -9,6 +9,13 @@
     border: 1px solid black;
 }
 
+// mixin qui reprend les media queries pour les écrans de très petites tailles
+@mixin extraSmallScreen-only{
+    @media screen and (max-width: map-get($map: $breakpoints, $key: extraSmallMax)) {
+        @content;
+    }
+}
+
 // mixin qui reprend les media queries pour les écrans de petites tailles
 @mixin SmallScreen-only{
     @media screen and (max-width: map-get($map: $breakpoints, $key: smallMax)) {

@@ -157,11 +157,25 @@ main {
   gap: 0;
   height: 7em;
 }
+@media screen and (max-width: 575.98px) {
+  .sorting {
+    box-sizing: border-box;
+    height: 100%;
+  }
+}
+.sorting .tags-container {
+  border: 1px solid black;
+}
+@media screen and (max-width: 575.98px) {
+  .sorting .tags-container {
+    box-sizing: border-box;
+    height: 100%;
+  }
+}
 .sorting .tags-container .tagsList {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  column-gap: 1em;
   padding-left: 2em;
   margin: 0;
 }
@@ -170,10 +184,16 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  column-gap: 0.25em;
   flex-wrap: nowrap;
   height: 4em;
   padding: 0;
+}
+@media screen and (max-width: 575.98px) {
+  .sorting .filters {
+    flex-direction: column;
+    row-gap: 0.5em;
+    height: 100%;
+  }
 }
 
 .recipe-wrapper {
@@ -325,8 +345,8 @@ main {
   list-style: none;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  margin-right: 2em;
-  margin-left: -2em;
+  margin-right: 1em;
+  margin-left: -1em;
   padding: 0;
   cursor: pointer;
 }
@@ -358,30 +378,42 @@ main {
   z-index: 2;
   margin: 0;
 }
+@media screen and (max-width: 575.98px) {
+  .combobox-container {
+    padding-right: 0;
+    z-index: 0;
+  }
+}
 
 .combobox__header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5em 1em 0.75em 1em;
+  padding: 0.75em 1em 0.75em 1em;
   border-radius: 5px;
 }
 .combobox__input {
   width: 100%;
-  padding: 0.75em 1.25em 0.75em 1.25em;
+  padding: 1em 1.25em 0.75em 1.25em;
 }
 .combobox__datalist--closed {
   display: none;
 }
 .combobox__datalist--open {
   margin-top: -0.75em;
-  padding: 0 3.25em 0.5em 3.25em;
+  padding: 0 5em auto 2.25em;
+  padding-bottom: 0.5em;
   z-index: 2;
   border-radius: 0 0 5px 5px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  grid-column-gap: 3em;
+  grid-column-gap: 1em;
+}
+@media screen and (max-width: 575.98px) {
+  .combobox__datalist--open {
+    z-index: 0;
+  }
 }
 @media screen and (min-width: 768px) and (max-width: 991.98px) {
   .combobox__datalist--open {
@@ -394,6 +426,14 @@ main {
   }
 }
 
+.combobox__header {
+  z-index: 3;
+}
+@media screen and (max-width: 575.98px) {
+  .combobox__header {
+    z-index: 0;
+  }
+}
 .combobox__header .combobox__label--hidden, .combobox__header .combobox__input--hidden {
   display: none;
 }
