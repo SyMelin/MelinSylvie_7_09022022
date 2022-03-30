@@ -5,6 +5,7 @@
 .main-search__formField {
     position: relative;
     & .formField {
+       
         &__label{
             display: flex;
             flex-direction: row;
@@ -18,8 +19,11 @@
             padding-right: 5em;
         }
         &__icon {
+            position: absolute;
+            top: 1.4375em;
+            right: 1em;
             z-index: 1;
-            margin-left: -2.5em;
+            //margin-left: -2.5em;
             display: flex;
             align-items: center;
         }

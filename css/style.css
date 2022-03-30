@@ -316,8 +316,10 @@ main {
   padding-right: 5em;
 }
 .main-search__formField .formField__icon {
+  position: absolute;
+  top: 1.4375em;
+  right: 1em;
   z-index: 1;
-  margin-left: -2.5em;
   display: flex;
   align-items: center;
 }
