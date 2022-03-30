@@ -283,7 +283,7 @@ main {
   margin-left: -3.25em;
 }
 .recipe-card .recipe-ingredientList li {
-  white-space: wrap;
+  white-space: normal;
 }
 .recipe-card .recipe-description {
   box-sizing: border-box;
@@ -399,7 +399,8 @@ main {
 }
 .combobox__datalist--open {
   margin-top: -0.75em;
-  padding: 0 5em auto 2.25em;
+  padding-top: 0;
+  padding-right: 5em;
   padding-bottom: 0.5em;
   z-index: 2;
   border-radius: 0 0 5px 5px;
