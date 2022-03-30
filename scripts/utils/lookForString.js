@@ -1,5 +1,7 @@
-//La fonction lookForString recherche une valeur dans les éléments du tableau (valeur et tableau passés en paramètres)
-//Pour chaque recette du tableau, on chercher d'abord une correspondance au niveau du nom de la recette, sinon au niveau des ingrédients, sinon au niveau de la description
+/**
+ * La fonction lookForString recherche une valeur dans les éléments du tableau (valeur et tableau passés en paramètres)
+ * Pour chaque recette du tableau, on cherche d'abord une correspondance au niveau du nom de la recette, sinon au niveau des ingrédients, sinon au niveau de la description
+**/
 function lookForString(array, value) {
     let matchingRecipes = [];
     //on cherche une correspondance au niveau du nom de chaque recette

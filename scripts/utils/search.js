@@ -5,9 +5,10 @@ function isTextValid(element) {
     }
 }
 
-
-//La fonction search est déclenchée à la frappe sur le champ de saisie
-//Elle vérifie tout d'abord la validité de la saisie puis déclenche ou non l'appel à la fonction lookForString
+/**
+ * La fonction search est déclenchée à la frappe sur le champ de saisie
+ * Elle vérifie tout d'abord la validité de la saisie puis déclenche ou non l'appel à la fonction lookForString
+ */
 function search(element) {
     //on rend visible toutes les cartes au début du test
     const recipeCards = document.getElementsByClassName('recipe-card');
