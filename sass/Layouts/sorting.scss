@@ -7,7 +7,7 @@
        // @include border;
     }
     & .tags-container {
-        @include border;
+        //@include border;
         @include extraSmallScreen-only {
             box-sizing: border-box;
             height: 100%;

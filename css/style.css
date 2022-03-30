@@ -163,9 +163,6 @@ main {
     height: 100%;
   }
 }
-.sorting .tags-container {
-  border: 1px solid black;
-}
 @media screen and (max-width: 575.98px) {
   .sorting .tags-container {
     box-sizing: border-box;
