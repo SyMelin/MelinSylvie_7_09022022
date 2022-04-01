@@ -19,7 +19,9 @@
             flex-wrap: wrap;
            // column-gap: 1em;
            // @include border;
-            padding-left: 2em;
+            padding: 0;
+            padding-left: 1em;
+            column-gap: 1em;
             margin: 0;     
         }
     }

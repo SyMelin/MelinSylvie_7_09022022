@@ -173,7 +173,9 @@ main {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding-left: 2em;
+  padding: 0;
+  padding-left: 1em;
+  column-gap: 1em;
   margin: 0;
 }
 .sorting .filters {
